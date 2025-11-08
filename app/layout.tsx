@@ -1,0 +1,26 @@
+import type { Metadata } from 'next'
+import './globals.css'
+import { CartProvider } from '@/context/CartContext'
+import Navbar from '@/components/Navbar'
+
+export const metadata: Metadata = {
+  title: 'Just Cakes - Delicious Custom Cakes',
+  description: 'Premium custom cakes for all occasions',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <CartProvider>
+          <Navbar />
+          {children}
+        </CartProvider>
+      </body>
+    </html>
+  )
+}
