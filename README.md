@@ -1,6 +1,4 @@
-# Just Cakes - E-commerce Website
-
-A modern e-commerce website for a cake business built with Next.js, React, and TypeScript.
+# Just Cakes
 
 ## Table of Contents
 - [Tech Stack](#tech-stack)
