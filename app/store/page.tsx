@@ -1,3 +1,4 @@
+import styles from './store.module.css'
 import Product from '@/components/Product'
 import { getAllProducts } from '@/lib/products'
 
