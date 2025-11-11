@@ -1,0 +1,17 @@
+.card {
+     border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.image {
+    width: 100%;
+    hieght: 200px;
+    Object-fit: cover;
+}
+
+

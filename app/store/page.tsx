@@ -9,7 +9,7 @@ export default async function StorePage() {
   return (
     <main>
       <h1>Our Cakes</h1>
-      <div>
+      <div className={styles.productsgrid}>
         {products.map((product) => (
           <Product key={product.id} {...product} />
         ))}

@@ -1,5 +1,5 @@
 'use client'
-
+import styles from "./Product.module.css"
 import { Product as ProductType } from '@/types/product'
 import { useCart } from '@/context/CartContext'
 import Link from 'next/link'
@@ -32,8 +32,8 @@ export default function Product({
   }
 
   return (
-    <div>
-      <img src={image} alt={name} />
+    <div className={styles.card}>
+      <img className={styles.image} src={image} alt={name}  />
       <h3>{name}</h3>
       <p>{description}</p>
       <p>Price: ${price.toFixed(2)}</p>
