@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { usePathname } from 'next/navigation'
+import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const { cart } = useCart()
@@ -13,12 +14,11 @@ export default function Navbar() {
   }
 
   return (
-    <nav>
+    <nav className={styles.navcontainer}>
       <div>
         <Link href="/">
           <h1>Just Cakes</h1>
         </Link>
-
         <ul>
           <li>
             <Link
@@ -33,7 +33,31 @@ export default function Navbar() {
               href="/store"
               className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
             >
-              Store
+              Products
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/store"
+              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+            >
+              Orders
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/store"
+              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+            >
+             Digital Products
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/store"
+              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+            >
+             Blogs
             </Link>
           </li>
           <li>
