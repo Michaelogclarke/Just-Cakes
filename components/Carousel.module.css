@@ -1,0 +1,14 @@
+
+.carouselwrapper {
+    display: flex;
+
+}
+.carouselcontainer {
+    display: flex;
+    align-items: center;
+}
+.textwrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 10px;
+}
