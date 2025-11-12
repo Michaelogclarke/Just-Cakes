@@ -43,7 +43,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           <div className={styles.infoRow}>
             <div className={styles.price}>
-              ${product.price.toFixed(2)}
+              £{product.price.toFixed(2)}
             </div>
             <div className={styles.availability}>
               {product.available ? (

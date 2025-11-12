@@ -27,6 +27,9 @@
 .navcontainer li {
     margin: 0;
 }
+.navcontainer li :active {
+    color: #6A00AA;    
+}
 
 .navcontainer a {
     text-decoration: none;
@@ -44,3 +47,4 @@
     font-size: 1.5rem;
     color: #333;
 }
+
