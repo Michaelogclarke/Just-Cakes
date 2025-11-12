@@ -1,0 +1,26 @@
+.storeContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .storeContainer {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+}

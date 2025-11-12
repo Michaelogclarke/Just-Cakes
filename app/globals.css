@@ -1,3 +1,7 @@
+:root {
+ --just-cakes:#6A00AA
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -19,6 +23,6 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--just-cakes);
   text-decoration: none;
 }

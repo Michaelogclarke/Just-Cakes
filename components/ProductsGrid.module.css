@@ -1,0 +1,71 @@
+.container {
+  width: 100%;
+}
+
+/* Filter Section */
+.filterSection {
+  margin-bottom: 2rem;
+}
+
+.filterButtons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: capitalize;
+}
+
+.filterButton:hover {
+  border-color: #999;
+  color: #333;
+}
+
+.filterButton.active {
+  background: #333;
+  color: white;
+  border-color: #333;
+}
+
+.resultsCount {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Products Grid */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  .productsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .productsGrid {
+    grid-template-columns: 1fr;
+  }
+}
