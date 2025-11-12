@@ -3,6 +3,7 @@
 import { Product } from '@/types/product'
 import { useCart } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
+import styles from './ProductDetail.module.css'
 
 interface ProductDetailProps {
   product: Product
@@ -22,28 +23,46 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }
 
   return (
-    <div>
-      <button onClick={handleBackToStore}>← Back to Store</button>
+    <div className={styles.container}>
+      <button onClick={handleBackToStore} className={styles.backButton}>
+        ← Back to Store
+      </button>
 
-      <div>
-        <img src={product.image} alt={product.name} />
+      <div className={styles.productLayout}>
+        <div className={styles.imageContainer}>
+          <img src={product.image} alt={product.name} />
+        </div>
 
-        <div>
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-
-          <div>
-            <span>Price: ${product.price.toFixed(2)}</span>
-            <span>Category: {product.category}</span>
-            <span>Status: {product.available ? 'Available' : 'Out of Stock'}</span>
+        <div className={styles.details}>
+          <div className={styles.header}>
+            <h1>{product.name}</h1>
+            <span className={styles.category}>{product.category}</span>
           </div>
 
-          <button
-            onClick={handleAddToCart}
-            disabled={!product.available}
-          >
-            {product.available ? 'Add to Cart' : 'Out of Stock'}
-          </button>
+          <p className={styles.description}>{product.description}</p>
+
+          <div className={styles.infoRow}>
+            <div className={styles.price}>
+              ${product.price.toFixed(2)}
+            </div>
+            <div className={styles.availability}>
+              {product.available ? (
+                <span className={styles.inStock}>In Stock</span>
+              ) : (
+                <span className={styles.outOfStock}>Out of Stock</span>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.actions}>
+            <button
+              onClick={handleAddToCart}
+              disabled={!product.available}
+              className={styles.addButton}
+            >
+              {product.available ? 'Add to Cart' : 'Out of Stock'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

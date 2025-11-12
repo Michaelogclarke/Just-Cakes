@@ -126,3 +126,20 @@ Create `app/api/endpoint/route.ts` with exported async functions: `GET()`, `POST
 - Use CSS Modules for component-specific styling
 - Server components for data fetching, client components for interactivity
 - CartContext is already set up globally - use `useCart()` hook in any client component
+
+## Current Priority Tasks (Deadline: Sunday)
+
+**REMINDER: Check TodoWrite tool for current task status. Key priorities:**
+
+**Monday:**
+1. Landing page with popular cakes carousel
+2. Database setup (replace mock data)
+3. Order/checkout system
+
+**Tuesday:**
+4. Custom orders page and form
+5. Blog page structure
+6. Digital products page
+7. Vercel deployment
+
+**Focus:** Get orders flowing first, then content pages. Client needs working e-commerce by Sunday.

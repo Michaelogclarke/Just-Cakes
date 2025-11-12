@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import Navbar from '@/components/Navbar'
+import Product from '@/components/Product'
+import ProductPage from './store/[id]/page'
 
 export const metadata: Metadata = {
   title: 'Just Cakes - Delicious Custom Cakes',
@@ -17,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CartProvider>
-          <Navbar />
+         <Navbar />
           {children}
         </CartProvider>
       </body>
