@@ -18,6 +18,8 @@ export default function Product({
   const { addToCart } = useCart()
 
   const handleAddToCart = () => {
+    if (!available) return
+
     const product: ProductType = {
       id,
       name,
@@ -28,28 +30,38 @@ export default function Product({
       available
     }
     addToCart(product)
-    alert(`${name} added to cart!`)
   }
 
   return (
     <div className={styles.card}>
-      <img className={styles.image} src={image} alt={name}  />
-      <h3>{name}</h3>
-      <p>{description}</p>
-      <p>Price: ${price.toFixed(2)}</p>
-      <p>Category: {category}</p>
-      <p>Status: {available ? 'Available' : 'Out of Stock'}</p>
+      <div className={styles.imageContainer}>
+        <img className={styles.image} src={image} alt={name} />
+      </div>
 
-      <div>
-        <Link href={`/store/${id}`}>
-          <button>View Details</button>
-        </Link>
-        <button
-          onClick={handleAddToCart}
-          disabled={!available}
-        >
-          {available ? 'Add to Cart' : 'Unavailable'}
-        </button>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>{name}</h3>
+          <span className={styles.category}>{category}</span>
+        </div>
+
+        <p className={styles.description}>{description}</p>
+
+        <div className={styles.footer}>
+          <span className={styles.price}>${price.toFixed(2)}</span>
+
+          <div className={styles.actions}>
+            <Link href={`/store/${id}`}>
+              <button className={styles.detailsButton}>Details</button>
+            </Link>
+            <button
+              onClick={handleAddToCart}
+              disabled={!available}
+              className={styles.addButton}
+            >
+              {available ? 'Add to Cart' : 'Out of Stock'}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
