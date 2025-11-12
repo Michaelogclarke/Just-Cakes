@@ -2,18 +2,21 @@
 
 import { useCart } from '@/context/CartContext'
 import Link from 'next/link'
+import styles from './cart.module.css'
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart()
 
   if (cart.items.length === 0) {
     return (
-      <main>
-        <h1>Shopping Cart</h1>
-        <p>Your cart is empty</p>
-        <Link href="/store">
-          <button>Continue Shopping</button>
-        </Link>
+      <main className={styles.container}>
+        <div className={styles.emptyState}>
+          <h1>Shopping Cart</h1>
+          <p>Your cart is empty</p>
+          <Link href="/store">
+            <button className={styles.primaryButton}>Continue Shopping</button>
+          </Link>
+        </div>
       </main>
     )
   }
@@ -25,52 +28,80 @@ export default function CartPage() {
   }
 
   return (
-    <main>
-      <h1>Shopping Cart</h1>
-
-      <div>
-        {cart.items.map((item) => (
-          <div key={item.id}>
-            <img src={item.image} alt={item.name} />
-
-            <div>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <p>Price: ${item.price.toFixed(2)}</p>
-            </div>
-
-            <div>
-              <label>Quantity:</label>
-              <input
-                type="number"
-                min="1"
-                value={item.quantity}
-                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-              />
-            </div>
-
-            <div>
-              <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
-            </div>
-
-            <button onClick={() => removeFromCart(item.id)}>
-              Remove
-            </button>
-          </div>
-        ))}
+    <main className={styles.container}>
+      <div className={styles.header}>
+        <h1>Shopping Cart</h1>
       </div>
 
-      <div>
-        <h2>Cart Summary</h2>
-        <p>Total Items: {cart.totalItems}</p>
-        <p>Total Price: ${cart.totalPrice.toFixed(2)}</p>
+      <div className={styles.cartLayout}>
+        <div className={styles.cartItems}>
+          {cart.items.map((item) => (
+            <div key={item.id} className={styles.cartItem}>
+              <div className={styles.itemImage}>
+                <img src={item.image} alt={item.name} />
+              </div>
 
-        <div>
-          <button onClick={clearCart}>Clear Cart</button>
-          <Link href="/store">
-            <button>Continue Shopping</button>
-          </Link>
-          <button onClick={handleCheckout}>Proceed to Checkout</button>
+              <div className={styles.itemDetails}>
+                <h3>{item.name}</h3>
+                <p className={styles.itemDescription}>{item.description}</p>
+                <p className={styles.itemPrice}>${item.price.toFixed(2)}</p>
+              </div>
+
+              <div className={styles.itemQuantity}>
+                <label>Qty</label>
+                <input
+                  type="number"
+                  min="1"
+                  value={item.quantity}
+                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                />
+              </div>
+
+              <div className={styles.itemSubtotal}>
+                <p className={styles.subtotalLabel}>Subtotal</p>
+                <p className={styles.subtotalPrice}>${(item.price * item.quantity).toFixed(2)}</p>
+              </div>
+
+              <button
+                className={styles.removeButton}
+                onClick={() => removeFromCart(item.id)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.cartSummary}>
+          <h2>Cart Summary</h2>
+
+          <div className={styles.summaryRow}>
+            <span>Total Items:</span>
+            <span>{cart.totalItems}</span>
+          </div>
+
+          <div className={styles.summaryTotal}>
+            <span>Total:</span>
+            <span>${cart.totalPrice.toFixed(2)}</span>
+          </div>
+
+          <div className={styles.summaryActions}>
+            <button
+              className={styles.primaryButton}
+              onClick={handleCheckout}
+            >
+              Proceed to Checkout
+            </button>
+            <Link href="/store">
+              <button className={styles.secondaryButton}>Continue Shopping</button>
+            </Link>
+            <button
+              className={styles.clearButton}
+              onClick={clearCart}
+            >
+              Clear Cart
+            </button>
+          </div>
         </div>
       </div>
     </main>
