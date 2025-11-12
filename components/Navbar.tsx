@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { usePathname } from 'next/navigation'
 import styles from './Navbar.module.css'
-
+import Logo from '../assets/Logo general transparent.png'
 export default function Navbar() {
   const { cart } = useCart()
   const pathname = usePathname()
@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className={styles.navcontainer}>
       <div>
         <Link href="/">
-          <h1>Just Cakes</h1>
+        
         </Link>
         <ul>
           <li>

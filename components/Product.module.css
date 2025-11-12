@@ -110,7 +110,7 @@
   flex: 1;
   padding: 0.625rem 1rem;
   border: none;
-  background: #333;
+  background: #6A00AA;
   color: white;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -120,11 +120,11 @@
 }
 
 .addButton:hover:not(:disabled) {
-  background: #000;
+  background: #991ee6;
 }
 
 .addButton:disabled {
-  background: #ddd;
+  background: #30024d;
   color: #999;
   cursor: not-allowed;
 }

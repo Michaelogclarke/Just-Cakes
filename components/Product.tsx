@@ -47,7 +47,7 @@ export default function Product({
         <p className={styles.description}>{description}</p>
 
         <div className={styles.footer}>
-          <span className={styles.price}>${price.toFixed(2)}</span>
+          <span className={styles.price}>£{price.toFixed(2)}</span>
 
           <div className={styles.actions}>
             <Link href={`/store/${id}`}>
