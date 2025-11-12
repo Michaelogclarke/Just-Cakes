@@ -1,5 +1,5 @@
 import styles from './store.module.css'
-import Product from '@/components/Product'
+import ProductsGrid from '@/components/ProductsGrid'
 import { getAllProducts } from '@/lib/products'
 
 export default async function StorePage() {
@@ -7,13 +7,12 @@ export default async function StorePage() {
   const products = await getAllProducts()
 
   return (
-    <main>
-      <h1>Our Cakes</h1>
-      <div className={styles.productsgrid}>
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
+    <main className={styles.storeContainer}>
+      <div className={styles.header}>
+        <h1>Our Cakes</h1>
       </div>
+
+      <ProductsGrid products={products} />
     </main>
   )
 }
