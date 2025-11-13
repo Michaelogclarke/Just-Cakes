@@ -1,50 +1,121 @@
-/* Basic navbar styles - you can customize these */
-
+/* Navbar Container */
 .navcontainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.navcontainer div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.navContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navcontainer ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 2rem;
+/* Logo Section */
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-.navcontainer li {
-    margin: 0;
-}
-.navcontainer li :active {
-    color: #6A00AA;    
+.logoLink:hover {
+  opacity: 0.8;
 }
 
-.navcontainer a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.2s ease;
+.logo {
+  height: 70px;
+  width: auto;
+  object-fit: fit;
 }
 
-.navcontainer a:hover {
-    color: #007bff;
+/* Navigation Links */
+.navLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
 }
 
-.navcontainer h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
+.navLinks li {
+  margin: 0;
 }
 
+.navLinks a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.navLinks a:hover {
+  color: #333;
+}
+
+.navLinks a.active {
+  color: #6A00AA;
+  border-bottom-color: #6A00AA;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .navcontainer {
+    padding: 1rem 1.5rem;
+  }
+
+  .navLinks {
+    gap: 1.5rem;
+  }
+
+  .navLinks a {
+    font-size: 0.9rem;
+  }
+
+  .logo {
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navContent {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navLinks {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo {
+    height: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navcontainer {
+    padding: 0.875rem 1rem;
+  }
+
+  .navLinks {
+    gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .navLinks a {
+    font-size: 0.85rem;
+  }
+}
