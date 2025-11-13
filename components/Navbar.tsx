@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { usePathname } from 'next/navigation'
 import styles from './Navbar.module.css'
-import Logo from '../assets/Logo general transparent.png'
+
 export default function Navbar() {
   const { cart } = useCart()
   const pathname = usePathname()
@@ -15,15 +15,18 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navcontainer}>
-      <div>
-        <Link href="/">
-        
+      <div className={styles.navContent}>
+        {/* Logo Section */}
+        <Link href="/" className={styles.logoLink}>
+          <img src="/updated-logo.png" alt="Just Cakes Logo" className={styles.logo} />
         </Link>
-        <ul>
+
+        {/* Navigation Links */}
+        <ul className={styles.navLinks}>
           <li>
             <Link
               href="/"
-              className={isActive('/') ? 'active' : ''}
+              className={isActive('/') ? styles.active : ''}
             >
               Home
             </Link>
@@ -31,7 +34,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
             >
               Products
             </Link>
@@ -39,7 +42,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
             >
               Orders
             </Link>
@@ -47,7 +50,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
             >
              Digital Products
             </Link>
@@ -55,7 +58,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? 'active' : ''}
+              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
             >
              Blogs
             </Link>
@@ -63,7 +66,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/cart"
-              className={isActive('/cart') ? 'active' : ''}
+              className={isActive('/cart') ? styles.active : ''}
             >
               Cart {cart.totalItems > 0 && `(${cart.totalItems})`}
             </Link>
