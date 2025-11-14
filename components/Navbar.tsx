@@ -41,16 +41,16 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
+              href="/custom-orders"
+              className={isActive('/custom-orders') ? styles.active : ''}
             >
-              Orders
+              Custom Orders
             </Link>
           </li>
           <li>
             <Link
               href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
+              className={isActive('/digital-products') ? styles.active : ''}
             >
              Digital Products
             </Link>
