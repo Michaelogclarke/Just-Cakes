@@ -54,10 +54,10 @@
   color: #666;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
   padding: 0.5rem 0;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  position: relative;
 }
 
 .navLinks a:hover {
@@ -67,6 +67,7 @@
 .navLinks a.active {
   color: #6A00AA;
   border-bottom-color: #6A00AA;
+  font-weight: 600;
 }
 
 /* Responsive */

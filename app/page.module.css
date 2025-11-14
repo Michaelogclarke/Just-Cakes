@@ -27,26 +27,29 @@
 .productsHeader h2 {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #333;
+  color: #1a1a1a;
   margin: 0;
 }
 
 .viewAllButton {
-  padding: 0.625rem 1.25rem;
-  border: 1px solid #ddd;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #6A00AA;
   background: white;
-  color: #666;
+  color: #6A00AA;
   border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   text-decoration: none;
 }
 
 .viewAllButton:hover {
-  border-color: #999;
-  color: #333;
+  background: #6A00AA;
+  border-color: #6A00AA;
+  color: white;
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.2);
+  transform: translateY(-1px);
 }
 
 .productsGrid {
