@@ -6,9 +6,9 @@
 }
 
 .section {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 2px solid #f5f5f5;
 }
 
 .section:last-of-type {
@@ -17,9 +17,20 @@
 
 .sectionTitle {
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-weight: 600;
+  margin-bottom: 1.75rem;
+  color: #1a1a1a;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sectionTitle::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: #6A00AA;
+  border-radius: 2px;
 }
 
 .formGrid {
@@ -36,7 +47,7 @@
 .formGroup label {
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: #495057;
+  color: #1a1a1a;
   font-size: 0.95rem;
 }
 
@@ -56,7 +67,8 @@
 .formGroup textarea:focus {
   outline: none;
   border-color: #6A00AA;
-  box-shadow: 0 0 0 2px rgba(106, 0, 170, 0.1);
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.15);
+  background: #fafafa;
 }
 
 .formGroup textarea {
@@ -66,8 +78,9 @@
 
 .formGroup small {
   margin-top: 0.5rem;
-  color: #6c757d;
+  color: #555;
   font-size: 0.875rem;
+  line-height: 1.4;
 }
 
 .checkboxGroup {
@@ -80,15 +93,16 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0.75rem;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  transition: background-color 0.2s, border-color 0.2s;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .checkbox:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(106, 0, 170, 0.04);
   border-color: #6A00AA;
+  transform: translateX(2px);
 }
 
 .checkbox input[type="checkbox"] {
@@ -101,60 +115,74 @@
 
 .checkbox span {
   font-size: 0.95rem;
-  color: #495057;
+  color: #555;
+}
+
+.checkbox input[type="checkbox"]:checked + span {
+  color: #6A00AA;
+  font-weight: 600;
 }
 
 .submitButton {
   width: 100%;
-  padding: 0.875rem 2rem;
-  background: #6A00AA;
+  padding: 1.125rem 2rem;
+  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.3);
+  letter-spacing: 0.01em;
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #8300d4;
-  box-shadow: 0 2px 8px rgba(106, 0, 170, 0.2);
+  background: linear-gradient(135deg, #8300d4 0%, #991ee6 100%);
+  box-shadow: 0 6px 24px rgba(106, 0, 170, 0.4);
+  transform: translateY(-2px);
 }
 
 .submitButton:disabled {
-  background: #30024d;
+  background: #9e9e9e;
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
+  box-shadow: none;
 }
 
 .submitButton:active:not(:disabled) {
-  background: #5a0088;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(106, 0, 170, 0.3);
 }
 
 .successMessage {
-  padding: 1rem 1.25rem;
+  padding: 1.25rem 1.5rem;
   background: #e8f5e9;
-  border: 1px solid #c8e6c9;
-  border-radius: 6px;
-  color: #2e7d32;
-  margin-bottom: 1rem;
-  text-align: center;
+  border: 2px solid #4caf50;
+  border-left: 6px solid #4caf50;
+  border-radius: 8px;
+  color: #1b5e20;
+  margin-bottom: 1.5rem;
+  text-align: left;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .errorMessage {
-  padding: 1rem 1.25rem;
+  padding: 1.25rem 1.5rem;
   background: #ffebee;
-  border: 1px solid #ffcdd2;
-  border-radius: 6px;
-  color: #c62828;
-  margin-bottom: 1rem;
-  text-align: center;
+  border: 2px solid #f44336;
+  border-left: 6px solid #f44336;
+  border-radius: 8px;
+  color: #b71c1c;
+  margin-bottom: 1.5rem;
+  text-align: left;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
