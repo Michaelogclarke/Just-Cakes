@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
+import { AdminProvider } from '@/context/AdminContext'
 import Navbar from '@/components/Navbar'
 import Product from '@/components/Product'
 import ProductPage from './store/[id]/page'
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CartProvider>
-         <Navbar />
-          {children}
-        </CartProvider>
+        <AdminProvider>
+          <CartProvider>
+            <Navbar />
+            {children}
+          </CartProvider>
+        </AdminProvider>
       </body>
     </html>
   )
