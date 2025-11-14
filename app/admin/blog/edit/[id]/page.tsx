@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
 import { getBlogPostById } from '@/lib/blogs'
 import styles from '../../new/newPost.module.css'
 
-export default function EditBlogPostPage({ params }: { params: { id: string } }) {
+export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
@@ -37,7 +38,7 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
 
   useEffect(() => {
     const loadPost = async () => {
-      const post = await getBlogPostById(parseInt(params.id))
+      const post = await getBlogPostById(parseInt(id))
       if (post) {
         setFormData({
           title: post.title,
@@ -55,7 +56,7 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
     if (mounted && isAuthenticated) {
       loadPost()
     }
-  }, [params.id, mounted, isAuthenticated])
+  }, [id, mounted, isAuthenticated])
 
   if (!mounted || !isAuthenticated || loading) {
     return (
@@ -78,7 +79,7 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     const updatedPost = {
-      id: parseInt(params.id),
+      id: parseInt(id),
       ...formData,
       date: new Date().toISOString().split('T')[0]
     }
