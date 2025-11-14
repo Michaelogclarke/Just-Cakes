@@ -6,25 +6,27 @@
 
 .hero {
   text-align: center;
-  padding: 3rem 2rem;
-  background: white;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(106, 0, 170, 0.03) 0%, rgba(106, 0, 170, 0.08) 100%);
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 3rem;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: 1.125rem;
-  color: #666;
-  max-width: 600px;
+  font-size: 1.25rem;
+  color: #555;
+  max-width: 650px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-weight: 400;
 }
 
 .content {
@@ -37,7 +39,8 @@
 .infoSection h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #1a1a1a;
+  font-weight: 700;
 }
 
 .steps {
@@ -49,58 +52,70 @@
 
 .step {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 1.25rem;
+  padding: 2rem;
   background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  border-left: 3px solid #6A00AA;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  border-left: 4px solid #6A00AA;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.step:hover {
+  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.1);
+  border-left-color: #8300d4;
+  transform: translateX(4px);
 }
 
 .stepNumber {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: #6A00AA;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 1.125rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.25);
 }
 
 .step h3 {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.625rem 0;
   font-size: 1.25rem;
-  color: #333;
+  color: #1a1a1a;
+  font-weight: 700;
 }
 
 .step p {
   margin: 0;
-  color: #666;
-  line-height: 1.6;
+  color: #555;
+  line-height: 1.65;
 }
 
 .guidelines {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
+  background: #FFF9F5;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #FFE4D6;
+  box-shadow: 0 2px 8px rgba(106, 0, 170, 0.04);
 }
 
 .guidelines h3 {
   margin-top: 0;
   margin-bottom: 1rem;
-  color: #333;
-  font-weight: 600;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1.125rem;
 }
 
 .guidelines ul {
   margin: 0;
   padding-left: 1.5rem;
-  color: #666;
+  color: #555;
 }
 
 .guidelines li {
@@ -111,7 +126,8 @@
 .formSection h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #1a1a1a;
+  font-weight: 700;
 }
 
 @media (max-width: 968px) {
