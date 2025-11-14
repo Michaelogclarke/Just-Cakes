@@ -124,7 +124,7 @@ export default function AdminDashboard() {
         <div className={styles.infoBox}>
           <h3>🔒 Database Integration</h3>
           <p>
-            Currently using mock data from <code>lib/blogs.ts</code>. When you're ready to connect a database:
+            Currently using mock data from <code>lib/blogs.ts</code>. When you&apos;re ready to connect a database:
           </p>
           <ol>
             <li>Set up your database (PostgreSQL, MongoDB, etc.)</li>

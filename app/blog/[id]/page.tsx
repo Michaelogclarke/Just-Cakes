@@ -10,8 +10,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const post = await getBlogPostById(parseInt(params.id))
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const post = await getBlogPostById(parseInt(id))
 
   if (!post) {
     return {
@@ -25,8 +26,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = await getBlogPostById(parseInt(params.id))
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const post = await getBlogPostById(parseInt(id))
 
   if (!post) {
     notFound()
@@ -110,7 +112,7 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
         <footer className={styles.footer}>
           <div className={styles.callToAction}>
             <h3>Ready to Order Your Custom Cake?</h3>
-            <p>Let's create something special for your next celebration!</p>
+            <p>Let&apos;s create something special for your next celebration!</p>
             <Link href="/custom-orders" className={styles.ctaButton}>
               Start Your Custom Order
             </Link>

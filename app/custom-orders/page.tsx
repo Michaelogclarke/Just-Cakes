@@ -12,7 +12,7 @@ export default function CustomOrdersPage() {
       <div className={styles.hero}>
         <h1 className={styles.title}>Custom Cake Orders</h1>
         <p className={styles.subtitle}>
-          Create your dream cake - we'll bring it to life!
+          Create your dream cake - we&apos;ll bring it to life!
         </p>
       </div>
 
@@ -28,12 +28,12 @@ export default function CustomOrdersPage() {
             <div className={styles.step}>
               <div className={styles.stepNumber}>2</div>
               <h3>Get a Quote</h3>
-              <p>We'll review your request and send you a custom quote within 24 hours.</p>
+              <p>We&apos;ll review your request and send you a custom quote within 24 hours.</p>
             </div>
             <div className={styles.step}>
               <div className={styles.stepNumber}>3</div>
               <h3>Confirm & Pay</h3>
-              <p>Once you approve the design and price, we'll schedule your order and collect payment.</p>
+              <p>Once you approve the design and price, we&apos;ll schedule your order and collect payment.</p>
             </div>
             <div className={styles.step}>
               <div className={styles.stepNumber}>4</div>
