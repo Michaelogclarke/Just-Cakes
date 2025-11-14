@@ -57,10 +57,10 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
+              href="/blog"
+              className={isActive('/blog') || pathname?.startsWith('/blog/') ? styles.active : ''}
             >
-             Blogs
+             Blog
             </Link>
           </li>
           <li>
