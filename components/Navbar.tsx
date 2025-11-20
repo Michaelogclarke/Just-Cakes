@@ -39,15 +39,7 @@ export default function Navbar() {
               Products
             </Link>
           </li>
-          <li>
-            <Link
-              href="/custom-orders"
-              className={isActive('/custom-orders') ? styles.active : ''}
-            >
-              Custom Orders
-            </Link>
-          </li>
-          <li>
+         <li>
             <Link
               href="/store"
               className={isActive('/digital-products') ? styles.active : ''}
