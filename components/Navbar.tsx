@@ -33,23 +33,23 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="/store"
-              className={isActive('/store') || pathname?.startsWith('/store/') ? styles.active : ''}
+              href="/cakes"
+              className={isActive('/cakes') || pathname?.startsWith('/cakes/') ? styles.active : ''}
             >
-              Products
+              Cakes
             </Link>
           </li>
           <li>
             <Link
-              href="/custom-orders"
-              className={isActive('/custom-orders') ? styles.active : ''}
+              href="/cupcakes"
+              className={isActive('/cupcakes') || pathname?.startsWith('/cupcakes/') ? styles.active : ''}
             >
-              Custom Orders
+              Cupcakes
             </Link>
           </li>
-          <li>
+         <li>
             <Link
-              href="/store"
+              href="/digital-products"
               className={isActive('/digital-products') ? styles.active : ''}
             >
              Digital Products

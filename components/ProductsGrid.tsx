@@ -7,50 +7,53 @@ import { Product as ProductType } from '@/types/product'
 
 type ProductsGridProps = {
   products: ProductType[]
+  productLabel?: string // e.g., "cake" or "cupcake"
 }
 
-export default function ProductsGrid({ products }: ProductsGridProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+export default function ProductsGrid({ products, productLabel = 'item' }: ProductsGridProps) {
+  const [selectedOccasion, setSelectedOccasion] = useState<string>('all')
 
-  // Get unique categories
-  const categories = useMemo(() => {
-    const uniqueCategories = Array.from(new Set(products.map(p => p.category)))
-    return ['all', ...uniqueCategories]
+  // Get unique occasions
+  const occasions = useMemo(() => {
+    const uniqueOccasions = Array.from(new Set(products.map(p => p.occasion)))
+    return ['all', ...uniqueOccasions]
   }, [products])
 
-  // Filter products based on selected category
+  // Filter products based on selected occasion
   const filteredProducts = useMemo(() => {
-    if (selectedCategory === 'all') {
+    if (selectedOccasion === 'all') {
       return products
     }
-    return products.filter(p => p.category === selectedCategory)
-  }, [products, selectedCategory])
+    return products.filter(p => p.occasion === selectedOccasion)
+  }, [products, selectedOccasion])
 
-  // Format category name for display
-  const formatCategory = (category: string) => {
-    if (category === 'all') return 'All Cakes'
-    return category.charAt(0).toUpperCase() + category.slice(1)
+  // Format occasion name for display
+  const formatOccasion = (occasion: string) => {
+    if (occasion === 'all') return `All ${productLabel}s`
+    return occasion.charAt(0).toUpperCase() + occasion.slice(1)
   }
+
+  const pluralLabel = filteredProducts.length === 1 ? productLabel : `${productLabel}s`
 
   return (
     <div className={styles.container}>
-      {/* Category Filter */}
+      {/* Occasion Filter */}
       <div className={styles.filterSection}>
         <div className={styles.filterButtons}>
-          {categories.map((category) => (
+          {occasions.map((occasion) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
+              key={occasion}
+              onClick={() => setSelectedOccasion(occasion)}
               className={`${styles.filterButton} ${
-                selectedCategory === category ? styles.active : ''
+                selectedOccasion === occasion ? styles.active : ''
               }`}
             >
-              {formatCategory(category)}
+              {formatOccasion(occasion)}
             </button>
           ))}
         </div>
         <div className={styles.resultsCount}>
-          {filteredProducts.length} {filteredProducts.length === 1 ? 'cake' : 'cakes'} available
+          {filteredProducts.length} {pluralLabel} available
         </div>
       </div>
 
@@ -64,7 +67,7 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
       {/* Empty State */}
       {filteredProducts.length === 0 && (
         <div className={styles.emptyState}>
-          <p>No cakes found in this category.</p>
+          <p>No {productLabel}s found for this occasion.</p>
         </div>
       )}
     </div>
