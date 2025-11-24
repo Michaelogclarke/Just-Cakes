@@ -5,5 +5,7 @@ export interface Product {
   price: number
   image: string
   category: string
+  occasion: string
+  type: 'cake' | 'cupcake' | 'digital'
   available: boolean
 }

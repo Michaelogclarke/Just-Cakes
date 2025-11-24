@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(npm run build:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(file:*)",
+      "WebSearch",
+      "WebFetch(domain:www.pexels.com)"
     ],
     "deny": [],
     "ask": []
