@@ -3,6 +3,7 @@ import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import { AdminProvider } from '@/context/AdminContext'
 import Navbar from '@/components/Navbar'
+import CartBubble from '@/components/CartBubble'
 import Product from '@/components/Product'
 import ProductPage from './store/[id]/page'
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           <CartProvider>
             <Navbar />
             {children}
+            <CartBubble />
           </CartProvider>
         </AdminProvider>
       </body>

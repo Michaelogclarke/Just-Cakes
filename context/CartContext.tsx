@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react'
 import { Product } from '@/types/product'
 import { CartItem, Cart } from '@/types/cart'
+import Toast from '@/components/Toast'
 
 interface CartContextType {
   cart: Cart
@@ -16,6 +17,8 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   // Calculate cart totals
   const cart: Cart = {
@@ -41,6 +44,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return [...prevItems, { ...product, quantity: 1 }]
       }
     })
+
+    // Show toast notification
+    setToastMessage(`${product.name} added to cart!`)
+    setToastVisible(true)
   }, [])
 
   // Remove product from cart
@@ -72,6 +79,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
       {children}
+      <Toast
+        message={toastMessage}
+        isVisible={toastVisible}
+        onClose={() => setToastVisible(false)}
+      />
     </CartContext.Provider>
   )
 }

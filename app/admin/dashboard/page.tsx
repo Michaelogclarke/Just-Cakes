@@ -119,22 +119,7 @@ export default function AdminDashboard() {
               </tbody>
             </table>
           </div>
-        </div>
 
-        <div className={styles.infoBox}>
-          <h3>🔒 Database Integration</h3>
-          <p>
-            Currently using mock data from <code>lib/blogs.ts</code>. When you&apos;re ready to connect a database:
-          </p>
-          <ol>
-            <li>Set up your database (PostgreSQL, MongoDB, etc.)</li>
-            <li>Replace the mock data functions in <code>lib/blogs.ts</code> with real database queries</li>
-            <li>Update the admin forms to save to your database instead of the mock array</li>
-            <li>Add proper authentication with secure backend validation</li>
-          </ol>
-          <p>
-            The forms and UI are already built - you just need to wire up the backend!
-          </p>
         </div>
       </main>
     </div>

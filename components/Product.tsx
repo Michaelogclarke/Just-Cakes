@@ -13,6 +13,8 @@ export default function Product({
   price,
   image,
   category,
+  occasion,
+  type,
   available
 }: ProductProps) {
   const { addToCart } = useCart()
@@ -27,10 +29,25 @@ export default function Product({
       price,
       image,
       category,
+      occasion,
+      type,
       available
     }
     addToCart(product)
   }
+
+  // Determine the detail page route based on product type
+  const getDetailRoute = () => {
+    switch (type) {
+      case 'cupcake':
+        return `/cupcakes/${id}`
+      case 'digital':
+        return `/digital-products/${id}`
+      default:
+        return `/cakes/${id}`
+    }
+  }
+  const detailRoute = getDetailRoute()
 
   return (
     <div className={styles.card}>
@@ -50,7 +67,7 @@ export default function Product({
           <span className={styles.price}>£{price.toFixed(2)}</span>
 
           <div className={styles.actions}>
-            <Link href={`/store/${id}`}>
+            <Link href={detailRoute}>
               <button className={styles.detailsButton}>Details</button>
             </Link>
             <button

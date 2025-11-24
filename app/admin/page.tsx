@@ -62,9 +62,6 @@ export default function AdminLoginPage() {
 
         <div className={styles.helpText}>
           <p><strong>Demo Password:</strong> justcakes2024</p>
-          <p className={styles.note}>
-            Note: In production, replace this with secure backend authentication
-          </p>
         </div>
       </div>
     </div>

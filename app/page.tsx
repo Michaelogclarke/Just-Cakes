@@ -1,5 +1,4 @@
 import styles from './page.module.css'
-import Carousel from '@/components/Carousel'
 import Product from '@/components/Product'
 import { getAllProducts } from '@/lib/products'
 import Link from 'next/link'
@@ -8,18 +7,19 @@ export default async function Home() {
   const products = await getAllProducts()
   const featuredProducts = products.slice(0, 6)
 
-  const carouselImages = [
-    '/carousel/barbie-cake.png',
-    '/carousel/Princess-cake.jpg',
-    '/carousel/full-cake-display.jpeg',
-    '/carousel/Rian-cake.jpg',
-  ]
-
   return (
     <main className={styles.main}>
-      {/* Hero Carousel */}
+      {/* Hero Section */}
       <section className={styles.heroSection}>
-        <Carousel images={carouselImages} />
+        <div className={styles.heroOverlay}>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>Just Cakes</h1>
+            <p className={styles.heroSubtitle}>Handcrafted with Love, Designed to Delight</p>
+            <Link href="/store">
+              <button className={styles.heroButton}>Explore Our Collection</button>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Featured Products */}
