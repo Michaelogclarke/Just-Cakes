@@ -21,8 +21,28 @@ export default function CartPage() {
     )
   }
 
-  const handleCheckout = () => {
-    alert('Proceeding to checkout...')
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cart.items,
+        }),
+      })
+
+      const { url } = await response.json()
+
+      if (url) {
+        // Redirect to Stripe checkout
+        window.location.href = url
+      }
+    } catch (error) {
+      console.error('Checkout error:', error)
+      alert('There was an error processing your checkout. Please try again.')
+    }
   }
 
   return (
@@ -90,7 +110,7 @@ export default function CartPage() {
             >
               Proceed to Checkout
             </button>
-            <Link href="/store">
+            <Link href="/cakes">
               <button className={styles.secondaryButton}>Continue Shopping</button>
             </Link>
             <button

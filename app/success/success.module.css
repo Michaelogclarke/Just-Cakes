@@ -1,0 +1,126 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #fdf2f8, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.content {
+  max-width: 32rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #fce7f3;
+}
+
+.successIcon {
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 2rem auto;
+  background-color: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #16a34a;
+  stroke-width: 2;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.orderReference {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.orderLabel {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+}
+
+.orderId {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #1f2937;
+  word-break: break-all;
+}
+
+.actions {
+  margin-bottom: 1rem;
+}
+
+.primaryButton {
+  display: inline-block;
+  background-color: #6A00AA;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.primaryButton:hover {
+  background-color: #8300d4;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.contact {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 1rem;
+}
+
+.contactEmail {
+  color: #6A00AA;
+}
+
+.decorative {
+  margin-top: 3rem;
+  opacity: 0.3;
+}
+
+.cakeEmoji {
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}

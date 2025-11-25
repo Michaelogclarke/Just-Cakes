@@ -6,7 +6,8 @@
       "Bash(curl:*)",
       "Bash(file:*)",
       "WebSearch",
-      "WebFetch(domain:www.pexels.com)"
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
