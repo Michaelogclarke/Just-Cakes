@@ -22,9 +22,7 @@ export default function CartPage() {
   }
 
   const handleCheckout = () => {
-    // Checkout logic would go here
     alert('Proceeding to checkout...')
-    // In a real app, this would redirect to a checkout page
   }
 
   return (
@@ -44,7 +42,7 @@ export default function CartPage() {
               <div className={styles.itemDetails}>
                 <h3>{item.name}</h3>
                 <p className={styles.itemDescription}>{item.description}</p>
-                <p className={styles.itemPrice}>${item.price.toFixed(2)}</p>
+                <p className={styles.itemPrice}>£{item.price.toFixed(2)}</p>
               </div>
 
               <div className={styles.itemQuantity}>
