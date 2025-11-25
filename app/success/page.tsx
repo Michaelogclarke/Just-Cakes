@@ -26,7 +26,7 @@ export default async function Success({
           </p>
 
           <p className={styles.description}>
-            Your delicious treats are being prepared with love. You'll receive a confirmation email with all the details shortly.
+            Your delicious treats are being prepared with love. You&apos;ll receive a confirmation email with all the details shortly.
           </p>
 
           {params.session_id && (
