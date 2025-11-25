@@ -5,9 +5,9 @@
   z-index: 9999;
   animation: slideIn 0.3s ease-out;
 }
-
+/* #10b981 */
 .toastContent {
-  background-color: #10b981;
+  background-color: #6A00AA;
   color: white;
   padding: 16px 24px;
   border-radius: 12px;
