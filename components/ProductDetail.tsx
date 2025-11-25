@@ -13,7 +13,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const { addToCart } = useCart()
   const router = useRouter()
 
-  const handleAddToCart = (useCart) => {
+  const handleAddToCart = () => {
     addToCart(product)
  /*   alert(`${product.name} added to cart!`)*/
   }
