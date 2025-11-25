@@ -15,7 +15,7 @@ export default async function Home() {
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Just Cakes</h1>
             <p className={styles.heroSubtitle}>Handcrafted with Love, Designed to Delight</p>
-            <Link href="/store">
+            <Link href="/cakes">
               <button className={styles.heroButton}>Explore Our Collection</button>
             </Link>
           </div>
@@ -26,7 +26,7 @@ export default async function Home() {
       <section className={styles.productsSection}>
         <div className={styles.productsHeader}>
           <h2>Some of Our Products</h2>
-          <Link href="/store">
+          <Link href="/cakes">
             <button className={styles.viewAllButton}>View All Products</button>
           </Link>
         </div>
