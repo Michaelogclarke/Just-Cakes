@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
           description: item.description,
           images: item.image ? [`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${item.image}`] : [],
         },
-        unit_amount: Math.round(item.price * 100), // Convert to Pence
+        
+        unit_amount: Math.round(item.price * 100), // Convert to cents
       },
       quantity: item.quantity,
     }))
