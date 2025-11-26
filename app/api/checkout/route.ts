@@ -18,12 +18,13 @@ export async function POST(request: NextRequest) {
     // Create line items for Stripe
     const lineItems = items.map((item: any) => ({
       price_data: {
-        currency: 'usd',
+        currency: 'GBP',
         product_data: {
           name: item.name,
           description: item.description,
           images: item.image ? [`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${item.image}`] : [],
         },
+        
         unit_amount: Math.round(item.price * 100), // Convert to cents
       },
       quantity: item.quantity,
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/cart`,
       shipping_address_collection: {
-        allowed_countries: ['US', 'CA'],
+        allowed_countries: ['GB'],
       },
       metadata: {
         // Store cart info for later order processing

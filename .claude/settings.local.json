@@ -7,7 +7,8 @@
       "Bash(file:*)",
       "WebSearch",
       "WebFetch(domain:www.pexels.com)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

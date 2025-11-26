@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import CartBubble from '@/components/CartBubble'
 import Product from '@/components/Product'
 import ProductPage from './store/[id]/page'
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: 'Just Cakes - Delicious Custom Cakes',
