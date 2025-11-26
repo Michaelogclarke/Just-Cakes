@@ -39,7 +39,7 @@ export default async function Success({
           )}
 
           <div className={styles.actions}>
-            <Link href="/cakes" className={styles.primaryButton}>
+            <Link href="/" className={styles.primaryButton}>
               Continue Shopping
             </Link>
           </div>

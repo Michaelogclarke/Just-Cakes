@@ -217,7 +217,7 @@
   width: 100%;
   padding: 0.75rem 1.25rem;
   border: none;
-  background: #333;
+  background: #6A00AA;
   color: white;
   border-radius: 6px;
   font-size: 0.95rem;
@@ -227,7 +227,7 @@
 }
 
 .primaryButton:hover {
-  background: #000;
+  background: #8300d4;
 }
 
 .secondaryButton {

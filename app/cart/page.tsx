@@ -13,7 +13,7 @@ export default function CartPage() {
         <div className={styles.emptyState}>
           <h1>Shopping Cart</h1>
           <p>Your cart is empty</p>
-          <Link href="/store">
+          <Link href="/">
             <button className={styles.primaryButton}>Continue Shopping</button>
           </Link>
         </div>
@@ -77,7 +77,7 @@ export default function CartPage() {
 
               <div className={styles.itemSubtotal}>
                 <p className={styles.subtotalLabel}>Subtotal</p>
-                <p className={styles.subtotalPrice}>${(item.price * item.quantity).toFixed(2)}</p>
+                <p className={styles.subtotalPrice}>£{(item.price * item.quantity).toFixed(2)}</p>
               </div>
 
               <button
@@ -100,7 +100,7 @@ export default function CartPage() {
 
           <div className={styles.summaryTotal}>
             <span>Total:</span>
-            <span>${cart.totalPrice.toFixed(2)}</span>
+            <span>£{cart.totalPrice.toFixed(2)}</span>
           </div>
 
           <div className={styles.summaryActions}>
