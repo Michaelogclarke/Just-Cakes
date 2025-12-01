@@ -18,6 +18,19 @@
   align-items: center;
 }
 
+.backLink {
+  display: inline-block;
+  color: #6A00AA;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #8300d4;
+}
+
 .header h1 {
   font-size: 2rem;
   font-weight: 700;

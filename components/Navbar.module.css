@@ -70,6 +70,77 @@
   font-weight: 600;
 }
 
+/* Dropdown Container */
+.dropdownContainer {
+  position: relative;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.dropdownContainer:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Dropdown Content - Amazon style */
+.dropdownContent {
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #d5d9d9;
+  padding: 1rem;
+  min-width: 320px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 2.5rem;
+}
+
+/* Dropdown Section */
+.dropdownSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.dropdownTitle {
+  color: #333;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+/* Dropdown Links - Amazon style */
+.dropdownLink {
+  color: #333;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0.625rem 0.75rem;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  white-space: nowrap;
+  display: block;
+}
+
+.dropdownLink:hover {
+  background-color: rgba(106, 0, 170, 0.08);
+  color: #6A00AA;
+}
+
 /* Responsive */
 @media (max-width: 968px) {
   .navcontainer {
@@ -87,6 +158,12 @@
   .logo {
     height: 60px;
   }
+
+  .dropdownContent {
+    min-width: 280px;
+    padding: 0.875rem;
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -103,6 +180,11 @@
 
   .logo {
     height: 55px;
+  }
+
+  /* Hide dropdowns on tablet and mobile - click to navigate directly */
+  .dropdown {
+    display: none;
   }
 }
 
