@@ -180,6 +180,95 @@ export const products: Product[] = [
     occasion: 'learning',
     type: 'digital',
     available: true
+  },
+  // Cake Slices
+  {
+    id: 301,
+    name: 'Chocolate Fudge Slice',
+    description: 'Rich chocolate cake slice with layers of chocolate fudge frosting',
+    price: 6.99,
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400',
+    category: 'chocolate',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 302,
+    name: 'Vanilla Bean Slice',
+    description: 'Classic vanilla cake slice with vanilla buttercream',
+    price: 5.99,
+    image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400',
+    category: 'vanilla',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 303,
+    name: 'Red Velvet Slice',
+    description: 'Decadent red velvet slice with cream cheese frosting',
+    price: 7.49,
+    image: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400',
+    category: 'specialty',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 304,
+    name: 'Strawberry Shortcake Slice',
+    description: 'Light vanilla sponge with fresh strawberries and whipped cream',
+    price: 6.49,
+    image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400',
+    category: 'fruit',
+    occasion: 'birthday',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 305,
+    name: 'Carrot Cake Slice',
+    description: 'Moist carrot cake with cream cheese frosting and walnuts',
+    price: 6.99,
+    image: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400',
+    category: 'specialty',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 306,
+    name: 'Lemon Bliss Slice',
+    description: 'Tangy lemon cake with lemon curd and buttercream',
+    price: 6.49,
+    image: 'https://images.unsplash.com/photo-1519915212116-7cfef71f1d3e?w=400',
+    category: 'fruit',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 307,
+    name: 'Black Forest Slice',
+    description: 'Chocolate cake with cherries and whipped cream',
+    price: 7.99,
+    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400',
+    category: 'chocolate',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
+  },
+  {
+    id: 308,
+    name: 'Tiramisu Slice',
+    description: 'Coffee-soaked cake with mascarpone cream',
+    price: 7.49,
+    image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400',
+    category: 'specialty',
+    occasion: 'celebration',
+    type: 'slice',
+    available: true
   }
 ]
 
@@ -218,4 +307,10 @@ export async function getAllCupcakes(): Promise<Product[]> {
 export async function getAllDigitalProducts(): Promise<Product[]> {
   await new Promise(resolve => setTimeout(resolve, 100))
   return products.filter(product => product.type === 'digital')
+}
+
+// Get all slices
+export async function getAllSlices(): Promise<Product[]> {
+  await new Promise(resolve => setTimeout(resolve, 100))
+  return products.filter(product => product.type === 'slice')
 }

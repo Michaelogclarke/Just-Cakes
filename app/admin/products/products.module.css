@@ -18,6 +18,19 @@
   align-items: center;
 }
 
+.backLink {
+  display: inline-block;
+  color: #6A00AA;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #8300d4;
+}
+
 .header h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -332,4 +345,61 @@
   .statsGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Product-specific styles */
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+
+.productName {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.productDesc {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.typeBadge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.priceCell {
+  font-weight: 700;
+  color: #6A00AA;
+  font-size: 1.05rem;
+}
+
+.statusAvailable {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.statusUnavailable {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
 }

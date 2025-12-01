@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
 import { blogPosts } from '@/lib/blogs'
-import styles from './dashboard.module.css'
+import styles from './blogs.module.css'
 
-export default function AdminDashboard() {
+export default function AdminBlogsPage() {
   const { isAuthenticated, logout } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
@@ -44,8 +44,9 @@ export default function AdminDashboard() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <h1>Admin Dashboard</h1>
-            <p>Manage your products and blog posts</p>
+            <Link href="/admin/dashboard" className={styles.backLink}>← Back to Dashboard</Link>
+            <h1>Blog Management</h1>
+            <p>Manage all your blog posts</p>
           </div>
           <button onClick={handleLogout} className={styles.logoutButton}>
             Logout
@@ -54,23 +55,7 @@ export default function AdminDashboard() {
       </header>
 
       <main className={styles.main}>
-        <div className={styles.quickLinks}>
-          <Link href="/admin/products" className={styles.quickLinkCard}>
-            <div className={styles.quickLinkIcon}>🛍️</div>
-            <h3>Manage Products</h3>
-            <p>Add, edit, and manage your cakes and cupcakes</p>
-          </Link>
-          <Link href="/admin/blogs" className={styles.quickLinkCard}>
-            <div className={styles.quickLinkIcon}>📝</div>
-            <h3>Manage Blogs</h3>
-            <p>Create and edit blog posts</p>
-          </Link>
-        </div>
-
         <div className={styles.actions}>
-          <Link href="/admin/products/new" className={styles.createButton}>
-            + Add New Product
-          </Link>
           <Link href="/admin/blog/new" className={styles.createButton}>
             + Create New Blog Post
           </Link>
@@ -135,7 +120,6 @@ export default function AdminDashboard() {
               </tbody>
             </table>
           </div>
-
         </div>
       </main>
     </div>
