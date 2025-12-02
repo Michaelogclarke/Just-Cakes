@@ -189,6 +189,10 @@
     display: none;
   }
 
+  .closeButtonWrapper {
+    display: none;
+  }
+
   .navLinks {
     position: static;
     width: auto;
@@ -258,7 +262,8 @@
     height: 100vh;
     background: white;
     flex-direction: column;
-    padding: 5rem 2rem 2rem;
+    align-items: flex-start;
+    padding: 4rem 2rem 2rem;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
     gap: 0;
@@ -267,39 +272,71 @@
   }
 
   .navLinksOpen {
-    right: 0;
+    right: 0 !important;
+  }
+
+  .closeButtonWrapper {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    border-bottom: none !important;
+    width: auto !important;
+  }
+
+  .closeButton {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: all 0.2s ease;
+  }
+
+  .closeButton:hover {
+    color: #6A00AA;
+    background: rgba(106, 0, 170, 0.05);
+    border-radius: 4px;
   }
 
   .navLinks li {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
+    list-style: none;
   }
 
   .navLinks a {
-    display: block;
-    padding: 1rem 0;
-    font-size: 1rem;
-    border-bottom: none;
-    color: #333;
+    display: block !important;
+    padding: 1rem 0 !important;
+    font-size: 1rem !important;
+    border-bottom: none !important;
+    color: #333 !important;
+    text-decoration: none;
+    width: 100%;
   }
 
   .navLinks a:hover {
-    color: #6A00AA;
+    color: #6A00AA !important;
     background: rgba(106, 0, 170, 0.03);
-    padding-left: 1rem;
+    padding-left: 1rem !important;
     margin-left: -1rem;
     margin-right: -1rem;
-    padding-right: 1rem;
+    padding-right: 1rem !important;
   }
 
   .navLinks a.active {
-    border-bottom: none;
+    border-bottom: none !important;
     background: rgba(106, 0, 170, 0.05);
-    padding-left: 1rem;
+    padding-left: 1rem !important;
     margin-left: -1rem;
     margin-right: -1rem;
-    padding-right: 1rem;
-    color: #6A00AA;
+    padding-right: 1rem !important;
+    color: #6A00AA !important;
   }
 
   .logo {
@@ -308,7 +345,11 @@
 
   /* Hide dropdowns on mobile */
   .dropdown {
-    display: none;
+    display: none !important;
+  }
+
+  .dropdownContainer {
+    position: static;
   }
 }
 
@@ -322,11 +363,12 @@
   }
 
   .navLinks {
-    width: 100%;
+    width: 85%;
     right: -100%;
+    padding: 4rem 1.5rem 2rem;
   }
 
   .navLinks a {
-    font-size: 0.95rem;
+    font-size: 0.95rem !important;
   }
 }
