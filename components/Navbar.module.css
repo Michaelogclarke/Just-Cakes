@@ -158,7 +158,8 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1000;
+  z-index: 1001;
+  position: relative;
 }
 
 .hamburger span {
@@ -186,10 +187,6 @@
 /* Responsive */
 @media (min-width: 769px) {
   .hamburger {
-    display: none;
-  }
-
-  .closeButtonWrapper {
     display: none;
   }
 
@@ -273,35 +270,6 @@
 
   .navLinksOpen {
     right: 0 !important;
-  }
-
-  .closeButtonWrapper {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    border-bottom: none !important;
-    width: auto !important;
-  }
-
-  .closeButton {
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    color: #333;
-    cursor: pointer;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    transition: all 0.2s ease;
-  }
-
-  .closeButton:hover {
-    color: #6A00AA;
-    background: rgba(106, 0, 170, 0.05);
-    border-radius: 4px;
   }
 
   .navLinks li {
