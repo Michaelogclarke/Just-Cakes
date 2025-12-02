@@ -51,9 +51,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 a {
   color: var(--just-cakes);
   text-decoration: none;
+}
+
+/* Prevent zoom on input focus on mobile Safari */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Improve tap highlighting on mobile */
+* {
+  -webkit-tap-highlight-color: rgba(106, 0, 170, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

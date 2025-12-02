@@ -72,6 +72,10 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .heroButton:hover {
@@ -102,7 +106,7 @@
 }
 
 .viewAllButton {
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   border: 2px solid #6A00AA;
   background: white;
   color: #6A00AA;
@@ -112,6 +116,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .viewAllButton:hover {
@@ -185,29 +193,44 @@
   }
 
   .heroContent {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .heroTitle {
-    font-size: 2rem;
+    font-size: 1.875rem;
     margin-bottom: 0.75rem;
   }
 
   .heroSubtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 1.5rem;
   }
 
   .heroButton {
-    padding: 0.75rem 1.75rem;
-    font-size: 0.95rem;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
   }
 
   .productsSection {
     padding: 1.5rem 1rem;
   }
 
+  .productsHeader {
+    gap: 0.875rem;
+  }
+
   .productsHeader h2 {
     font-size: 1.5rem;
+  }
+
+  .viewAllButton {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }

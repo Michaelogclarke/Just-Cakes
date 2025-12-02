@@ -144,6 +144,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 48px;
 }
 
 .addButton:hover:not(:disabled) {
@@ -204,9 +205,23 @@
 
   .productLayout {
     padding: 1.25rem;
+    gap: 2rem;
   }
 
   .header h1 {
     font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .addButton {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
   }
 }
