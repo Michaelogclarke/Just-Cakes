@@ -146,7 +146,7 @@
 }
 
 .removeButton {
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1rem;
   border: 1px solid #ddd;
   background: white;
   color: #666;
@@ -156,6 +156,7 @@
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  min-height: 44px;
 }
 
 .removeButton:hover {
@@ -215,7 +216,7 @@
 
 .primaryButton {
   width: 100%;
-  padding: 0.75rem 1.25rem;
+  padding: 0.875rem 1.25rem;
   border: none;
   background: #6A00AA;
   color: white;
@@ -224,6 +225,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 48px;
 }
 
 .primaryButton:hover {
@@ -232,7 +234,7 @@
 
 .secondaryButton {
   width: 100%;
-  padding: 0.75rem 1.25rem;
+  padding: 0.875rem 1.25rem;
   border: 1px solid #ddd;
   background: white;
   color: #666;
@@ -241,6 +243,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 48px;
 }
 
 .secondaryButton:hover {
@@ -250,7 +253,7 @@
 
 .clearButton {
   width: 100%;
-  padding: 0.75rem 1.25rem;
+  padding: 0.875rem 1.25rem;
   border: 1px solid #dc2626;
   background: white;
   color: #dc2626;
@@ -259,6 +262,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 44px;
 }
 
 .clearButton:hover {
@@ -325,5 +329,29 @@
 
   .cartItem {
     padding: 1rem;
+    gap: 0.875rem;
+  }
+
+  .itemDetails h3 {
+    font-size: 1rem;
+  }
+
+  .itemDescription {
+    font-size: 0.8rem;
+  }
+
+  .itemQuantity input {
+    width: 50px;
+    font-size: 0.875rem;
+  }
+
+  .subtotalPrice {
+    font-size: 1rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
   }
 }

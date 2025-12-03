@@ -137,6 +137,7 @@
   margin-top: 2rem;
   box-shadow: 0 4px 16px rgba(106, 0, 170, 0.3);
   letter-spacing: 0.01em;
+  min-height: 52px;
 }
 
 .submitButton:hover:not(:disabled) {
@@ -200,5 +201,27 @@
 
   .sectionTitle {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    font-size: 0.95rem;
+    padding: 0.875rem;
+  }
+
+  .submitButton {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
   }
 }

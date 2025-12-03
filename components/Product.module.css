@@ -96,7 +96,7 @@
 }
 
 .detailsButton {
-  padding: 0.625rem 1rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ddd;
   background: white;
   color: #666;
@@ -105,6 +105,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 44px;
 }
 
 .detailsButton:hover {
@@ -114,7 +115,7 @@
 
 .addButton {
   flex: 1;
-  padding: 0.75rem 1.25rem;
+  padding: 0.85rem 1.25rem;
   border: none;
   background: #6A00AA;
   color: white;
@@ -124,6 +125,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(106, 0, 170, 0.2);
+  min-height: 44px;
 }
 
 .addButton:hover:not(:disabled) {
@@ -147,5 +149,72 @@
 
   .content {
     padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.05rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+  }
+
+  .actions {
+    gap: 0.75rem;
+  }
+
+  .addButton,
+  .detailsButton {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageContainer {
+    height: 180px;
+  }
+
+  .content {
+    padding: 0.875rem;
+  }
+
+  .header {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .category {
+    font-size: 0.7rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .price {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .detailsButton {
+    display: none;
+  }
+
+  .addButton {
+    font-size: 0.85rem;
+    padding: 0.75rem 0.875rem;
   }
 }

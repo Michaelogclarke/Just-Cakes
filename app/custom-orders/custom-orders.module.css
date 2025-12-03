@@ -165,3 +165,45 @@
     font-size: 1.75rem;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 1.25rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .step {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.1rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+  }
+
+  .guidelines {
+    padding: 1.5rem;
+  }
+
+  .content {
+    gap: 2rem;
+  }
+}

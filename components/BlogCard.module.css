@@ -147,9 +147,38 @@
     font-size: 1.25rem;
   }
 
+  .excerpt {
+    font-size: 0.9rem;
+  }
+
   .meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    font-size: 0.825rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageContainer {
+    height: 180px;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .excerpt {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .categoryBadge {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.875rem;
   }
 }

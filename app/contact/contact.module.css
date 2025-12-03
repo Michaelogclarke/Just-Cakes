@@ -131,6 +131,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-top: 1rem;
+  min-height: 48px;
 }
 
 .submitButton:hover:not(:disabled) {
@@ -199,5 +200,43 @@
   .contactInfo,
   .contactForm {
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    padding: 1rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 1.625rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .contactInfo,
+  .contactForm {
+    padding: 1.25rem;
+  }
+
+  .contactInfo h2 {
+    font-size: 1.25rem;
+  }
+
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    padding: 0.875rem 1rem;
+  }
+
+  .submitButton {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
   }
 }
