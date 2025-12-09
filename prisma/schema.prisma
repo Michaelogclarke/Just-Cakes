@@ -5,10 +5,23 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  imageUrl    String?
+  category    String      // e.g., "Birthday", "Wedding", "Cupcakes"
+  available   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
