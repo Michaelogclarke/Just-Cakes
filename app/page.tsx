@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import Product from '@/components/Product'
 import { getAllProducts } from '@/lib/products'
 import Link from 'next/link'
+import { Analytics } from '@vercel/analytics/next'
 
 export default async function Home() {
   const products = await getAllProducts()
