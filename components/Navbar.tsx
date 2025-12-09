@@ -70,23 +70,8 @@ export default function Navbar() {
             </Link>
             <div className={styles.dropdown}>
               <div className={styles.dropdownContent}>
+                <h3 className={styles.dropdownTitle}>By Occasion</h3>
                 <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Category</h3>
-                  <Link href="/cakes#category=chocolate" className={styles.dropdownLink}>
-                    Chocolate
-                  </Link>
-                  <Link href="/cakes#category=vanilla" className={styles.dropdownLink}>
-                    Vanilla
-                  </Link>
-                  <Link href="/cakes#category=specialty" className={styles.dropdownLink}>
-                    Specialty
-                  </Link>
-                  <Link href="/cakes#category=fruit" className={styles.dropdownLink}>
-                    Fruit
-                  </Link>
-                </div>
-                <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Occasion</h3>
                   <Link href="/cakes#occasion=birthday" className={styles.dropdownLink}>
                     Birthday
                   </Link>
@@ -115,21 +100,6 @@ export default function Navbar() {
             </Link>
             <div className={styles.dropdown}>
               <div className={styles.dropdownContent}>
-                <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Category</h3>
-                  <Link href="/cupcakes#category=chocolate" className={styles.dropdownLink}>
-                    Chocolate
-                  </Link>
-                  <Link href="/cupcakes#category=vanilla" className={styles.dropdownLink}>
-                    Vanilla
-                  </Link>
-                  <Link href="/cupcakes#category=specialty" className={styles.dropdownLink}>
-                    Specialty
-                  </Link>
-                  <Link href="/cupcakes#category=fruit" className={styles.dropdownLink}>
-                    Fruit
-                  </Link>
-                </div>
                 <div className={styles.dropdownSection}>
                   <h3 className={styles.dropdownTitle}>By Occasion</h3>
                   <Link href="/cupcakes#occasion=birthday" className={styles.dropdownLink}>
@@ -160,22 +130,7 @@ export default function Navbar() {
             </Link>
             <div className={styles.dropdown}>
               <div className={styles.dropdownContent}>
-                <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Category</h3>
-                  <Link href="/slices#category=chocolate" className={styles.dropdownLink}>
-                    Chocolate
-                  </Link>
-                  <Link href="/slices#category=vanilla" className={styles.dropdownLink}>
-                    Vanilla
-                  </Link>
-                  <Link href="/slices#category=specialty" className={styles.dropdownLink}>
-                    Specialty
-                  </Link>
-                  <Link href="/slices#category=fruit" className={styles.dropdownLink}>
-                    Fruit
-                  </Link>
-                </div>
-                <div className={styles.dropdownSection}>
+               <div className={styles.dropdownSection}>
                   <h3 className={styles.dropdownTitle}>By Occasion</h3>
                   <Link href="/slices#occasion=birthday" className={styles.dropdownLink}>
                     Birthday

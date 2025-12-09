@@ -111,8 +111,8 @@
 /* Dropdown Section */
 .dropdownSection {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  flex-direction: row;
+  gap: 1rem;
   flex: 1;
 }
 
@@ -135,6 +135,7 @@
   transition: background-color 0.1s ease, color 0.1s ease;
   white-space: nowrap;
   display: block;
+  justify-content: space-between;
 }
 
 .dropdownLink:hover {
