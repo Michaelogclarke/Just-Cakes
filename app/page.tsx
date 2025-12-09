@@ -4,12 +4,14 @@ import { getAllProducts } from '@/lib/products'
 import Link from 'next/link'
 import { Analytics } from '@vercel/analytics/next'
 
+
 export default async function Home() {
   const products = await getAllProducts()
   const featuredProducts = products.slice(0, 6)
 
   return (
     <main className={styles.main}>
+      <Analytics />
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroOverlay}>
