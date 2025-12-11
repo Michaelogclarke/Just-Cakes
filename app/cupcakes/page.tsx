@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import styles from './cupcakes.module.css'
 import ProductsGrid from '@/components/ProductsGrid'
-import { getAllCupcakes } from '@/lib/products'
 import { Product } from '@/types/product'
 
 export default function CupcakesPage() {
@@ -12,11 +11,19 @@ export default function CupcakesPage() {
   const [activeFilter, setActiveFilter] = useState<{ type: string; value: string } | null>(null)
 
   useEffect(() => {
-    // Fetch cupcakes on mount
-    getAllCupcakes().then(cupcakes => {
-      setAllCupcakes(cupcakes)
-      setFilteredCupcakes(cupcakes)
-    })
+    // Fetch cupcakes from API on mount
+    async function fetchCupcakes() {
+      try {
+        const response = await fetch('/api/products')
+        const allProducts = await response.json()
+        const cupcakes = allProducts.filter((p: Product) => p.type === 'cupcake')
+        setAllCupcakes(cupcakes)
+        setFilteredCupcakes(cupcakes)
+      } catch (error) {
+        console.error('Failed to fetch cupcakes:', error)
+      }
+    }
+    fetchCupcakes()
   }, [])
 
   useEffect(() => {

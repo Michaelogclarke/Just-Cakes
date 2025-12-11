@@ -20,7 +20,6 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     const products = await prisma.product.findMany({
-      where: { available: true },
       orderBy: { createdAt: 'desc' }
     })
     return NextResponse.json(products)
@@ -37,8 +36,10 @@ export async function POST(request: Request) {
         name: body.name,
         description: body.description,
         category: body.category,
+        occasion: body.occasion,
+        type: body.type,
         price: body.price,
-        imageUrl: body.imageUrl,
+        image: body.image,
         available: body.available,
       }
     })

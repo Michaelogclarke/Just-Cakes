@@ -39,12 +39,16 @@ export default function Product({
   // Determine the detail page route based on product type
   const getDetailRoute = () => {
     switch (type) {
+      case 'cake':
+        return `/cakes/${id}`
       case 'cupcake':
         return `/cupcakes/${id}`
+      case 'slice':
+        return `/slices/${id}`
       case 'digital':
         return `/digital-products/${id}`
       default:
-        return `/cakes/${id}`
+        return `/store/${id}`
     }
   }
   const detailRoute = getDetailRoute()

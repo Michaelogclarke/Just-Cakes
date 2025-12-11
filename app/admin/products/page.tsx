@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { products } from '@/lib/products'
+import { Product } from '@/types/product'
 import styles from './products.module.css'
-import { GET } from '@/app/api/products/route'
 
 export default function AdminProductsPage() {
   const { isAuthenticated, logout } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setMounted(true)
@@ -23,8 +24,30 @@ export default function AdminProductsPage() {
     }
   }, [isAuthenticated, router, mounted])
 
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products')
+        const data = await response.json()
+        setProducts(data)
+      } catch (error) {
+        console.error('Failed to fetch products:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (mounted && isAuthenticated) {
+      fetchProducts()
+    }
+  }, [mounted, isAuthenticated])
+
   if (!mounted || !isAuthenticated) {
     return null
+  }
+
+  if (loading) {
+    return <div className={styles.dashboard}>Loading products...</div>
   }
 
   const handleLogout = () => {

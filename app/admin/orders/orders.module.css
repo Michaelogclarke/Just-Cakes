@@ -1,0 +1,289 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 2rem;
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.backLink {
+  display: inline-block;
+  color: #666;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.backLink:hover {
+  color: #333;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.header p {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+}
+
+.logoutButton {
+  padding: 0.5rem 1.5rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.logoutButton:hover {
+  background: #c82333;
+}
+
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.filters {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filters label {
+  font-weight: 500;
+  color: #333;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.noOrders {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  color: #666;
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background: #f8f9fa;
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.orderId {
+  font-family: monospace;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.customerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.customerName {
+  font-weight: 500;
+  color: #333;
+}
+
+.customerEmail {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.itemCount {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.amount {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.statusPending, .statusProcessing, .statusCompleted, .statusShipped,
+.statusDelivered, .statusCancelled, .statusDefault {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusPending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusProcessing {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.statusCompleted {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.statusShipped {
+  background: #d3d3f9;
+  color: #3d155f;
+}
+
+.statusDelivered {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.statusCancelled {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.statusDefault {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.paymentPaid, .paymentUnpaid, .paymentRefunded, .paymentFailed, .paymentDefault {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.paymentPaid {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.paymentUnpaid {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.paymentRefunded {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.paymentFailed {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.paymentDefault {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.viewButton {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background 0.2s;
+}
+
+.viewButton:hover {
+  background: #0056b3;
+}
