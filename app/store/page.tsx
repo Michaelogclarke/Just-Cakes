@@ -8,11 +8,6 @@ export default async function StorePage() {
 
   return (
     <main className={styles.storeContainer}>
-      <div className={styles.header}>
-        <h1>Our Cakes</h1>
-      </div>
-
-      <ProductsGrid products={products} />
     </main>
   )
 }

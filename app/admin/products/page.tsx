@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
 import { products } from '@/lib/products'
 import styles from './products.module.css'
+import { GET } from '@/app/api/products/route'
 
 export default function AdminProductsPage() {
   const { isAuthenticated, logout } = useAdmin()

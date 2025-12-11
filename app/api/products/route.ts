@@ -36,9 +36,10 @@ export async function POST(request: Request) {
       data: {
         name: body.name,
         description: body.description,
-        price: body.price,
         category: body.category,
+        price: body.price,
         imageUrl: body.imageUrl,
+        available: body.available,
       }
     })
     return NextResponse.json(product, { status: 201 })
