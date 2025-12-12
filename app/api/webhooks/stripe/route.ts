@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
             customerName: session.customer_details?.name || null,
             customerPhone: session.customer_details?.phone || null,
             shippingAddress: (session as any).shipping_details || null,
-            billingAddress: session.customer_details?.address || null,
+            billingAddress: session.customer_details?.address ? JSON.parse(JSON.stringify(session.customer_details.address)) : null,
             orderItems: cartItems,
             totalAmount: (session.amount_total || 0) / 100, // Convert from cents
             currency: session.currency || 'gbp',
