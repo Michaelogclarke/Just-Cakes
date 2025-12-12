@@ -35,16 +35,17 @@ export async function POST(request: Request) {
       data: {
         name: body.name,
         description: body.description,
+        price: parseFloat(body.price),
+        image: body.image,
         category: body.category,
         occasion: body.occasion,
         type: body.type,
-        price: body.price,
-        image: body.image,
-        available: body.available,
+        available: body.available ?? true,
       }
     })
     return NextResponse.json(product, { status: 201 })
   } catch (error) {
+    console.error('Failed to create product:', error)
     return NextResponse.json({ error: 'Failed to create product' }, { status: 500 })
   }
 }

@@ -91,16 +91,61 @@ export default function EditProductPage({ params }: EditProductPageProps) {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Update product data:', formData)
-    alert('Product would be updated! (Not functional yet)')
+
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          image: formData.image,
+          category: formData.category,
+          occasion: formData.occasion,
+          type: formData.type,
+          available: formData.available,
+        }),
+      })
+
+      if (response.ok) {
+        const product = await response.json()
+        alert(`Product "${product.name}" updated successfully!`)
+        router.push('/admin/products')
+      } else {
+        const error = await response.json()
+        alert(`Failed to update product: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error updating product:', error)
+      alert('An error occurred while updating the product')
+    }
   }
 
-  const handleDelete = () => {
-    if (confirm('Are you sure you want to delete this product?')) {
-      console.log('Delete product:', productId)
-      alert('Product would be deleted! (Not functional yet)')
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        alert('Product deleted successfully!')
+        router.push('/admin/products')
+      } else {
+        const error = await response.json()
+        alert(`Failed to delete product: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error)
+      alert('An error occurred while deleting the product')
     }
   }
 
