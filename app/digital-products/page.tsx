@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import styles from './digital-products.module.css'
 import ProductsGrid from '@/components/ProductsGrid'
-import { getAllDigitalProducts } from '@/lib/products'
 import { Product } from '@/types/product'
 
 export default function DigitalProductsPage() {
@@ -12,11 +11,19 @@ export default function DigitalProductsPage() {
   const [activeFilter, setActiveFilter] = useState<{ type: string; value: string } | null>(null)
 
   useEffect(() => {
-    // Fetch digital products on mount
-    getAllDigitalProducts().then(products => {
-      setAllProducts(products)
-      setFilteredProducts(products)
-    })
+    // Fetch digital products from API on mount
+    async function fetchDigitalProducts() {
+      try {
+        const response = await fetch('/api/products')
+        const allProducts = await response.json()
+        const digitalProducts = allProducts.filter((p: Product) => p.type === 'digital')
+        setAllProducts(digitalProducts)
+        setFilteredProducts(digitalProducts)
+      } catch (error) {
+        console.error('Failed to fetch digital products:', error)
+      }
+    }
+    fetchDigitalProducts()
   }, [])
 
   useEffect(() => {

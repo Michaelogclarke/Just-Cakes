@@ -2,18 +2,26 @@ import { notFound } from 'next/navigation'
 import { getProductById, getAllDigitalProducts } from '@/lib/products'
 import ProductDetail from '@/components/ProductDetail'
 
+// Force dynamic rendering since we're using a database
+export const dynamic = 'force-dynamic'
+
 // Generate static params for all digital products
 export async function generateStaticParams() {
-  const digitalProducts = await getAllDigitalProducts()
-  return digitalProducts.map((product) => ({
-    id: product.id.toString(),
-  }))
+  try {
+    const digitalProducts = await getAllDigitalProducts()
+    return digitalProducts.map((product) => ({
+      id: product.id.toString(),
+    }))
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const product = await getProductById(parseInt(id))
+  const product = await getProductById(id)
 
   if (!product || product.type !== 'digital') {
     return {
@@ -29,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function DigitalProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const product = await getProductById(parseInt(id))
+  const product = await getProductById(id)
 
   if (!product || product.type !== 'digital') {
     notFound()

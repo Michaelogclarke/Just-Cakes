@@ -4,6 +4,8 @@ import { getAllProducts } from '@/lib/products'
 import Link from 'next/link'
 import { Analytics } from '@vercel/analytics/next'
 
+// Force dynamic rendering since we're using a database
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const products = await getAllProducts()

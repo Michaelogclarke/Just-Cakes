@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { products } from '@/lib/products'
+import { Product } from '@/types/product'
 import styles from './edit.module.css'
 
 interface EditProductPageProps {
@@ -15,8 +15,9 @@ export default function EditProductPage({ params }: EditProductPageProps) {
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
-  const [productId, setProductId] = useState<number | null>(null)
-  const [product, setProduct] = useState<any>(null)
+  const [productId, setProductId] = useState<string | null>(null)
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -32,22 +33,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
   useEffect(() => {
     setMounted(true)
     params.then(p => {
-      const id = parseInt(p.id)
-      setProductId(id)
-      const foundProduct = products.find(prod => prod.id === id)
-      if (foundProduct) {
-        setProduct(foundProduct)
-        setFormData({
-          name: foundProduct.name,
-          description: foundProduct.description,
-          price: foundProduct.price.toString(),
-          image: foundProduct.image,
-          category: foundProduct.category,
-          occasion: foundProduct.occasion,
-          type: foundProduct.type,
-          available: foundProduct.available
-        })
-      }
+      setProductId(p.id)
     })
   }, [params])
 
@@ -57,8 +43,44 @@ export default function EditProductPage({ params }: EditProductPageProps) {
     }
   }, [isAuthenticated, router, mounted])
 
-  if (!mounted || !isAuthenticated || !product) {
+  useEffect(() => {
+    async function fetchProduct() {
+      if (!productId) return
+
+      try {
+        const response = await fetch(`/api/products/${productId}`)
+        if (response.ok) {
+          const foundProduct = await response.json()
+          setProduct(foundProduct)
+          setFormData({
+            name: foundProduct.name,
+            description: foundProduct.description,
+            price: foundProduct.price.toString(),
+            image: foundProduct.image,
+            category: foundProduct.category,
+            occasion: foundProduct.occasion,
+            type: foundProduct.type,
+            available: foundProduct.available
+          })
+        }
+      } catch (error) {
+        console.error('Failed to fetch product:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (mounted && isAuthenticated && productId) {
+      fetchProduct()
+    }
+  }, [mounted, isAuthenticated, productId])
+
+  if (!mounted || !isAuthenticated) {
     return null
+  }
+
+  if (loading || !product) {
+    return <div className={styles.container}>Loading product...</div>
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

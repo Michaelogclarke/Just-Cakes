@@ -145,24 +145,6 @@ export default function NewProductPage() {
               </div>
 
               <div className={styles.formGroup}>
-                <label htmlFor="category">Category *</label>
-                <select
-                  id="category"
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a category</option>
-                  <option value="chocolate">Chocolate</option>
-                  <option value="vanilla">Vanilla</option>
-                  <option value="specialty">Specialty</option>
-                  <option value="fruit">Fruit</option>
-                  <option value="cookbook">Cookbook (Digital)</option>
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
                 <label htmlFor="occasion">Occasion *</label>
                 <select
                   id="occasion"

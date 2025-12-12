@@ -4,43 +4,63 @@ import { createContext, useContext, useState, useCallback, ReactNode, useEffect 
 
 interface AdminContextType {
   isAuthenticated: boolean
-  login: (password: string) => boolean
-  logout: () => void
+  login: (password: string) => Promise<boolean>
+  logout: () => Promise<void>
+  checkAuth: () => Promise<boolean>
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined)
 
-// IMPORTANT: Replace this with your actual admin password
-// In production, this should be validated against a secure backend
-const ADMIN_PASSWORD = 'justcakes2024'
-
 export function AdminProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  // Check if user is already authenticated on mount
+  // Check authentication status on mount
   useEffect(() => {
-    const authStatus = sessionStorage.getItem('adminAuthenticated')
-    if (authStatus === 'true') {
-      setIsAuthenticated(true)
+    checkAuth()
+  }, [])
+
+  const checkAuth = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/auth')
+      const data = await response.json()
+      setIsAuthenticated(data.authenticated)
+      return data.authenticated
+    } catch (error) {
+      setIsAuthenticated(false)
+      return false
     }
   }, [])
 
-  const login = useCallback((password: string) => {
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true)
-      sessionStorage.setItem('adminAuthenticated', 'true')
-      return true
+  const login = useCallback(async (password: string) => {
+    try {
+      const response = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      })
+
+      if (response.ok) {
+        setIsAuthenticated(true)
+        return true
+      }
+      return false
+    } catch (error) {
+      console.error('Login failed:', error)
+      return false
     }
-    return false
   }, [])
 
-  const logout = useCallback(() => {
-    setIsAuthenticated(false)
-    sessionStorage.removeItem('adminAuthenticated')
+  const logout = useCallback(async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' })
+      setIsAuthenticated(false)
+    } catch (error) {
+      console.error('Logout failed:', error)
+    }
   }, [])
 
   return (
-    <AdminContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AdminContext.Provider value={{ isAuthenticated, login, logout, checkAuth }}>
       {children}
     </AdminContext.Provider>
   )

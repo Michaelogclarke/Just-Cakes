@@ -5,10 +5,49 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  image       String
+  category    String      // e.g., "chocolate", "vanilla", "specialty", "fruit", "cookbook"
+  occasion    String      // e.g., "birthday", "wedding", "anniversary", "celebration", "learning"
+  type        String      // e.g., "cake", "cupcake", "slice", "digital"
+  available   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id                  String   @id @default(cuid())
+  stripeSessionId     String   @unique
+  stripePaymentIntent String?
+  customerEmail       String
+  customerName        String?
+  customerPhone       String?
+  shippingAddress     Json?    // Store full shipping details
+  billingAddress      Json?    // Store billing address
+  orderItems          Json     // Store cart items with product details
+  totalAmount         Float
+  currency            String   @default("gbp")
+  status              String   @default("pending") // pending, processing, completed, shipped, delivered, cancelled
+  paymentStatus       String   @default("unpaid") // unpaid, paid, refunded, failed
+  notes               String?  // Internal notes for order fulfillment
+  trackingNumber      String?  // Shipping tracking number
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([customerEmail])
+  @@index([status])
+  @@index([createdAt])
 }

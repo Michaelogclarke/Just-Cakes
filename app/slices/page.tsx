@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import styles from './slices.module.css'
 import ProductsGrid from '@/components/ProductsGrid'
-import { getAllSlices } from '@/lib/products'
 import { Product } from '@/types/product'
 
 export default function SlicesPage() {
@@ -12,11 +11,19 @@ export default function SlicesPage() {
   const [activeFilter, setActiveFilter] = useState<{ type: string; value: string } | null>(null)
 
   useEffect(() => {
-    // Fetch slices on mount
-    getAllSlices().then(slices => {
-      setAllSlices(slices)
-      setFilteredSlices(slices)
-    })
+    // Fetch slices from API on mount
+    async function fetchSlices() {
+      try {
+        const response = await fetch('/api/products')
+        const allProducts = await response.json()
+        const slices = allProducts.filter((p: Product) => p.type === 'slice')
+        setAllSlices(slices)
+        setFilteredSlices(slices)
+      } catch (error) {
+        console.error('Failed to fetch slices:', error)
+      }
+    }
+    fetchSlices()
   }, [])
 
   useEffect(() => {

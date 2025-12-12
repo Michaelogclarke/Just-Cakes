@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import styles from './cakes.module.css'
 import ProductsGrid from '@/components/ProductsGrid'
-import { getAllCakes } from '@/lib/products'
 import { Product } from '@/types/product'
 
 export default function CakesPage() {
@@ -12,11 +11,19 @@ export default function CakesPage() {
   const [activeFilter, setActiveFilter] = useState<{ type: string; value: string } | null>(null)
 
   useEffect(() => {
-    // Fetch cakes on mount
-    getAllCakes().then(cakes => {
-      setAllCakes(cakes)
-      setFilteredCakes(cakes)
-    })
+    // Fetch cakes from API on mount
+    async function fetchCakes() {
+      try {
+        const response = await fetch('/api/products')
+        const allProducts = await response.json()
+        const cakes = allProducts.filter((p: Product) => p.type === 'cake')
+        setAllCakes(cakes)
+        setFilteredCakes(cakes)
+      } catch (error) {
+        console.error('Failed to fetch cakes:', error)
+      }
+    }
+    fetchCakes()
   }, [])
 
   useEffect(() => {

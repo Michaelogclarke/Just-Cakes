@@ -17,11 +17,11 @@ export default function AdminLoginPage() {
     return null
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
-    const success = login(password)
+    const success = await login(password)
     if (success) {
       router.push('/admin/dashboard')
     } else {

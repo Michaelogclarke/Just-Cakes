@@ -8,7 +8,10 @@
       "WebSearch",
       "WebFetch(domain:www.pexels.com)",
       "Bash(npm install:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run db:seed:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
