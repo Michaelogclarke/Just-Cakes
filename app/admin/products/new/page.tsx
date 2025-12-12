@@ -44,10 +44,39 @@ export default function NewProductPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('New product data:', formData)
-    alert('Product would be created! (Not functional yet)')
+
+    try {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          image: formData.image,
+          category: formData.category,
+          occasion: formData.occasion,
+          type: formData.type,
+          available: formData.available,
+        }),
+      })
+
+      if (response.ok) {
+        const product = await response.json()
+        alert(`Product "${product.name}" created successfully!`)
+        router.push('/admin/products')
+      } else {
+        const error = await response.json()
+        alert(`Failed to create product: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error creating product:', error)
+      alert('An error occurred while creating the product')
+    }
   }
 
   return (
@@ -141,6 +170,24 @@ export default function NewProductPage() {
                   <option value="cupcake">Cupcake</option>
                   <option value="slice">Slice</option>
                   <option value="digital">Digital Product</option>
+                </select>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="category">Category *</label>
+                <select
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select a category</option>
+                  <option value="chocolate">Chocolate</option>
+                  <option value="vanilla">Vanilla</option>
+                  <option value="specialty">Specialty</option>
+                  <option value="fruit">Fruit</option>
+                  <option value="cookbook">Cookbook (Digital)</option>
                 </select>
               </div>
 
