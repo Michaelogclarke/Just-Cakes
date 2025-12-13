@@ -131,33 +131,61 @@
   transform: translateY(-2px);
 }
 
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+.statsContainer {
+  margin-bottom: 2rem;
 }
 
-.statCard {
+.statsBox {
   background: white;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 2rem;
-  text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.statsBox h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 80px;
+}
+
 .statNumber {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #6A00AA;
-  margin-bottom: 0.5rem;
+  line-height: 1;
 }
 
 .statLabel {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #666;
   font-weight: 500;
+  text-align: center;
+}
+
+.statDivider {
+  width: 1px;
+  height: 60px;
+  background: #e5e5e5;
 }
 
 .section {
@@ -402,4 +430,312 @@
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 500;
+}
+
+.filterSection {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.filterSelect {
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #999;
+}
+
+.emptyState p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Mobile Card Layout */
+.mobileCardGrid {
+  display: none; /* Hidden by default, shown on mobile */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.productCard {
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.productCard:hover {
+  border-color: #6A00AA;
+  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.15);
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardImage .statusAvailable,
+.cardImage .statusUnavailable {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardContent {
+  padding: 1.25rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.cardHeader h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.cardPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6A00AA;
+  white-space: nowrap;
+}
+
+.cardDescription {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.cardBadges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.cardActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 2px solid #f5f5f5;
+}
+
+.cardActions .viewButton,
+.cardActions .editButton {
+  text-align: center;
+  padding: 0.75rem 1rem;
+}
+
+/* Responsive Behavior */
+@media (max-width: 968px) {
+  /* Hide table on tablets and below */
+  .tableContainer {
+    display: none;
+  }
+
+  /* Show card grid on tablets and below */
+  .mobileCardGrid {
+    display: grid;
+  }
+}
+
+@media (max-width: 768px) {
+  .filterSection {
+    flex-direction: column;
+  }
+
+  .filterSelect {
+    min-width: 100%;
+  }
+
+  .mobileCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .cardImage {
+    height: 160px;
+  }
+
+  .cardHeader h3 {
+    font-size: 0.95rem;
+  }
+
+  .cardPrice {
+    font-size: 1rem;
+  }
+
+  .cardDescription {
+    font-size: 0.85rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .statDivider {
+    display: none;
+  }
+
+  .statsRow {
+    gap: 1rem;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .cardActions {
+    grid-template-columns: 1fr;
+  }
+
+  .cardImage {
+    height: 140px;
+  }
+
+  .cardHeader h3 {
+    font-size: 0.9rem;
+  }
+
+  .cardPrice {
+    font-size: 0.95rem;
+  }
+
+  .cardDescription {
+    font-size: 0.8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cardContent {
+    padding: 0.875rem;
+  }
+
+  .cardBadges {
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .typeBadge,
+  .categoryBadge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .cardActions {
+    gap: 0.5rem;
+  }
+
+  .cardActions .viewButton,
+  .cardActions .editButton {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .statsBox {
+    padding: 1.25rem;
+  }
+
+  .statsBox h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .statsRow {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .statItem {
+    min-width: auto;
+    flex: 1;
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+  }
 }
