@@ -132,26 +132,35 @@ export default function AdminProductsPage() {
           </select>
         </div>
 
-        <div className={styles.statsGrid}>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{products.length}</div>
-            <div className={styles.statLabel}>Total Products</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{cakes.length}</div>
-            <div className={styles.statLabel}>Cakes</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{cupcakes.length}</div>
-            <div className={styles.statLabel}>Cupcakes</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{slices.length}</div>
-            <div className={styles.statLabel}>Slices</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{digitalProducts.length}</div>
-            <div className={styles.statLabel}>Digital Products</div>
+        <div className={styles.statsContainer}>
+          <div className={styles.statsBox}>
+            <h3>Product Overview</h3>
+            <div className={styles.statsRow}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{products.length}</span>
+                <span className={styles.statLabel}>Total Products</span>
+              </div>
+              <div className={styles.statDivider}></div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{cakes.length}</span>
+                <span className={styles.statLabel}>Cakes</span>
+              </div>
+              <div className={styles.statDivider}></div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{cupcakes.length}</span>
+                <span className={styles.statLabel}>Cupcakes</span>
+              </div>
+              <div className={styles.statDivider}></div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{slices.length}</span>
+                <span className={styles.statLabel}>Slices</span>
+              </div>
+              <div className={styles.statDivider}></div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{digitalProducts.length}</span>
+                <span className={styles.statLabel}>Digital</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -162,43 +171,82 @@ export default function AdminProductsPage() {
               <p>No products found matching your criteria.</p>
             </div>
           ) : (
-            <div className={styles.tableContainer}>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredProducts.map((product) => (
-                  <tr key={product.id}>
-                    <td>
-                      <img src={product.image} alt={product.name} className={styles.productImage} />
-                    </td>
-                    <td className={styles.titleCell}>
-                      <div className={styles.productName}>{product.name}</div>
-                      <div className={styles.productDesc}>{product.description.substring(0, 60)}...</div>
-                    </td>
-                    <td>
-                      <span className={styles.typeBadge}>{product.type}</span>
-                    </td>
-                    <td>
-                      <span className={styles.categoryBadge}>{product.category}</span>
-                    </td>
-                    <td className={styles.priceCell}>{formatPrice(product.price)}</td>
-                    <td>
+            <>
+              {/* Desktop Table View */}
+              <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredProducts.map((product) => (
+                    <tr key={product.id}>
+                      <td>
+                        <img src={product.image} alt={product.name} className={styles.productImage} />
+                      </td>
+                      <td className={styles.titleCell}>
+                        <div className={styles.productName}>{product.name}</div>
+                        <div className={styles.productDesc}>{product.description.substring(0, 60)}...</div>
+                      </td>
+                      <td>
+                        <span className={styles.typeBadge}>{product.type}</span>
+                      </td>
+                      <td>
+                        <span className={styles.categoryBadge}>{product.category}</span>
+                      </td>
+                      <td className={styles.priceCell}>{formatPrice(product.price)}</td>
+                      <td>
+                        <span className={product.available ? styles.statusAvailable : styles.statusUnavailable}>
+                          {product.available ? 'Available' : 'Unavailable'}
+                        </span>
+                      </td>
+                      <td>
+                        <div className={styles.actionButtons}>
+                          <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'slice' ? product.type === 'slice' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
+                            View
+                          </Link>
+                          <Link href={`/admin/products/edit/${product.id}`} className={styles.editButton}>
+                            Edit
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile Card View */}
+              <div className={styles.mobileCardGrid}>
+                {filteredProducts.map((product) => (
+                  <div key={product.id} className={styles.productCard}>
+                    <div className={styles.cardImage}>
+                      <img src={product.image} alt={product.name} />
                       <span className={product.available ? styles.statusAvailable : styles.statusUnavailable}>
                         {product.available ? 'Available' : 'Unavailable'}
                       </span>
-                    </td>
-                    <td>
-                      <div className={styles.actionButtons}>
+                    </div>
+                    <div className={styles.cardContent}>
+                      <div className={styles.cardHeader}>
+                        <h3>{product.name}</h3>
+                        <div className={styles.cardPrice}>{formatPrice(product.price)}</div>
+                      </div>
+                      <p className={styles.cardDescription}>
+                        {product.description.substring(0, 80)}...
+                      </p>
+                      <div className={styles.cardBadges}>
+                        <span className={styles.typeBadge}>{product.type}</span>
+                        <span className={styles.categoryBadge}>{product.category}</span>
+                      </div>
+                      <div className={styles.cardActions}>
                         <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'slice' ? product.type === 'slice' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                           View
                         </Link>
@@ -206,12 +254,11 @@ export default function AdminProductsPage() {
                           Edit
                         </Link>
                       </div>
-                    </td>
-                  </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </main>
