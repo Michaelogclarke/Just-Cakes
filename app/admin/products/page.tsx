@@ -228,24 +228,9 @@ export default function AdminProductsPage() {
               <div className={styles.mobileCardGrid}>
                 {filteredProducts.map((product) => (
                   <div key={product.id} className={styles.productCard}>
-                    <div className={styles.cardImage}>
-                      <img src={product.image} alt={product.name} />
-                      <span className={product.available ? styles.statusAvailable : styles.statusUnavailable}>
-                        {product.available ? 'Available' : 'Unavailable'}
-                      </span>
-                    </div>
                     <div className={styles.cardContent}>
-                      <div className={styles.cardHeader}>
-                        <h3>{product.name}</h3>
-                        <div className={styles.cardPrice}>{formatPrice(product.price)}</div>
-                      </div>
-                      <p className={styles.cardDescription}>
-                        {product.description.substring(0, 80)}...
-                      </p>
-                      <div className={styles.cardBadges}>
-                        <span className={styles.typeBadge}>{product.type}</span>
-                        <span className={styles.categoryBadge}>{product.category}</span>
-                      </div>
+                      <h3 className={styles.cardTitle}>{product.name}</h3>
+                      <div className={styles.cardPrice}>{formatPrice(product.price)}</div>
                       <div className={styles.cardActions}>
                         <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'slice' ? product.type === 'slice' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                           View
