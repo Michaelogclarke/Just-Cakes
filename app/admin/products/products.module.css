@@ -403,3 +403,71 @@
   font-size: 0.85rem;
   font-weight: 500;
 }
+
+.filterSection {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.filterSelect {
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #999;
+}
+
+.emptyState p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .filterSection {
+    flex-direction: column;
+  }
+
+  .filterSelect {
+    min-width: 100%;
+  }
+}

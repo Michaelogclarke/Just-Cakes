@@ -86,12 +86,13 @@
 .formGroup select,
 .formGroup textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #d5d9d9;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  padding: 0.875rem 1.125rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
   font-family: inherit;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+  background: #fafafa;
 }
 
 .formGroup input:focus,
@@ -99,7 +100,15 @@
 .formGroup textarea:focus {
   outline: none;
   border-color: #6A00AA;
-  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+  box-shadow: 0 0 0 4px rgba(106, 0, 170, 0.1);
+  background: white;
+}
+
+.formGroup input:hover,
+.formGroup select:hover,
+.formGroup textarea:hover {
+  border-color: #ccc;
+  background: white;
 }
 
 .formGroup textarea {

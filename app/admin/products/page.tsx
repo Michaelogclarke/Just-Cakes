@@ -12,7 +12,10 @@ export default function AdminProductsPage() {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filterType, setFilterType] = useState('all')
 
   useEffect(() => {
     setMounted(true)
@@ -30,6 +33,7 @@ export default function AdminProductsPage() {
         const response = await fetch('/api/products')
         const data = await response.json()
         setProducts(data)
+        setFilteredProducts(data)
       } catch (error) {
         console.error('Failed to fetch products:', error)
       } finally {
@@ -41,6 +45,27 @@ export default function AdminProductsPage() {
       fetchProducts()
     }
   }, [mounted, isAuthenticated])
+
+  // Filter products based on search and type
+  useEffect(() => {
+    let filtered = products
+
+    // Filter by type
+    if (filterType !== 'all') {
+      filtered = filtered.filter(p => p.type === filterType)
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }
+
+    setFilteredProducts(filtered)
+  }, [products, searchTerm, filterType])
 
   if (!mounted || !isAuthenticated) {
     return null
@@ -86,6 +111,27 @@ export default function AdminProductsPage() {
           </Link>
         </div>
 
+        <div className={styles.filterSection}>
+          <input
+            type="text"
+            placeholder="Search products by name, description, or category..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="all">All Types</option>
+            <option value="cake">Cakes</option>
+            <option value="cupcake">Cupcakes</option>
+            <option value="slice">Slices</option>
+            <option value="digital">Digital Products</option>
+          </select>
+        </div>
+
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
             <div className={styles.statNumber}>{products.length}</div>
@@ -110,22 +156,27 @@ export default function AdminProductsPage() {
         </div>
 
         <div className={styles.section}>
-          <h2>All Products</h2>
-          <div className={styles.tableContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
+          <h2>All Products ({filteredProducts.length})</h2>
+          {filteredProducts.length === 0 ? (
+            <div className={styles.emptyState}>
+              <p>No products found matching your criteria.</p>
+            </div>
+          ) : (
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredProducts.map((product) => (
                   <tr key={product.id}>
                     <td>
                       <img src={product.image} alt={product.name} className={styles.productImage} />
@@ -157,10 +208,11 @@ export default function AdminProductsPage() {
                       </div>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </main>
     </div>
