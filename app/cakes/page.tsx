@@ -79,7 +79,7 @@ export default function CakesPage() {
       {/* Header Section */}
       <div className={styles.header}>
         <h1>Order Your Custom Cake</h1>
-        <p className={styles.subtitle}>Tell us about your dream cake and we'll make it a reality</p>
+        <p className={styles.subtitle}>Tell us about your dream cake and we&apos;ll make it a reality</p>
       </div>
 
       {/* Form */}
