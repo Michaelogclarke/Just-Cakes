@@ -111,7 +111,7 @@ export default function CakesPage() {
       setSubmitStatus('error')
       setSubmitMessage(
         'We\'re sorry, something went wrong. Please try again or email us directly at ' +
-        (process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@justcakes.com')
+        (process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'orders@mogsserver.online')
       )
     } finally {
       setIsSubmitting(false)
