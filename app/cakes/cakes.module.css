@@ -1,40 +1,452 @@
+/* Page Container */
 .pageContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f8f5fc 0%, #ffffff 50%);
+  padding: 0;
 }
 
-.header {
-  margin-bottom: 2rem;
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  background: linear-gradient(135deg, rgba(106, 0, 170, 0.03) 0%, rgba(131, 0, 212, 0.02) 100%);
 }
 
-.header h1 {
-  font-size: 2rem;
-  font-weight: 600;
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
   color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #555;
   margin: 0;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Card */
+.formCard {
+  max-width: 700px;
+  margin: -2rem auto 4rem;
+  padding: 3rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(106, 0, 170, 0.08),
+              0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Field Group */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Labels */
+.label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.required {
+  color: #6A00AA;
+  margin-left: 2px;
+}
+
+/* Select Field */
+.selectField {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236A00AA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 20px;
+  padding-right: 3rem;
+}
+
+.selectField:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.selectField:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Number Input */
+.numberInput {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.numberInput:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.numberInput::placeholder {
+  color: #999;
+}
+
+/* Allergy Pills */
+.allergyPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.allergyPill {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #555;
+  background: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.allergyPill:hover:not(:disabled) {
+  border-color: #6A00AA;
+  color: #6A00AA;
+  background: rgba(106, 0, 170, 0.03);
+}
+
+.allergyPillActive {
+  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
+  border-color: #6A00AA;
+  color: white;
+}
+
+.allergyPillActive:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a009a 0%, #7300c4 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.25);
+}
+
+.allergyPill:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Textarea Field */
+.textareaField {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  resize: vertical;
+  min-height: 150px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.textareaField:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.textareaField:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.textareaField::placeholder {
+  color: #999;
+}
+
+/* Character Counter */
+.characterCount {
+  text-align: right;
+  font-size: 0.875rem;
+  color: #999;
+  margin-top: -0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Helper Text */
+.helperText {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Status Message */
+.statusMessage {
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  border-left: 6px solid;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.statusMessage.success {
+  background: #e8f5e9;
+  border-color: #4caf50;
+  color: #1b5e20;
+}
+
+.statusMessage.error {
+  background: #ffebee;
+  border-color: #f44336;
+  color: #c62828;
+}
+
+/* Submit Button */
+.submitButton {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.2);
+}
+
+.submitButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a009a 0%, #7300c4 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 0, 170, 0.3);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .formCard {
+    max-width: 600px;
+    padding: 2.5rem;
+    margin: -1.5rem auto 3rem;
+  }
+
+  .form {
+    gap: 1.75rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .pageContainer {
-    padding: 1.5rem;
+  .hero {
+    padding: 3rem 1.5rem 2.5rem;
   }
 
-  .header h1 {
-    font-size: 1.75rem;
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .formCard {
+    margin: -1rem 1rem 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+  }
+
+  .form {
+    gap: 1.5rem;
+  }
+
+  .allergyPills {
+    gap: 0.625rem;
+  }
+
+  .allergyPill {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
+  .hero {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 1.875rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .formCard {
+    margin: -0.5rem 0.75rem 1.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(106, 0, 170, 0.06),
+                0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  .form {
+    gap: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.9375rem;
+  }
+
+  .selectField,
+  .numberInput,
+  .textareaField {
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+
+  .selectField {
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+  }
+
+  .allergyPills {
+    gap: 0.5rem;
+  }
+
+  .allergyPill {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 0;
+    text-align: center;
+  }
+
+  .submitButton {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .helperText {
+    font-size: 0.8125rem;
+  }
+
+  .characterCount {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Accessibility & Focus States */
+.selectField:focus-visible,
+.numberInput:focus-visible,
+.textareaField:focus-visible {
+  outline: 2px solid #6A00AA;
+  outline-offset: 2px;
+}
+
+.allergyPill:focus-visible {
+  outline: 2px solid #6A00AA;
+  outline-offset: 2px;
+}
+
+.submitButton:focus-visible {
+  outline: 3px solid #6A00AA;
+  outline-offset: 3px;
+}
+
+/* Print Styles */
+@media print {
   .pageContainer {
-    padding: 1rem;
+    background: white;
   }
 
-  .header {
-    margin-bottom: 1.5rem;
-  }
-
-  .header h1 {
-    font-size: 1.5rem;
+  .submitButton {
+    display: none;
   }
 }
