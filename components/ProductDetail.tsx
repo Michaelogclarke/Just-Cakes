@@ -19,7 +19,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }
 
   const handleBackToStore = () => {
-    router.push('/store')
+    router.push('/')
   }
 
   return (
