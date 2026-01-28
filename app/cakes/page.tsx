@@ -37,7 +37,7 @@ export default function CakesPage() {
   }
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value === '' ? '' : parseInt(e.target.value)
-    setFormData(prev => ({ ...prev, Contact: value }))
+    setFormData(prev => ({ ...prev, contact: value }))
   }
 
   const toggleAllergy = (allergy: string) => {
