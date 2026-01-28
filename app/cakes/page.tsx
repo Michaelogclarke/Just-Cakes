@@ -8,6 +8,7 @@ interface FormData {
   servings: number | ''
   allergies: string[]
   description: string
+  contact: number | ''
 }
 
 const ALLERGY_OPTIONS = ['Gluten-free', 'Dairy-free', 'Vegan', 'Nut-free']
@@ -18,7 +19,8 @@ export default function CakesPage() {
     occasion: '',
     servings: '',
     allergies: [],
-    description: ''
+    description: '',
+    contact: '', 
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -32,6 +34,10 @@ export default function CakesPage() {
   const handleServingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value === '' ? '' : parseInt(e.target.value)
     setFormData(prev => ({ ...prev, servings: value }))
+  }
+  const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value === '' ? '' : parseInt(e.target.value)
+    setFormData(prev => ({ ...prev, contact: value }))
   }
 
   const toggleAllergy = (allergy: string) => {
@@ -74,6 +80,9 @@ export default function CakesPage() {
     if (formData.description.trim().length < 10) {
       setSubmitMessage('Please provide more details about your cake (at least 10 characters)')
       return false
+    }
+    if (!formData.contact  || formData.contact < 11) {
+      setSubmitMessage('Please eneter a valid phone number')
     }
 
     return true
@@ -227,6 +236,28 @@ export default function CakesPage() {
               The more details you share, the better we can bring your vision to life!
             </p>
           </div>
+
+          {/* Contact Field */}
+          <div className={styles.fieldGroup}>
+            <label htmlFor="Contact" className={styles.label}>
+              Contact <span className={styles.required}>*</span>
+            </label>
+            <input
+              type="number"
+              id="Contact"
+              value={formData.contact}
+              onChange={handleContactChange}
+              min="1"
+              required
+              placeholder="071234567"
+              className={styles.numberInput}
+              disabled={isSubmitting}
+            />
+            <p className={styles.helperText}>
+              Enter your phone number in the text field so we can contact you
+            </p>
+          </div>
+
 
           {/* Status Message */}
           {submitMessage && (
