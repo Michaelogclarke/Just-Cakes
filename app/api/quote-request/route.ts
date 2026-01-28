@@ -9,6 +9,7 @@ interface QuoteRequestData {
   servings: number
   allergies: string[]
   description: string
+  contact: string
 }
 
 export async function POST(req: NextRequest) {
@@ -106,7 +107,7 @@ function formatOccasion(occasion: string): string {
 }
 
 function generateEmailHTML(data: QuoteRequestData): string {
-  const { occasion, servings, allergies, description } = data
+  const { occasion, servings, allergies, description, contact } = data
 
   return `
     <!DOCTYPE html>
@@ -151,7 +152,15 @@ function generateEmailHTML(data: QuoteRequestData): string {
               <td style="padding: 12px 0; text-align: right;">
                 ${allergies.length > 0 ? allergies.join(', ') : 'None'}
               </td>
-            </tr>
+            </tr> 
+            <tr>
+              <td style="padding: 12px 0;">
+                <strong style="color: #6A00AA;">Contact Number:</strong>
+              </td>
+              <td style="padding: 12px 0; text-align: right;">
+                ${contact}
+              </td>
+           </tr>
           </table>
         </div>
 
@@ -181,7 +190,7 @@ function generateEmailHTML(data: QuoteRequestData): string {
 }
 
 function generateEmailText(data: QuoteRequestData): string {
-  const { occasion, servings, allergies, description } = data
+  const { occasion, servings, allergies, description, contact } = data
 
   return `
 NEW CUSTOM CAKE QUOTE REQUEST
@@ -189,6 +198,7 @@ NEW CUSTOM CAKE QUOTE REQUEST
 Occasion: ${formatOccasion(occasion)}
 Servings: ${servings}
 Dietary Restrictions: ${allergies.length > 0 ? allergies.join(', ') : 'None'}
+Contact: ${contact}
 
 Cake Description:
 ${description}

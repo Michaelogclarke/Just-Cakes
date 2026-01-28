@@ -81,6 +81,9 @@ export default function CakesPage() {
       setSubmitMessage('Please provide more details about your cake (at least 10 characters)')
       return false
     }
+    if (!formData.contact  || formData.contact < 11) {
+      setSubmitMessage('Please eneter a valid phone number')
+    }
 
     return true
   }
@@ -245,7 +248,6 @@ export default function CakesPage() {
               value={formData.contact}
               onChange={handleContactChange}
               min="1"
-              max="500"
               required
               placeholder="071234567"
               className={styles.numberInput}
