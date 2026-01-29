@@ -68,25 +68,6 @@ export default function Navbar() {
             >
               Cakes
             </Link>
-            <div className={styles.dropdown}>
-              <div className={styles.dropdownContent}>
-                <h3 className={styles.dropdownTitle}>By Occasion</h3>
-                <div className={styles.dropdownSection}>
-                  <Link href="/cakes#occasion=birthday" className={styles.dropdownLink}>
-                    Birthday
-                  </Link>
-                  <Link href="/cakes#occasion=wedding" className={styles.dropdownLink}>
-                    Wedding
-                  </Link>
-                  <Link href="/cakes#occasion=anniversary" className={styles.dropdownLink}>
-                    Anniversary
-                  </Link>
-                  <Link href="/cakes#occasion=celebration" className={styles.dropdownLink}>
-                    Celebration
-                  </Link>
-                </div>
-              </div>
-            </div>
           </li>
 
           {/* Cupcakes with Dropdown */}
@@ -98,25 +79,6 @@ export default function Navbar() {
             >
               Cupcakes
             </Link>
-            <div className={styles.dropdown}>
-              <div className={styles.dropdownContent}>
-                <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Occasion</h3>
-                  <Link href="/cupcakes#occasion=birthday" className={styles.dropdownLink}>
-                    Birthday
-                  </Link>
-                  <Link href="/cupcakes#occasion=wedding" className={styles.dropdownLink}>
-                    Wedding
-                  </Link>
-                  <Link href="/cupcakes#occasion=anniversary" className={styles.dropdownLink}>
-                    Anniversary
-                  </Link>
-                  <Link href="/cupcakes#occasion=celebration" className={styles.dropdownLink}>
-                    Celebration
-                  </Link>
-                </div>
-              </div>
-            </div>
           </li>
 
           {/* Slices with Dropdown */}
