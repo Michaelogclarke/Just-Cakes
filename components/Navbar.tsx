@@ -90,19 +90,6 @@ export default function Navbar() {
             >
               Letterbox Cakes
             </Link>
-            <div className={styles.dropdown}>
-              <div className={styles.dropdownContent}>
-               <div className={styles.dropdownSection}>
-                  <h3 className={styles.dropdownTitle}>By Occasion</h3>
-                  <Link href="/letterbox-cakes#occasion=birthday" className={styles.dropdownLink}>
-                    Birthday
-                  </Link>
-                  <Link href="/letterbox-cakes#occasion=celebration" className={styles.dropdownLink}>
-                    Celebration
-                  </Link>
-                </div>
-              </div>
-            </div>
           </li>
 
           {/* Digital Products with Dropdown */}

@@ -8,7 +8,7 @@
   width: 100%;
   height: 70vh;
   min-height: 500px;
-  background-image: url('/new/DSC06794.jpg');/*other options */
+  background-image: url('/new/DSC06766(edited).jpg');/*other options */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -84,67 +84,70 @@
   background: #f8f8f8;
 }
 
-/* About Us Section */
-.aboutSection {
-  max-width: 900px;
+/* Products Section */
+.productsSection {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
 }
 
-.aboutContent {
-  background: white;
-  padding: 3rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.productsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-.aboutTitle {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #6A00AA;
-  margin: 0 0 2rem 0;
-  text-align: center;
-}
-
-.aboutText {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #333;
-}
-
-.aboutText p {
-  margin: 0 0 1.5rem 0;
-}
-
-.aboutText p:last-child {
-  margin-bottom: 0;
-}
-
-.aboutClosing {
+.productsHeader h2 {
+  font-size: 1.75rem;
   font-weight: 600;
-  font-style: italic;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.viewAllButton {
+  padding: 0.875rem 1.5rem;
+  border: 2px solid #6A00AA;
+  background: white;
   color: #6A00AA;
-  text-align: center;
-  margin-top: 2rem !important;
-  font-size: 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewAllButton:hover {
+  background: #6A00AA;
+  border-color: #6A00AA;
+  color: white;
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.2);
+  transform: translateY(-1px);
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .heroTitle {
     font-size: 3.5rem;
   }
 
   .heroSubtitle {
     font-size: 1.3rem;
-  }
-
-  .aboutSection {
-    padding: 3rem 1.5rem;
-  }
-
-  .aboutContent {
-    padding: 2.5rem;
   }
 }
 
@@ -168,21 +171,18 @@
     font-size: 1rem;
   }
 
-  .aboutSection {
-    padding: 2.5rem 1.5rem;
+  .productsSection {
+    padding: 2rem 1.5rem;
   }
 
-  .aboutContent {
-    padding: 2rem;
+  .productsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .aboutTitle {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .aboutText {
-    font-size: 1rem;
+  .productsGrid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -211,26 +211,26 @@
     font-size: 1rem;
   }
 
-  .aboutSection {
-    padding: 2rem 1rem;
+  .productsSection {
+    padding: 1.5rem 1rem;
   }
 
-  .aboutContent {
-    padding: 1.5rem;
+  .productsHeader {
+    gap: 0.875rem;
   }
 
-  .aboutTitle {
-    font-size: 1.75rem;
-    margin-bottom: 1.25rem;
+  .productsHeader h2 {
+    font-size: 1.5rem;
   }
 
-  .aboutText {
-    font-size: 0.95rem;
-    line-height: 1.7;
+  .viewAllButton {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    width: 100%;
   }
 
-  .aboutClosing {
-    font-size: 1.1rem;
-    margin-top: 1.5rem !important;
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }
