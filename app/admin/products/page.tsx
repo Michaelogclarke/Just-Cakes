@@ -86,7 +86,7 @@ export default function AdminProductsPage() {
 
   const cakes = products.filter(p => p.type === 'cake')
   const cupcakes = products.filter(p => p.type === 'cupcake')
-  const slices = products.filter(p => p.type === 'slice')
+  const slices = products.filter(p => p.type === 'letterbox')
   const digitalProducts = products.filter(p => p.type === 'digital')
 
   return (
@@ -210,7 +210,7 @@ export default function AdminProductsPage() {
                       </td>
                       <td>
                         <div className={styles.actionButtons}>
-                          <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'slice' ? product.type === 'slice' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
+                          <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                             View
                           </Link>
                           <Link href={`/admin/products/edit/${product.id}`} className={styles.editButton}>
@@ -232,7 +232,7 @@ export default function AdminProductsPage() {
                       <h3 className={styles.cardTitle}>{product.name}</h3>
                       <div className={styles.cardPrice}>{formatPrice(product.price)}</div>
                       <div className={styles.cardActions}>
-                        <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'slice' ? product.type === 'slice' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
+                        <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                           View
                         </Link>
                         <Link href={`/admin/products/edit/${product.id}`} className={styles.editButton}>

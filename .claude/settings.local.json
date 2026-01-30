@@ -11,7 +11,10 @@
       "Bash(git push:*)",
       "Bash(npx prisma:*)",
       "Bash(npm run db:seed:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(if [ -f app/letterbox-cakes/slices.module.css ])",
+      "Bash(then mv app/letterbox-cakes/slices.module.css app/letterbox-cakes/letterbox-cakes.module.css)",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []

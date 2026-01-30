@@ -46,7 +46,7 @@ export default async function Success({
 
           <div className={styles.contact}>
             <p>Questions about your order?</p>
-            <p>Contact us at <span className={styles.contactEmail}>hello@justcakes.com</span></p>
+            <p>Contact us at <span className={styles.contactEmail}>justcakesballykelly@gmail.com</span></p>
           </div>
         </div>
 
