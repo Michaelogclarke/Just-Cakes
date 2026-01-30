@@ -6,6 +6,6 @@ export interface Product {
   image: string
   category: string
   occasion: string
-  type: 'cake' | 'cupcake' | 'digital' | 'slice'
+  type: 'cake' | 'cupcake' | 'digital' | 'letterbox'
   available: boolean
 }

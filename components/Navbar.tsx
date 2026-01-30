@@ -81,23 +81,23 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Slices with Dropdown */}
+          {/* Letterbox Cakes with Dropdown */}
           <li className={styles.dropdownContainer}>
             <Link
-              href="/slices"
-              className={isActive('/slices') || pathname?.startsWith('/slices/') ? styles.active : ''}
+              href="/letterbox-cakes"
+              className={isActive('/letterbox-cakes') || pathname?.startsWith('/letterbox-cakes/') ? styles.active : ''}
               onClick={closeMenu}
             >
-              Slices
+              Letterbox Cakes
             </Link>
             <div className={styles.dropdown}>
               <div className={styles.dropdownContent}>
                <div className={styles.dropdownSection}>
                   <h3 className={styles.dropdownTitle}>By Occasion</h3>
-                  <Link href="/slices#occasion=birthday" className={styles.dropdownLink}>
+                  <Link href="/letterbox-cakes#occasion=birthday" className={styles.dropdownLink}>
                     Birthday
                   </Link>
-                  <Link href="/slices#occasion=celebration" className={styles.dropdownLink}>
+                  <Link href="/letterbox-cakes#occasion=celebration" className={styles.dropdownLink}>
                     Celebration
                   </Link>
                 </div>

@@ -43,8 +43,8 @@ export default function Product({
         return `/cakes/${id}`
       case 'cupcake':
         return `/cupcakes/${id}`
-      case 'slice':
-        return `/slices/${id}`
+      case 'letterbox':
+        return `/letterbox-cakes/${id}`
       case 'digital':
         return `/digital-products/${id}`
       default:

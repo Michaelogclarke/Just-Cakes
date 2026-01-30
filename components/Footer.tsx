@@ -23,7 +23,7 @@ export default function Footer() {
           <ul className={styles.linkList}>
             <li><Link href="/cakes">Cakes</Link></li>
             <li><Link href="/cupcakes">Cupcakes</Link></li>
-            <li><Link href="/slices">Slices</Link></li>
+            <li><Link href="/letterbox-cakes">Letterbox Cakes</Link></li>
             <li><Link href="/digital-products">Digital Products</Link></li>
             <li><Link href="/custom-orders">Custom Orders</Link></li>
           </ul>

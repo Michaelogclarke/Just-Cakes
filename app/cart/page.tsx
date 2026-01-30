@@ -53,8 +53,8 @@ export default function CartPage() {
 
       <div className={styles.cartLayout}>
         <div className={styles.cartItems}>
-          {cart.items.map((item) => (
-            <div key={item.id} className={styles.cartItem}>
+          {cart.items.map((item, index) => (
+            <div key={`${item.id}-${index}`} className={styles.cartItem}>
               <div className={styles.itemImage}>
                 <img src={item.image} alt={item.name} />
               </div>
@@ -62,6 +62,16 @@ export default function CartPage() {
               <div className={styles.itemDetails}>
                 <h3>{item.name}</h3>
                 <p className={styles.itemDescription}>{item.description}</p>
+                {item.customOptions?.flavours && (
+                  <div className={styles.customOptions}>
+                    <strong>Selected Flavours:</strong>
+                    <ul className={styles.flavourList}>
+                      {item.customOptions.flavours.map((flavour, idx) => (
+                        <li key={idx}>{flavour}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <p className={styles.itemPrice}>£{item.price.toFixed(2)}</p>
               </div>
 
@@ -71,7 +81,7 @@ export default function CartPage() {
                   type="number"
                   min="1"
                   value={item.quantity}
-                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value), item.customOptions)}
                 />
               </div>
 
@@ -82,7 +92,7 @@ export default function CartPage() {
 
               <button
                 className={styles.removeButton}
-                onClick={() => removeFromCart(item.id)}
+                onClick={() => removeFromCart(item.id, item.customOptions)}
               >
                 Remove
               </button>

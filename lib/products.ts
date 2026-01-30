@@ -11,7 +11,7 @@ function transformProduct(dbProduct: any): Product {
     image: dbProduct.image,
     category: dbProduct.category,
     occasion: dbProduct.occasion,
-    type: dbProduct.type as 'cake' | 'cupcake' | 'digital' | 'slice',
+    type: dbProduct.type as 'cake' | 'cupcake' | 'digital' | 'letterbox',
     available: dbProduct.available
   }
 }
@@ -69,10 +69,10 @@ export async function getAllDigitalProducts(): Promise<Product[]> {
   return products.map(transformProduct)
 }
 
-// Get all slices
-export async function getAllSlices(): Promise<Product[]> {
+// Get all letterbox cakes
+export async function getAllLetterboxCakes(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { type: 'slice' },
+    where: { type: 'letterbox' },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)
