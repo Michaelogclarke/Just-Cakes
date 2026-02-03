@@ -19,9 +19,9 @@ export default async function Home() {
         <div className={styles.heroOverlay}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Just Cakes</h1>
-            <p className={styles.heroSubtitle}>Handcrafted with Love, Designed to Delight</p>
+            <p className={styles.heroSubtitle}>Cakes should be for everyone</p>
             <Link href="/cakes">
-              <button className={styles.heroButton}>Explore Our Collection</button>
+              <button className={styles.heroButton}>Create your first cake</button>
             </Link>
           </div>
         </div>
