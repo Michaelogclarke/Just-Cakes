@@ -13,7 +13,7 @@ const getStripe = () => {
 export async function POST(request: NextRequest) {
   try {
     const stripe = getStripe()
-    const { items } = await request.json()
+    const { items, deliveryDate } = await request.json()
 
     // Create line items for Stripe
     const lineItems = items.map((item: any) => ({
@@ -21,10 +21,12 @@ export async function POST(request: NextRequest) {
         currency: 'GBP',
         product_data: {
           name: item.name,
-          description: item.description,
+          description: deliveryDate
+            ? `${item.description} - Delivery: ${deliveryDate}`
+            : item.description,
           images: item.image ? [`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${item.image}`] : [],
         },
-        
+
         unit_amount: Math.round(item.price * 100), // Convert to cents
       },
       quantity: item.quantity,
@@ -47,7 +49,8 @@ export async function POST(request: NextRequest) {
           name: item.name,
           quantity: item.quantity,
           price: item.price
-        })))
+        }))),
+        delivery_date: deliveryDate || ''
       }
     })
 

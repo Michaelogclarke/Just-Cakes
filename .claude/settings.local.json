@@ -14,7 +14,8 @@
       "Bash(cat:*)",
       "Bash(if [ -f app/letterbox-cakes/slices.module.css ])",
       "Bash(then mv app/letterbox-cakes/slices.module.css app/letterbox-cakes/letterbox-cakes.module.css)",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
