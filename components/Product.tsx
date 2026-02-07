@@ -3,6 +3,7 @@ import styles from "./Product.module.css"
 import { Product as ProductType } from '@/types/product'
 import Link from 'next/link'
 import { useState } from 'react'
+import DateOrderModal from './DateOrderModal'
 
 type ProductProps = ProductType
 
@@ -17,47 +18,7 @@ export default function Product({
   type,
   available
 }: ProductProps) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleBuyNow = async () => {
-    if (!available || isLoading) return
-
-    setIsLoading(true)
-    try {
-      // Create a checkout session with this single product
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: [{
-            id,
-            name,
-            description,
-            price,
-            image,
-            quantity: 1
-          }]
-        }),
-      })
-
-      const data = await response.json()
-
-      if (data.url) {
-        // Redirect to Stripe checkout
-        window.location.href = data.url
-      } else {
-        console.error('No checkout URL returned')
-        alert('Failed to start checkout. Please try again.')
-        setIsLoading(false)
-      }
-    } catch (error) {
-      console.error('Checkout error:', error)
-      alert('Failed to start checkout. Please try again.')
-      setIsLoading(false)
-    }
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Determine the detail page route based on product type
   const getDetailRoute = () => {
@@ -97,16 +58,26 @@ export default function Product({
             <Link href={detailRoute}>
               <button className={styles.detailsButton}>Details</button>
             </Link>
-            <button
-              onClick={handleBuyNow}
-              disabled={!available || isLoading}
-              className={styles.addButton}
-            >
-              {!available ? 'Out of Stock' : isLoading ? 'Loading...' : 'Buy Now'}
-            </button>
+            {type === 'letterbox' && (
+              <button
+                onClick={() => setIsModalOpen(true)}
+                disabled={!available}
+                className={styles.addButton}
+              >
+                {!available ? 'Out of Stock' : 'Buy Now'}
+              </button>
+            )}
           </div>
         </div>
       </div>
+
+      {type === 'letterbox' && (
+        <DateOrderModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          product={{ id, name, description, price, image, category, occasion, type, available }}
+        />
+      )}
     </div>
   )
 }

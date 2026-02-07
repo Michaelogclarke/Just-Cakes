@@ -1,0 +1,133 @@
+.modalContent {
+  width: 100%;
+}
+
+.productInfo {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.productName {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.productPrice {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6A00AA;
+}
+
+.form {
+  width: 100%;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.hint {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: white;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #6A00AA;
+  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
+}
+
+.dateInput:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.error {
+  padding: 0.85rem 1rem;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: #6A00AA;
+  color: white;
+  border-radius: 6px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(106, 0, 170, 0.2);
+  min-height: 52px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #8300d4;
+  box-shadow: 0 4px 12px rgba(106, 0, 170, 0.3);
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .productInfo {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .productName {
+    font-size: 1.125rem;
+  }
+
+  .productPrice {
+    font-size: 1.25rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1.25rem;
+  }
+
+  .submitButton {
+    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+}
