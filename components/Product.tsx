@@ -1,8 +1,8 @@
 'use client'
 import styles from "./Product.module.css"
 import { Product as ProductType } from '@/types/product'
-import { useCart } from '@/context/CartContext'
 import Link from 'next/link'
+import { useState } from 'react'
 
 type ProductProps = ProductType
 
@@ -17,23 +17,46 @@ export default function Product({
   type,
   available
 }: ProductProps) {
-  const { addToCart } = useCart()
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleAddToCart = () => {
-    if (!available) return
+  const handleBuyNow = async () => {
+    if (!available || isLoading) return
 
-    const product: ProductType = {
-      id,
-      name,
-      description,
-      price,
-      image,
-      category,
-      occasion,
-      type,
-      available
+    setIsLoading(true)
+    try {
+      // Create a checkout session with this single product
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: [{
+            id,
+            name,
+            description,
+            price,
+            image,
+            quantity: 1
+          }]
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.url) {
+        // Redirect to Stripe checkout
+        window.location.href = data.url
+      } else {
+        console.error('No checkout URL returned')
+        alert('Failed to start checkout. Please try again.')
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.error('Checkout error:', error)
+      alert('Failed to start checkout. Please try again.')
+      setIsLoading(false)
     }
-    addToCart(product)
   }
 
   // Determine the detail page route based on product type
@@ -75,11 +98,11 @@ export default function Product({
               <button className={styles.detailsButton}>Details</button>
             </Link>
             <button
-              onClick={handleAddToCart}
-              disabled={!available}
+              onClick={handleBuyNow}
+              disabled={!available || isLoading}
               className={styles.addButton}
             >
-              {available ? 'Add to Cart' : 'Out of Stock'}
+              {!available ? 'Out of Stock' : isLoading ? 'Loading...' : 'Buy Now'}
             </button>
           </div>
         </div>
