@@ -42,6 +42,7 @@ model Order {
   currency            String   @default("gbp")
   status              String   @default("pending") // pending, processing, completed, shipped, delivered, cancelled
   paymentStatus       String   @default("unpaid") // unpaid, paid, refunded, failed
+  deliveryDate        String?  // Customer's requested delivery date
   notes               String?  // Internal notes for order fulfillment
   trackingNumber      String?  // Shipping tracking number
   createdAt           DateTime @default(now())
