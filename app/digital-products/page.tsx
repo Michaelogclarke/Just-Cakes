@@ -29,7 +29,7 @@ export default function DigitalProductsPage() {
   useEffect(() => {
     // Listen for filter changes from URL hash
     const handleHashChange = () => {
-      const hash = window.location.hash.slice(1) // Remove #
+      const hash = window.location.hash.slice(1) 
       if (!hash) {
         setFilteredProducts(allProducts)
         setActiveFilter(null)

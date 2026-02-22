@@ -1,23 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build:*)",
-      "Bash(npm run dev:*)",
-      "Bash(curl:*)",
-      "Bash(file:*)",
-      "WebSearch",
-      "WebFetch(domain:www.pexels.com)",
-      "Bash(npm install:*)",
-      "Bash(git push:*)",
-      "Bash(npx prisma:*)",
-      "Bash(npm run db:seed:*)",
-      "Bash(cat:*)",
-      "Bash(if [ -f app/letterbox-cakes/slices.module.css ])",
-      "Bash(then mv app/letterbox-cakes/slices.module.css app/letterbox-cakes/letterbox-cakes.module.css)",
-      "Bash(fi)",
-      "Bash(grep:*)",
-      "Bash(node test-email.js)",
-      "Bash(./node_modules/.bin/prisma generate)"
+      "Bash(kill -9 7099 7119 7130 7142)"
     ],
     "deny": [],
     "ask": []
