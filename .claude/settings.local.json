@@ -4,7 +4,8 @@
       "Bash(curl http://localhost:3000/api/products)",
       "Bash(npx prisma generate --force)",
       "Bash(curl http://localhost:3000/api/blogs)",
-      "Bash(curl -X POST http://localhost:3000/api/blogs )"
+      "Bash(curl -X POST http://localhost:3000/api/blogs )",
+      "Bash(npm run build)"
     ],
     "deny": [],
     "ask": []

@@ -36,12 +36,12 @@ export async function POST(request: NextRequest) {
     // Create the order in database
     const newOrder = await prisma.order.create({
       data: {
+        stripeSessionId: orderData.stripeSessionId || `temp_${Date.now()}`,
         customerName: orderData.customerName,
         customerEmail: orderData.customerEmail,
-        items: orderData.items,
-        total: orderData.total || 0,
-        status: 'pending',
-        createdAt: new Date()
+        orderItems: orderData.items,
+        totalAmount: orderData.total || 0,
+        status: 'pending'
       }
     })
 
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         id: newOrder.id,
         customerName: newOrder.customerName,
         customerEmail: newOrder.customerEmail,
-        items: orderData.items,
+        orderItems: orderData.items,
         status: newOrder.status
       })
 

@@ -10,9 +10,9 @@ export interface OrderItem {
 
 export interface Order {
   id: string
-  customerName: string
+  customerName: string | null
   customerEmail: string
-  items: OrderItem[]
+  orderItems: any // JSON field from Prisma
   status: string
 }
 
@@ -21,8 +21,9 @@ export interface Order {
  */
 export async function processOrderFulfillment(order: Order): Promise<boolean> {
   try {
-    // Filter for digital products
-    const digitalProducts = order.items
+    // Parse orderItems JSON and filter for digital products
+    const items = Array.isArray(order.orderItems) ? order.orderItems : []
+    const digitalProducts = items
       .filter(item => item.type === 'digital' && item.digitalAssetUrl)
       .map(item => ({
         id: item.id,
@@ -46,7 +47,7 @@ export async function processOrderFulfillment(order: Order): Promise<boolean> {
       body: JSON.stringify({
         orderId: order.id,
         customerEmail: order.customerEmail,
-        customerName: order.customerName,
+        customerName: order.customerName || 'Valued Customer',
         digitalProducts
       })
     })
@@ -70,5 +71,6 @@ export async function processOrderFulfillment(order: Order): Promise<boolean> {
  * Utility function to check if an order contains digital products
  */
 export function orderHasDigitalProducts(order: Order): boolean {
-  return order.items.some(item => item.type === 'digital')
+  const items = Array.isArray(order.orderItems) ? order.orderItems : []
+  return items.some(item => item.type === 'digital')
 }
