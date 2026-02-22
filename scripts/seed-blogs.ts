@@ -1,10 +1,7 @@
-import { BlogPost } from '@/types/blog'
-import { prisma } from './prisma'
+import { prisma } from '../lib/prisma'
 
-// Seed data for database - keep for reference or seeding
-const seedBlogPosts: BlogPost[] = [
+const seedBlogPosts = [
   {
-    id: 1,
     title: 'How to Choose the Perfect Wedding Cake',
     excerpt: 'Your wedding cake is more than just dessert—it\'s a centerpiece and a reflection of your style. Here\'s everything you need to know to choose the perfect one.',
     content: `Your wedding cake is one of the most anticipated elements of your big day. It's not just a dessert; it's a centerpiece, a photo opportunity, and a reflection of your personal style. Here's our comprehensive guide to choosing the perfect wedding cake.
@@ -42,13 +39,12 @@ Wedding cakes typically cost $3-$8 per slice, with elaborate designs costing mor
 
 Ready to start planning your dream wedding cake? Contact us today to schedule your tasting!`,
     author: 'Sarah Johnson',
-    date: '2024-01-15',
     image: '/carousel/Princess-cake.jpg',
     category: 'Wedding Cakes',
-    readTime: '5 min read'
+    readTime: '5 min read',
+    published: true
   },
   {
-    id: 2,
     title: '10 Creative Birthday Cake Ideas for Kids',
     excerpt: 'Make your child\'s birthday extra special with these fun and creative cake ideas that will have them talking for weeks!',
     content: `Planning a birthday party for your little one? The cake is often the highlight of the celebration! Here are 10 creative ideas that will make your child's birthday unforgettable.
@@ -95,13 +91,12 @@ Perfectly stacked blocks that look just like the real thing!
 
 Each design can be customized to your child's preferences and color scheme. Let's create something magical together!`,
     author: 'Mike Chen',
-    date: '2024-01-10',
     image: '/carousel/barbie-cake.png',
     category: 'Birthday Cakes',
-    readTime: '4 min read'
+    readTime: '4 min read',
+    published: true
   },
   {
-    id: 3,
     title: 'The Art of Cake Decorating: Tips from Our Bakers',
     excerpt: 'Ever wondered how professional bakers create those stunning designs? Our experts share their top decorating tips and tricks.',
     content: `Cake decorating is an art form that combines creativity, precision, and technique. Our professional bakers share their insider tips to help you create beautiful cakes at home.
@@ -153,13 +148,12 @@ Don't be discouraged if your first attempts aren't perfect. Every professional b
 
 Want to learn more? Join our upcoming cake decorating workshop!`,
     author: 'Emily Rodriguez',
-    date: '2024-01-05',
     image: '/carousel/full-cake-display.jpeg',
     category: 'Tutorials',
-    readTime: '6 min read'
+    readTime: '6 min read',
+    published: true
   },
   {
-    id: 4,
     title: 'Seasonal Flavors: Spring Cake Inspiration',
     excerpt: 'Celebrate the season with fresh, light flavors and beautiful floral designs that capture the essence of spring.',
     content: `Spring is the perfect time to embrace fresh flavors and beautiful floral designs. Here's how to incorporate the season's best into your next celebration.
@@ -213,117 +207,37 @@ Spring is perfect for:
 
 Let the season inspire your next cake order. Contact us to discuss your spring celebration!`,
     author: 'Sarah Johnson',
-    date: '2024-01-01',
     image: '/carousel/Rian-cake.jpg',
     category: 'Seasonal',
-    readTime: '4 min read'
+    readTime: '4 min read',
+    published: true
   }
 ]
 
-// Get all blog posts from database
-export async function getAllBlogPosts(): Promise<BlogPost[]> {
+async function seedBlogs() {
   try {
-    const blogs = await prisma.blog.findMany({
-      where: { published: true },
-      orderBy: { createdAt: 'desc' }
-    })
+    // Check if blogs already exist
+    const existingBlogs = await prisma.blog.findMany()
 
-    return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
-      title: blog.title,
-      excerpt: blog.excerpt,
-      content: blog.content,
-      author: blog.author,
-      category: blog.category,
-      image: blog.image,
-      readTime: blog.readTime,
-      date: blog.createdAt.toISOString().split('T')[0]
-    }))
-  } catch (error) {
-    console.error('Error fetching blogs:', error)
-    return []
-  }
-}
-
-// Get blog post by ID from database
-export async function getBlogPostById(id: number): Promise<BlogPost | undefined> {
-  try {
-    const blog = await prisma.blog.findFirst({
-      where: {
-        id: id.toString(),
-        published: true
-      }
-    })
-
-    if (!blog) return undefined
-
-    return {
-      id: blog.id.length > 10 ? parseInt(blog.id.slice(-6), 16) : parseInt(blog.id), // Use last 6 chars of cuid as hex, parse for numeric strings
-      title: blog.title,
-      excerpt: blog.excerpt,
-      content: blog.content,
-      author: blog.author,
-      category: blog.category,
-      image: blog.image,
-      readTime: blog.readTime,
-      date: blog.createdAt.toISOString().split('T')[0]
+    if (existingBlogs.length > 0) {
+      console.log('✅ Blogs already exist in database. Skipping seed.')
+      return
     }
+
+    console.log('🌱 Seeding blog posts...')
+
+    for (const blog of seedBlogPosts) {
+      await prisma.blog.create({
+        data: blog
+      })
+    }
+
+    console.log('✅ Successfully seeded', seedBlogPosts.length, 'blog posts')
   } catch (error) {
-    console.error('Error fetching blog by ID:', error)
-    return undefined
+    console.error('❌ Error seeding blogs:', error)
+  } finally {
+    await prisma.$disconnect()
   }
 }
 
-// Get blog posts by category from database
-export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
-  try {
-    const blogs = await prisma.blog.findMany({
-      where: {
-        category,
-        published: true
-      },
-      orderBy: { createdAt: 'desc' }
-    })
-
-    return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
-      title: blog.title,
-      excerpt: blog.excerpt,
-      content: blog.content,
-      author: blog.author,
-      category: blog.category,
-      image: blog.image,
-      readTime: blog.readTime,
-      date: blog.createdAt.toISOString().split('T')[0]
-    }))
-  } catch (error) {
-    console.error('Error fetching blogs by category:', error)
-    return []
-  }
-}
-
-// Get recent blog posts from database
-export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]> {
-  try {
-    const blogs = await prisma.blog.findMany({
-      where: { published: true },
-      orderBy: { createdAt: 'desc' },
-      take: limit
-    })
-
-    return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
-      title: blog.title,
-      excerpt: blog.excerpt,
-      content: blog.content,
-      author: blog.author,
-      category: blog.category,
-      image: blog.image,
-      readTime: blog.readTime,
-      date: blog.createdAt.toISOString().split('T')[0]
-    }))
-  } catch (error) {
-    console.error('Error fetching recent blogs:', error)
-    return []
-  }
-}
+seedBlogs()

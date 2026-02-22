@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    console.log('📧 Fetching session details for:', sessionId)
+    console.log(' Fetching session details for:', sessionId)
 
     // Get session details from Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    console.log('✅ Session retrieved successfully')
+    console.log(' Session retrieved successfully')
 
     // Extract order details
     const customerEmail = session.customer_details?.email
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       ? JSON.parse(session.metadata.cart_items)
       : []
 
-    console.log('📦 Order details:', {
+    console.log(' Order details:', {
       customerEmail,
       customerName,
       totalAmount,
@@ -57,10 +57,10 @@ export async function POST(req: NextRequest) {
 
     // Send customer confirmation email
     if (customerEmail) {
-      console.log(`📧 Sending confirmation email to: ${customerEmail}`)
+      console.log(` Sending confirmation email to: ${customerEmail}`)
       try {
         const customerEmailResult = await resend.emails.send({
-          from: 'Just Cakes <onboarding@resend.dev>',
+          from: 'Just Cakes <michaelogclarke@gmail.com>',
           to: customerEmail,
           subject: 'Order Confirmation - Just Cakes',
           html: generateOrderConfirmationHTML(
@@ -72,22 +72,22 @@ export async function POST(req: NextRequest) {
           )
         })
 
-        console.log('✅ Customer email sent:', customerEmailResult.data?.id)
+        console.log('Customer email sent:', customerEmailResult.data?.id)
         emailResults.push({ type: 'customer', success: true, id: customerEmailResult.data?.id })
       } catch (error) {
-        console.error('❌ Failed to send customer email:', error)
+        console.error(' Failed to send customer email:', error)
         emailResults.push({ type: 'customer', success: false, error: error })
       }
     }
 
     // Send business notification email
     if (process.env.BUSINESS_EMAIL) {
-      console.log(`📧 Sending business notification to: ${process.env.BUSINESS_EMAIL}`)
+      console.log(` Sending business notification to: ${process.env.BUSINESS_EMAIL}`)
       try {
         const businessEmailResult = await resend.emails.send({
-          from: 'Just Cakes Orders <onboarding@resend.dev>',
+          from: 'Just Cakes Orders <michaelogclarke@gmail.com>',
           to: process.env.BUSINESS_EMAIL,
-          subject: `🔔 New Order - ${deliveryDate ? 'Delivery: ' + new Date(deliveryDate).toLocaleDateString('en-GB') : 'Action Required'}`,
+          subject: ` New Order - ${deliveryDate ? 'Delivery: ' + new Date(deliveryDate).toLocaleDateString('en-GB') : 'Action Required'}`,
           html: generateBusinessNotificationHTML(
             customerName,
             customerEmail || 'Not provided',
@@ -197,7 +197,7 @@ function generateOrderConfirmationHTML(
 
         <div style="background: #f8f5fc; padding: 20px; border-radius: 8px;">
           <p style="margin: 0; text-align: center; color: #6A00AA; font-weight: bold;">
-            Thank you for choosing Just Cakes! 🎂
+            Thank you for choosing Just Cakes! 
           </p>
         </div>
       </div>
@@ -235,17 +235,17 @@ function generateBusinessNotificationHTML(
     <html>
     <head>
       <meta charset="utf-8">
-      <title>🔔 New Order Received</title>
+      <title> New Order Received</title>
     </head>
     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="background: #d32f2f; padding: 20px; text-align: center; color: white;">
-        <h1 style="margin: 0;">🔔 NEW ORDER RECEIVED</h1>
+        <h1 style="margin: 0;"> NEW ORDER RECEIVED</h1>
       </div>
 
       <div style="background: white; padding: 20px; border: 1px solid #ddd;">
         ${deliveryDate ? `
         <div style="background: #ffebee; border: 2px solid #d32f2f; padding: 15px; margin-bottom: 20px; text-align: center;">
-          <h2 style="color: #d32f2f; margin: 0;">📅 DELIVERY DATE: ${new Date(deliveryDate).toLocaleDateString('en-GB')}</h2>
+          <h2 style="color: #d32f2f; margin: 0;"> DELIVERY DATE: ${new Date(deliveryDate).toLocaleDateString('en-GB')}</h2>
         </div>
         ` : ''}
 
