@@ -16,7 +16,8 @@
       "Bash(then mv app/letterbox-cakes/slices.module.css app/letterbox-cakes/letterbox-cakes.module.css)",
       "Bash(fi)",
       "Bash(grep:*)",
-      "Bash(node test-email.js)"
+      "Bash(node test-email.js)",
+      "Bash(./node_modules/.bin/prisma generate)"
     ],
     "deny": [],
     "ask": []
