@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { blogPosts } from '@/lib/blogs'
+import { getAllBlogPosts } from '@/lib/blogs'
+import { BlogPost } from '@/types/blog'
 import styles from './dashboard.module.css'
 
 export default function AdminDashboard() {
   const { isAuthenticated, logout } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
 
   useEffect(() => {
     setMounted(true)
@@ -21,6 +23,12 @@ export default function AdminDashboard() {
       router.push('/admin')
     }
   }, [isAuthenticated, router, mounted])
+
+  useEffect(() => {
+    if (mounted && isAuthenticated) {
+      getAllBlogPosts().then(setBlogPosts)
+    }
+  }, [mounted, isAuthenticated])
 
   if (!mounted || !isAuthenticated) {
     return null

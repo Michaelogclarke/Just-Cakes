@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(kill -9 7099 7119 7130 7142)"
+      "Bash(curl http://localhost:3000/api/products)",
+      "Bash(npx prisma generate --force)",
+      "Bash(curl http://localhost:3000/api/blogs)",
+      "Bash(curl -X POST http://localhost:3000/api/blogs )"
     ],
     "deny": [],
     "ask": []

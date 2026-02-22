@@ -51,3 +51,21 @@ model Order {
   @@index([status])
   @@index([createdAt])
 }
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  excerpt   String
+  content   String
+  author    String
+  category  String   // e.g., "Wedding Cakes", "Birthday Cakes", "Tutorials", "Seasonal", "Tips & Tricks", "Recipes", "Business"
+  image     String
+  readTime  String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([published])
+  @@index([createdAt])
+}
