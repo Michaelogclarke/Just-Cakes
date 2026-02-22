@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import styles from './success.module.css'
+import EmailSender from '@/components/EmailSender'
 
 export default async function Success({
   searchParams,
@@ -7,6 +8,7 @@ export default async function Success({
   searchParams: Promise<{ session_id?: string }>
 }) {
   const params = await searchParams
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -55,6 +57,11 @@ export default async function Success({
           <p className={styles.tagline}>Made with love, delivered with care</p>
         </div>
       </div>
+
+      {/* Send emails automatically */}
+      {params.session_id && (
+        <EmailSender sessionId={params.session_id} />
+      )}
     </div>
   )
 }

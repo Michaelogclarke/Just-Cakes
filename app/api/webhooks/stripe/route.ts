@@ -13,10 +13,12 @@ const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder')
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
+  console.log('🎯 Webhook received!')
   const body = await req.text()
   const signature = req.headers.get('stripe-signature')
 
   if (!signature) {
+    console.log('❌ No signature provided')
     return NextResponse.json(
       { error: 'No signature provided' },
       { status: 400 }
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
       process.env.STRIPE_WEBHOOK_SECRET!
     )
   } catch (err: any) {
-    console.error('Webhook signature verification failed:', err.message)
+    console.error('❌ Webhook signature verification failed:', err.message)
     return NextResponse.json(
       { error: `Webhook Error: ${err.message}` },
       { status: 400 }
@@ -42,8 +44,10 @@ export async function POST(req: NextRequest) {
 
   // Handle the event
   try {
+    console.log('✅ Webhook verified successfully. Event type:', event.type)
     switch (event.type) {
       case 'checkout.session.completed': {
+        console.log('🛒 Processing checkout.session.completed')
         const session = event.data.object as Stripe.Checkout.Session
 
         // Parse cart items from metadata
@@ -76,7 +80,9 @@ export async function POST(req: NextRequest) {
         console.log(`Order created for session ${session.id}`)
 
         // Send emails if Resend is configured
+        console.log('📧 Starting email sending process...')
         if (process.env.RESEND_API_KEY) {
+          console.log('📧 Resend API key found, preparing emails...')
           const customerEmail = session.customer_details?.email
           const customerName = session.customer_details?.name || 'Valued Customer'
           const totalAmount = (session.amount_total || 0) / 100
@@ -84,6 +90,7 @@ export async function POST(req: NextRequest) {
 
           // Send order confirmation email to customer
           if (customerEmail) {
+            console.log(`📧 Sending confirmation email to: ${customerEmail}`)
             try {
               await resend.emails.send({
                 from: 'Just Cakes <onboarding@resend.dev>',
@@ -113,6 +120,7 @@ export async function POST(req: NextRequest) {
 
           // Send order notification email to business owner
           if (process.env.BUSINESS_EMAIL) {
+            console.log(`📧 Sending business notification to: ${process.env.BUSINESS_EMAIL}`)
             try {
               await resend.emails.send({
                 from: 'Just Cakes Orders <onboarding@resend.dev>',
@@ -145,6 +153,8 @@ export async function POST(req: NextRequest) {
               // Don't fail the webhook if email fails
             }
           }
+        } else {
+          console.log('❌ RESEND_API_KEY not found - emails skipped')
         }
 
         break
