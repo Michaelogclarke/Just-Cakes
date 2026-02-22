@@ -27,9 +27,7 @@ export async function POST(request: NextRequest) {
       await prisma.order.update({
         where: { id: orderId },
         data: {
-          status: 'fulfilled',
-          digitalProductsDelivered: true,
-          digitalProductsDeliveredAt: new Date()
+          status: 'completed'
         }
       })
     } catch (dbError) {
