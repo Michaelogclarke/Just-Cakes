@@ -21,6 +21,12 @@ export default function DateOrderModal({ isOpen, onClose, product }: DateOrderMo
     return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
   }
 
+  // Check if a date is a weekend (Saturday or Sunday)
+  const isWeekend = (date: Date) => {
+    const day = date.getDay()
+    return day === 0 || day === 6 // Sunday = 0, Saturday = 6
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -36,6 +42,12 @@ export default function DateOrderModal({ isOpen, onClose, product }: DateOrderMo
     const selectedDate = new Date(deliveryDate)
     if (selectedDate < minDate) {
       setError('Delivery date must be at least 7 days from today')
+      return
+    }
+
+    // Validate date is not a weekend
+    if (isWeekend(selectedDate)) {
+      setError('Sorry, we don\'t deliver on weekends. Please select a weekday.')
       return
     }
 
@@ -99,7 +111,7 @@ export default function DateOrderModal({ isOpen, onClose, product }: DateOrderMo
               Delivery Date <span className={styles.required}>*</span>
             </label>
             <p className={styles.hint}>
-              Please select a date at least 7 days from today
+              Please select a date at least 7 days from today (weekdays only)
             </p>
             <input
               type="date"
