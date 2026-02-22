@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import styles from './cakes.module.css'
+import { Analytics } from '@vercel/analytics/next';
+ 
 
 interface FormData {
   occasion: string
@@ -132,6 +134,7 @@ export default function CakesPage() {
 
   return (
     <div className={styles.pageContainer}>
+        <Analytics />
       {/* Hero Section */}
       <div className={styles.hero}>
         <h1>Request Your Custom Cake Quote</h1>
