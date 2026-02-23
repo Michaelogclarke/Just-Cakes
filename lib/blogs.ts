@@ -229,7 +229,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     })
 
     return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
+      id: index + 1, // Always use 1-based indexing for consistent IDs
       title: blog.title,
       excerpt: blog.excerpt,
       content: blog.content,
@@ -248,17 +248,19 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 // Get blog post by ID from database
 export async function getBlogPostById(id: number): Promise<BlogPost | undefined> {
   try {
-    const blog = await prisma.blog.findFirst({
-      where: {
-        id: id.toString(),
-        published: true
-      }
+    // Get all blogs and find the one at the specified index position
+    const blogs = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' }
     })
+
+    // Since we're using indexed IDs (1, 2, 3...), find by position
+    const blog = blogs[id - 1] // Convert 1-based ID to 0-based index
 
     if (!blog) return undefined
 
     return {
-      id: blog.id.length > 10 ? parseInt(blog.id.slice(-6), 16) : parseInt(blog.id), // Use last 6 chars of cuid as hex, parse for numeric strings
+      id: id, // Use the requested ID
       title: blog.title,
       excerpt: blog.excerpt,
       content: blog.content,
@@ -286,7 +288,7 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
     })
 
     return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
+      id: index + 1, // Always use 1-based indexing for consistent IDs
       title: blog.title,
       excerpt: blog.excerpt,
       content: blog.content,
@@ -312,7 +314,7 @@ export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]>
     })
 
     return blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
+      id: index + 1, // Always use 1-based indexing for consistent IDs
       title: blog.title,
       excerpt: blog.excerpt,
       content: blog.content,

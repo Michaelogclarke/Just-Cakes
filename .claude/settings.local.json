@@ -7,7 +7,13 @@
       "Bash(curl -X POST http://localhost:3000/api/blogs )",
       "Bash(npm run build)",
       "Bash(npx prisma generate)",
-      "Bash(npx prisma db push)"
+      "Bash(npx prisma db push)",
+      "Bash(npm run dev)",
+      "Bash(curl http://localhost:3000/blog)",
+      "Bash(curl http://localhost:3000/blog/1)",
+      "Bash(curl http://localhost:3000/blog/2)",
+      "Bash(curl -s http://localhost:3000/api/blogs)",
+      "Bash(curl http://localhost:3000/)"
     ],
     "deny": [],
     "ask": []

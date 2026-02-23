@@ -10,7 +10,7 @@ export async function GET() {
 
     // Transform to match BlogPost interface (with numeric id and date string)
     const transformedBlogs = blogs.map((blog, index) => ({
-      id: blog.id.length > 10 ? index + 1 : parseInt(blog.id), // Use index for cuid, parse for numeric strings
+      id: index + 1, // Always use 1-based indexing for consistent IDs
       title: blog.title,
       excerpt: blog.excerpt,
       content: blog.content,
