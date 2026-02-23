@@ -19,7 +19,8 @@ export default function NewProductPage() {
     category: '',
     occasion: '',
     type: 'cake',
-    available: true
+    available: true,
+    digitalAssetUrl: ''
   })
 
   useEffect(() => {
@@ -151,6 +152,21 @@ export default function NewProductPage() {
                   placeholder="/products/image.jpg"
                 />
               </div>
+
+              {formData.type === 'digital' && (
+                <div className={styles.formGroup}>
+                  <label htmlFor="digitalAssetUrl">Digital Asset Download URL</label>
+                  <input
+                    type="text"
+                    id="digitalAssetUrl"
+                    name="digitalAssetUrl"
+                    value={formData.digitalAssetUrl}
+                    onChange={handleChange}
+                    placeholder="https://yoursite.com/downloads/ebook.pdf"
+                  />
+                  <small>URL where customers can download this digital product (PDF, ZIP, etc.)</small>
+                </div>
+              )}
             </div>
 
             {/* Right Column */}

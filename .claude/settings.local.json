@@ -5,7 +5,9 @@
       "Bash(npx prisma generate --force)",
       "Bash(curl http://localhost:3000/api/blogs)",
       "Bash(curl -X POST http://localhost:3000/api/blogs )",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(npx prisma generate)",
+      "Bash(npx prisma db push)"
     ],
     "deny": [],
     "ask": []
