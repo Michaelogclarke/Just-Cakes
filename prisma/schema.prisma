@@ -14,17 +14,18 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  image       String
-  category    String      // e.g., "chocolate", "vanilla", "specialty", "fruit", "cookbook"
-  occasion    String      // e.g., "birthday", "wedding", "anniversary", "celebration", "learning"
-  type        String      // e.g., "cake", "cupcake", "slice", "digital"
-  available   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  price           Float
+  image           String
+  category        String      // e.g., "chocolate", "vanilla", "specialty", "fruit", "cookbook"
+  occasion        String      // e.g., "birthday", "wedding", "anniversary", "celebration", "learning"
+  type            String      // e.g., "cake", "cupcake", "slice", "digital"
+  available       Boolean  @default(true)
+  digitalAssetUrl String?     // Download URL for digital products (PDF, ZIP, etc.)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Order {

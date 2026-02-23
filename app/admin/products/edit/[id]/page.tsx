@@ -27,7 +27,8 @@ export default function EditProductPage({ params }: EditProductPageProps) {
     category: '',
     occasion: '',
     type: 'cake',
-    available: true
+    available: true,
+    digitalAssetUrl: ''
   })
 
   useEffect(() => {
@@ -60,7 +61,8 @@ export default function EditProductPage({ params }: EditProductPageProps) {
             category: foundProduct.category,
             occasion: foundProduct.occasion,
             type: foundProduct.type,
-            available: foundProduct.available
+            available: foundProduct.available,
+            digitalAssetUrl: foundProduct.digitalAssetUrl || ''
           })
         }
       } catch (error) {
@@ -226,6 +228,21 @@ export default function EditProductPage({ params }: EditProductPageProps) {
                   </div>
                 )}
               </div>
+
+              {formData.type === 'digital' && (
+                <div className={styles.formGroup}>
+                  <label htmlFor="digitalAssetUrl">Digital Asset Download URL</label>
+                  <input
+                    type="text"
+                    id="digitalAssetUrl"
+                    name="digitalAssetUrl"
+                    value={formData.digitalAssetUrl}
+                    onChange={handleChange}
+                    placeholder="https://yoursite.com/downloads/ebook.pdf"
+                  />
+                  <small>URL where customers can download this digital product (PDF, ZIP, etc.)</small>
+                </div>
+              )}
             </div>
 
             {/* Right Column */}

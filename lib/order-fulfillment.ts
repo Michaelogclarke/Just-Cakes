@@ -23,8 +23,19 @@ export async function processOrderFulfillment(order: Order): Promise<boolean> {
   try {
     // Parse orderItems JSON and filter for digital products
     const items = Array.isArray(order.orderItems) ? order.orderItems : []
+
+    // Check for digital products missing download URLs
+    const incompleteDigitalProducts = items.filter(item =>
+      item.type === 'digital' && (!item.digitalAssetUrl || item.digitalAssetUrl.trim() === '')
+    )
+
+    if (incompleteDigitalProducts.length > 0) {
+      console.warn(`Order ${order.id} contains ${incompleteDigitalProducts.length} digital products without download URLs:`,
+        incompleteDigitalProducts.map(p => p.name))
+    }
+
     const digitalProducts = items
-      .filter(item => item.type === 'digital' && item.digitalAssetUrl)
+      .filter(item => item.type === 'digital' && item.digitalAssetUrl && item.digitalAssetUrl.trim() !== '')
       .map(item => ({
         id: item.id,
         name: item.name,

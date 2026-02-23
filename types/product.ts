@@ -8,4 +8,5 @@ export interface Product {
   occasion: string
   type: 'cake' | 'cupcake' | 'digital' | 'letterbox'
   available: boolean
+  digitalAssetUrl?: string // Download URL for digital products
 }

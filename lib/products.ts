@@ -12,7 +12,8 @@ function transformProduct(dbProduct: any): Product {
     category: dbProduct.category,
     occasion: dbProduct.occasion,
     type: dbProduct.type as 'cake' | 'cupcake' | 'digital' | 'letterbox',
-    available: dbProduct.available
+    available: dbProduct.available,
+    digitalAssetUrl: dbProduct.digitalAssetUrl
   }
 }
 
