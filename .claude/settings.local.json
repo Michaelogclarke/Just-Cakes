@@ -13,7 +13,8 @@
       "Bash(curl http://localhost:3000/blog/1)",
       "Bash(curl http://localhost:3000/blog/2)",
       "Bash(curl -s http://localhost:3000/api/blogs)",
-      "Bash(curl http://localhost:3000/)"
+      "Bash(curl http://localhost:3000/)",
+      "Bash(npm install server-only)"
     ],
     "deny": [],
     "ask": []

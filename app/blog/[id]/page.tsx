@@ -66,47 +66,77 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
         </div>
 
         <div className={styles.content}>
-          {post.content.split('\n\n').map((paragraph, index) => {
-            // Handle headings
-            if (paragraph.startsWith('## ')) {
-              return (
-                <h2 key={index} className={styles.heading}>
-                  {paragraph.replace('## ', '')}
-                </h2>
+          {(() => {
+            const renderInline = (text: string) => {
+              const parts = text.split('**')
+              return parts.map((part, i) =>
+                i % 2 === 1 ? <strong key={i}>{part}</strong> : part
               )
             }
-            // Handle bullet lists
-            if (paragraph.includes('\n- ')) {
-              const items = paragraph.split('\n- ').filter(item => item.trim())
-              return (
-                <ul key={index} className={styles.list}>
-                  {items.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              )
-            }
-            // Handle numbered lists
-            if (paragraph.match(/^\d+\./)) {
-              const items = paragraph.split(/\n\d+\.\s/).filter(item => item.trim())
-              return (
-                <ol key={index} className={styles.list}>
-                  {items.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ol>
-              )
-            }
-            // Regular paragraphs
-            if (paragraph.trim() && !paragraph.startsWith('#')) {
-              return (
-                <p key={index} className={styles.paragraph}>
-                  {paragraph}
-                </p>
-              )
-            }
-            return null
-          })}
+
+            const paragraphs = post.content.split('\n\n')
+            let firstParagraphSeen = false
+
+            return paragraphs.map((paragraph, index) => {
+              if (paragraph.startsWith('## ')) {
+                return (
+                  <div key={index} className={styles.sectionBreak}>
+                    <h2 className={styles.heading}>
+                      {paragraph.replace('## ', '')}
+                    </h2>
+                  </div>
+                )
+              }
+
+              if (paragraph.startsWith('### ')) {
+                return (
+                  <h3 key={index} className={styles.subheading}>
+                    {paragraph.replace('### ', '')}
+                  </h3>
+                )
+              }
+
+              if (paragraph.includes('\n- ')) {
+                const items = paragraph.split('\n- ').filter(item => item.trim())
+                return (
+                  <ul key={index} className={styles.list}>
+                    {items.map((item, i) => (
+                      <li key={i}>{renderInline(item)}</li>
+                    ))}
+                  </ul>
+                )
+              }
+
+              if (paragraph.match(/^\d+\./)) {
+                const items = paragraph.split(/\n\d+\.\s/).filter(item => item.trim())
+                return (
+                  <ol key={index} className={styles.list}>
+                    {items.map((item, i) => (
+                      <li key={i}>{renderInline(item)}</li>
+                    ))}
+                  </ol>
+                )
+              }
+
+              if (paragraph.trim() && !paragraph.startsWith('#')) {
+                if (!firstParagraphSeen) {
+                  firstParagraphSeen = true
+                  return (
+                    <p key={index} className={styles.leadParagraph}>
+                      {renderInline(paragraph)}
+                    </p>
+                  )
+                }
+                return (
+                  <p key={index} className={styles.paragraph}>
+                    {renderInline(paragraph)}
+                  </p>
+                )
+              }
+
+              return null
+            })
+          })()}
         </div>
 
         <footer className={styles.footer}>
