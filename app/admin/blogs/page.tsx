@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { getAllBlogPosts } from '@/lib/blogs'
 import { BlogPost } from '@/types/blog'
 import styles from './blogs.module.css'
 
@@ -26,9 +25,15 @@ export default function AdminBlogsPage() {
 
   useEffect(() => {
     if (mounted && isAuthenticated) {
-      getAllBlogPosts().then(setBlogPosts)
+      fetch('/api/blogs').then(r => r.json()).then(setBlogPosts)
     }
   }, [mounted, isAuthenticated])
+
+  const handleDelete = async (id: number, title: string) => {
+    if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) return
+    await fetch(`/api/blogs/${id}`, { method: 'DELETE' })
+    setBlogPosts(prev => prev.filter(p => p.id !== id))
+  }
 
   if (!mounted || !isAuthenticated) {
     return null
@@ -121,6 +126,9 @@ export default function AdminBlogsPage() {
                         <Link href={`/admin/blog/edit/${post.id}`} className={styles.editButton}>
                           Edit
                         </Link>
+                        <button onClick={() => handleDelete(post.id, post.title)} className={styles.deleteButton}>
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>

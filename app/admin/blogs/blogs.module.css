@@ -276,6 +276,24 @@
   border-color: #8300d4;
 }
 
+.deleteButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  border: 2px solid #e0e0e0;
+  color: #c00;
+}
+
+.deleteButton:hover {
+  background: #c00;
+  border-color: #c00;
+  color: white;
+}
+
 .infoBox {
   background: #FFF9F5;
   border: 2px solid #FFE4D6;

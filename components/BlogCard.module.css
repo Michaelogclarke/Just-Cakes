@@ -1,17 +1,19 @@
 .card {
   background: white;
   border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .card:hover {
-  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.1);
+  box-shadow: 0 8px 28px rgba(106, 0, 170, 0.15);
   border-color: #6A00AA;
+  transform: translateY(-4px);
 }
 
 .imageLink {
@@ -43,8 +45,8 @@
   left: 1rem;
   background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.4rem 0.875rem;
+  border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;

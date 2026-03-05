@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAdmin } from '@/context/AdminContext'
 import styles from './admin.module.css'
@@ -11,11 +11,13 @@ export default function AdminLoginPage() {
   const { login, isAuthenticated } = useAdmin()
   const router = useRouter()
 
-  // Redirect if already authenticated
-  if (isAuthenticated) {
-    router.push('/admin/dashboard')
-    return null
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/admin/dashboard')
+    }
+  }, [isAuthenticated, router])
+
+  if (isAuthenticated) return null
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

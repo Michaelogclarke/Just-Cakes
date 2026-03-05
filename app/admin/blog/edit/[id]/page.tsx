@@ -4,7 +4,6 @@ import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { getBlogPostById } from '@/lib/blogs'
 import styles from '../../new/newPost.module.css'
 
 export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
@@ -38,7 +37,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     const loadPost = async () => {
-      const post = await getBlogPostById(parseInt(id))
+      const post = await fetch(`/api/blogs/${id}`).then(r => r.ok ? r.json() : null)
       if (post) {
         setFormData({
           title: post.title,

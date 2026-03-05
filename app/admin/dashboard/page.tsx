@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
-import { getAllBlogPosts } from '@/lib/blogs'
 import { BlogPost } from '@/types/blog'
 import styles from './dashboard.module.css'
 
@@ -26,7 +25,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (mounted && isAuthenticated) {
-      getAllBlogPosts().then(setBlogPosts)
+      fetch('/api/blogs').then(r => r.json()).then(setBlogPosts)
     }
   }, [mounted, isAuthenticated])
 
