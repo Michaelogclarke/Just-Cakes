@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
 import { Resend } from 'resend'
+import { sendDigitalProductEmail } from '@/lib/email'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-01-28.clover',
@@ -78,6 +79,41 @@ export async function POST(req: NextRequest) {
         })
 
         console.log(`Order created for session ${session.id}`)
+
+        // Send digital product download links if order contains digital items
+        const digitalItems = cartItems.filter(
+          (item: any) => item.type === 'digital' && item.digitalAssetUrl
+        )
+        if (digitalItems.length > 0) {
+          const customerEmail = session.customer_details?.email
+          const customerName = session.customer_details?.name || 'Valued Customer'
+          if (customerEmail) {
+            try {
+              await sendDigitalProductEmail({
+                to: customerEmail,
+                customerName,
+                orderId: order.id,
+                digitalProducts: digitalItems.map((item: any) => ({
+                  id: String(item.id),
+                  name: item.name,
+                  downloadUrl: item.digitalAssetUrl,
+                })),
+              })
+              console.log(`Digital product email sent to ${customerEmail}`)
+
+              // Mark as completed if purely digital order
+              const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
+              if (!hasPhysicalItems) {
+                await prisma.order.update({
+                  where: { id: order.id },
+                  data: { status: 'completed' },
+                })
+              }
+            } catch (err) {
+              console.error('Failed to send digital product email:', err)
+            }
+          }
+        }
 
         // Send emails if Resend is configured
         console.log('📧 Starting email sending process...')

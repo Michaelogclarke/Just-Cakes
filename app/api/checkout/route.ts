@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
       quantity: item.quantity,
     }))
 
+    const isDigitalOnly = items.every((item: any) => item.type === 'digital')
+
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -39,16 +41,18 @@ export async function POST(request: NextRequest) {
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/cart`,
-      shipping_address_collection: {
-        allowed_countries: ['GB'],
-      },
+      // Only collect shipping address for physical products
+      ...(isDigitalOnly ? {} : {
+        shipping_address_collection: { allowed_countries: ['GB'] },
+      }),
       metadata: {
-        // Store cart info for later order processing
         cart_items: JSON.stringify(items.map((item: any) => ({
           id: item.id,
           name: item.name,
           quantity: item.quantity,
-          price: item.price
+          price: item.price,
+          type: item.type || 'cake',
+          digitalAssetUrl: item.digitalAssetUrl || null,
         }))),
         delivery_date: deliveryDate || ''
       }

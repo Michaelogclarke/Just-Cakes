@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAdmin } from '@/context/AdminContext'
@@ -10,6 +10,8 @@ export default function NewProductPage() {
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
+  const [uploading, setUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -45,6 +47,23 @@ export default function NewProductPage() {
     })
   }
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const res = await fetch('/api/upload', { method: 'POST', body: form })
+      const { url } = await res.json()
+      setFormData(prev => ({ ...prev, digitalAssetUrl: url }))
+    } catch {
+      alert('Upload failed. Please try again.')
+    } finally {
+      setUploading(false)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -63,6 +82,7 @@ export default function NewProductPage() {
           occasion: formData.occasion,
           type: formData.type,
           available: formData.available,
+          digitalAssetUrl: formData.digitalAssetUrl || null,
         }),
       })
 
@@ -155,16 +175,31 @@ export default function NewProductPage() {
 
               {formData.type === 'digital' && (
                 <div className={styles.formGroup}>
-                  <label htmlFor="digitalAssetUrl">Digital Asset Download URL</label>
+                  <label>Digital Asset File *</label>
                   <input
-                    type="text"
-                    id="digitalAssetUrl"
-                    name="digitalAssetUrl"
-                    value={formData.digitalAssetUrl}
-                    onChange={handleChange}
-                    placeholder="https://yoursite.com/downloads/ebook.pdf"
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,.zip,.mp4,.mp3,.epub,.png,.jpg,.jpeg"
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
                   />
-                  <small>URL where customers can download this digital product (PDF, ZIP, etc.)</small>
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className={styles.uploadButton}
+                    disabled={uploading}
+                  >
+                    {uploading ? 'Uploading...' : 'Upload File'}
+                  </button>
+                  {formData.digitalAssetUrl && (
+                    <div className={styles.uploadedFile}>
+                      <span>✓ File uploaded: </span>
+                      <a href={formData.digitalAssetUrl} target="_blank" rel="noreferrer">
+                        View file
+                      </a>
+                    </div>
+                  )}
+                  <small>Accepted: PDF, ZIP, MP4, MP3, EPUB, images</small>
                 </div>
               )}
             </div>
