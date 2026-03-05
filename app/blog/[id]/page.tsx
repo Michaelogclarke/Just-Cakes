@@ -143,7 +143,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
           <div className={styles.callToAction}>
             <h3>Ready to Order Your Custom Cake?</h3>
             <p>Let&apos;s create something special for your next celebration!</p>
-            <Link href="/custom-orders" className={styles.ctaButton}>
+            <Link href="/cakes" className={styles.ctaButton}>
               Start Your Custom Order
             </Link>
           </div>

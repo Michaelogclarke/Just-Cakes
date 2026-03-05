@@ -14,7 +14,8 @@
       "Bash(curl http://localhost:3000/blog/2)",
       "Bash(curl -s http://localhost:3000/api/blogs)",
       "Bash(curl http://localhost:3000/)",
-      "Bash(npm install server-only)"
+      "Bash(npm install server-only)",
+      "Bash(head -3 app/admin/dashboard/page.tsx app/admin/blogs/page.tsx app/admin/blog/edit/\\\\[id\\\\]/page.tsx)"
     ],
     "deny": [],
     "ask": []
