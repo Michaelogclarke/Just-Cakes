@@ -19,7 +19,7 @@ export interface EmailOptions {
 export async function sendDigitalProductEmail({ to, customerName, orderId, digitalProducts }: EmailOptions) {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Just Cakes <orders@justcakes.com>', // Replace with your verified domain
+      from: 'Just Cakes <noreply@mogsserver.online>',
       to: [to],
       subject: `Your Digital Products from Just Cakes - Order #${orderId}`,
       html: generateDigitalProductEmailHTML({ customerName, orderId, digitalProducts }),
