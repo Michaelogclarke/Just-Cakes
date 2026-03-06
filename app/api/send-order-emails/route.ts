@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       console.log(` Sending confirmation email to: ${customerEmail}`)
       try {
         const customerEmailResult = await resend.emails.send({
-          from: 'Just Cakes <mogsserver.online@resend.dev>',
+          from: 'Just Cakes <orders@mogsserver.online>',
           to: customerEmail,
           subject: 'Order Confirmation - Just Cakes',
           html: generateOrderConfirmationHTML(
