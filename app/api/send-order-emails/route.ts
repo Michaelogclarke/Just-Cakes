@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import Stripe from 'stripe'
+import { prisma } from '@/lib/prisma'
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -52,6 +53,33 @@ export async function POST(req: NextRequest) {
       totalAmount,
       itemCount: cartItems.length
     })
+
+    // Save order to DB (upsert to avoid duplicates if success page loads twice)
+    try {
+      await prisma.order.upsert({
+        where: { stripeSessionId: sessionId },
+        update: {},
+        create: {
+          stripeSessionId: sessionId,
+          stripePaymentIntent: (session.payment_intent as string) || null,
+          customerEmail: customerEmail || '',
+          customerName: customerName,
+          customerPhone: session.customer_details?.phone || null,
+          shippingAddress: (session as any).shipping_details || null,
+          billingAddress: session.customer_details?.address ? JSON.parse(JSON.stringify(session.customer_details.address)) : null,
+          orderItems: cartItems,
+          totalAmount,
+          currency: session.currency || 'gbp',
+          paymentStatus: session.payment_status === 'paid' ? 'paid' : 'unpaid',
+          status: 'pending',
+          deliveryDate: deliveryDate,
+        }
+      })
+      console.log('Order saved to DB for session:', sessionId)
+    } catch (dbError) {
+      console.error('Failed to save order to DB:', dbError)
+      // Don't fail the request if DB save fails — emails still go out
+    }
 
     const emailResults = []
 

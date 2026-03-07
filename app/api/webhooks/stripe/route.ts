@@ -59,9 +59,13 @@ export async function POST(req: NextRequest) {
         // Get delivery date from metadata
         const deliveryDate = session.metadata?.delivery_date || null
 
-        // Create order in database
-        const order = await prisma.order.create({
-          data: {
+        // Create order in database (upsert to handle race with send-order-emails)
+        const order = await prisma.order.upsert({
+          where: { stripeSessionId: session.id },
+          update: {
+            paymentStatus: session.payment_status === 'paid' ? 'paid' : 'unpaid',
+          },
+          create: {
             stripeSessionId: session.id,
             stripePaymentIntent: (session.payment_intent as string) || null,
             customerEmail: session.customer_details?.email || '',
@@ -70,7 +74,7 @@ export async function POST(req: NextRequest) {
             shippingAddress: (session as any).shipping_details || null,
             billingAddress: session.customer_details?.address ? JSON.parse(JSON.stringify(session.customer_details.address)) : null,
             orderItems: cartItems,
-            totalAmount: (session.amount_total || 0) / 100, // Convert from cents
+            totalAmount: (session.amount_total || 0) / 100,
             currency: session.currency || 'gbp',
             paymentStatus: session.payment_status === 'paid' ? 'paid' : 'unpaid',
             status: 'pending',
