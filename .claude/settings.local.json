@@ -17,7 +17,8 @@
       "Bash(npm install server-only)",
       "Bash(head -3 app/admin/dashboard/page.tsx app/admin/blogs/page.tsx app/admin/blog/edit/\\\\[id\\\\]/page.tsx)",
       "Bash(find /home/michaelogclarke/projects/Just-Cakes -name \".env*\" -type f 2>/dev/null | head -5)",
-      "Bash(npm install @vercel/blob)"
+      "Bash(npm install @vercel/blob)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []

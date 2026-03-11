@@ -136,6 +136,15 @@ export default function Navbar() {
           </li>
           <li>
             <Link
+              href="/events"
+              className={isActive('/events') || pathname?.startsWith('/events/') ? styles.active : ''}
+              onClick={closeMenu}
+            >
+              Events
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/cart"
               className={isActive('/cart') ? styles.active : ''}
               onClick={closeMenu}
