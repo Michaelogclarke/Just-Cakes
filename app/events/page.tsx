@@ -19,7 +19,7 @@ export default async function EventsPage() {
       <div className={styles.header}>
         <h1>Events & Workshops</h1>
         <p className={styles.subtitle}>
-          From hands-on decorating classes to exclusive tastings and pop-up markets — there&aposs always something on at Just Cakes.
+          From hands-on decorating classes to exclusive tastings and pop-up markets.
         </p>
       </div>
 
