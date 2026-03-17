@@ -19,7 +19,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     logout()
-    router.push('/admin')
+    router.push('/ludmilla')
   }
 
   const formatDate = (dateString: string) => {
@@ -62,12 +62,12 @@ export default function AdminDashboard() {
 
       <main className={styles.main}>
         <div className={styles.quickLinks}>
-          <Link href="/admin/products" className={styles.quickLinkCard}>
+          <Link href="/ludmilla/products" className={styles.quickLinkCard}>
             <div className={styles.quickLinkIcon}>🛍️</div>
             <h3>Manage Products</h3>
             <p>Add, edit, and manage your cakes and cupcakes</p>
           </Link>
-          <Link href="/admin/blogs" className={styles.quickLinkCard}>
+          <Link href="/ludmilla/blogs" className={styles.quickLinkCard}>
             <div className={styles.quickLinkIcon}>📝</div>
             <h3>Manage Blogs</h3>
             <p>Create and edit blog posts</p>
@@ -75,10 +75,10 @@ export default function AdminDashboard() {
         </div>
 
         <div className={styles.actions}>
-          <Link href="/admin/products/new" className={styles.createButton}>
+          <Link href="/ludmilla/products/new" className={styles.createButton}>
             + Add New Product
           </Link>
-          <Link href="/admin/blog/new" className={styles.createButton}>
+          <Link href="/ludmilla/blog/new" className={styles.createButton}>
             + Create New Blog Post
           </Link>
         </div>
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
                         <Link href={`/blog/${post.id}`} className={styles.viewButton}>
                           View
                         </Link>
-                        <Link href={`/admin/blog/edit/${post.id}`} className={styles.editButton}>
+                        <Link href={`/ludmilla/blog/edit/${post.id}`} className={styles.editButton}>
                           Edit
                         </Link>
                       </div>

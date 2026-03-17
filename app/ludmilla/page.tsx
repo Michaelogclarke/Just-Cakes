@@ -13,7 +13,7 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/admin/dashboard')
+      router.push('/ludmilla/dashboard')
     }
   }, [isAuthenticated, router])
 
@@ -62,9 +62,6 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div className={styles.helpText}>
-          <p><strong>Demo Password:</strong> justcakes2024</p>
-        </div>
       </div>
     </div>
   )
