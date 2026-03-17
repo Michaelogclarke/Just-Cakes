@@ -24,15 +24,33 @@ export default function NewsletterPopup() {
     localStorage.setItem(STORAGE_KEY, 'dismissed')
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError('Please enter a valid email address.')
       return
     }
+
     setError('')
-    setSubmitted(true)
-    localStorage.setItem(STORAGE_KEY, 'subscribed')
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitted(true)
+        localStorage.setItem(STORAGE_KEY, 'subscribed')
+      } else {
+        setError(data.error || 'Failed to subscribe. Please try again.')
+      }
+    } catch (error) {
+      setError('Failed to subscribe. Please try again.')
+    }
   }
 
   if (!visible) return null
