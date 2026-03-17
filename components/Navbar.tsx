@@ -33,7 +33,7 @@ export default function Navbar() {
       <div className={styles.navContent}>
         {/* Logo Section */}
         <Link href="/" className={styles.logoLink}>
-          <img src="/updated-logo.png" alt="Just Cakes Logo" className={styles.logo} />
+          <img src="/Logo4.png" alt="Just Cakes Logo" className={styles.logo} />
         </Link>
 
         {/* Hamburger Menu Button */}
@@ -82,7 +82,7 @@ export default function Navbar() {
           </li>
 
           {/* Letterbox Cakes with Dropdown */}
-          <li className={styles.dropdownContainer}>
+                    {/*         <li className={styles.dropdownContainer}>
             <Link
               href="/letterbox-cakes"
               className={isActive('/letterbox-cakes') || pathname?.startsWith('/letterbox-cakes/') ? styles.active : ''}
@@ -91,7 +91,7 @@ export default function Navbar() {
               Letterbox Cakes
             </Link>
           </li>
-
+*/}
           {/* Digital Products with Dropdown */}
           <li className={styles.dropdownContainer}>
             <Link
