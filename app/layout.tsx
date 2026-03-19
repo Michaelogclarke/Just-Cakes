@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import { AdminProvider } from '@/context/AdminContext'
@@ -24,11 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://t.contentsquare.net/uxa/30720b587567d.js" async />
         <Analytics />
         <SpeedInsights />
       </head>
       <body>
+        <Script
+          src="https://t.contentsquare.net/uxa/30720b587567d.js"
+          strategy="afterInteractive"
+        />
         <AdminProvider>
           <CartProvider>
             <Navbar />
