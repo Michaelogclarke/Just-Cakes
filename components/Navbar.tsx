@@ -147,10 +147,13 @@ export default function Navbar() {
           <li>
             <Link
               href="/cart"
-              className={isActive('/cart') ? styles.active : ''}
+              className={`${styles.cartLink} ${isActive('/cart') ? styles.active : ''}`}
               onClick={closeMenu}
             >
-              Cart {cart.totalItems > 0 && `(${cart.totalItems})`}
+              Cart
+              {cart.totalItems >= 1 && (
+                <span className={styles.cartBadge}>{cart.totalItems}</span>
+              )}
             </Link>
           </li>
         </ul>

@@ -1,3 +1,28 @@
+.cartLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #6A00AA;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+
 /* Navbar Container */
 .navcontainer {
   background: white;
