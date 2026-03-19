@@ -56,9 +56,7 @@ export default function Product({
           <span className={styles.category}>{category}</span>
         </div>
 
-        {type !== 'cake' && type !== 'cupcake' && (
-          <p className={styles.description}>{description}</p>
-        )}
+        <p className={styles.description}>{description}</p>
 
         <div className={styles.footer}>
           {type !== 'cake' && type !== 'cupcake' && (

@@ -62,6 +62,7 @@ export async function PUT(
         occasion: body.occasion,
         type: body.type,
         available: body.available,
+        sortOrder: body.sortOrder ?? 0,
         digitalAssetUrl: body.digitalAssetUrl || null,
       }
     })

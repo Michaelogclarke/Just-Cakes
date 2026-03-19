@@ -41,6 +41,7 @@ export async function POST(request: Request) {
         occasion: body.occasion,
         type: body.type,
         available: body.available ?? true,
+        sortOrder: body.sortOrder ?? 0,
         digitalAssetUrl: body.digitalAssetUrl || null,
       }
     })

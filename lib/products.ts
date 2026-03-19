@@ -20,7 +20,7 @@ function transformProduct(dbProduct: any): Product {
 // Get all products
 export async function getAllProducts(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    orderBy: { createdAt: 'desc' }
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }]
   })
   return products.map(transformProduct)
 }

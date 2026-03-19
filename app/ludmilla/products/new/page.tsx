@@ -22,6 +22,7 @@ export default function NewProductPage() {
     occasion: '',
     type: 'cake',
     available: true,
+    sortOrder: '0',
     digitalAssetUrl: ''
   })
 
@@ -82,6 +83,7 @@ export default function NewProductPage() {
           occasion: formData.occasion,
           type: formData.type,
           available: formData.available,
+          sortOrder: parseInt(formData.sortOrder) || 0,
           digitalAssetUrl: formData.digitalAssetUrl || null,
         }),
       })
@@ -258,6 +260,20 @@ export default function NewProductPage() {
                   <option value="celebration">Celebration</option>
                   <option value="learning">Learning (Digital)</option>
                 </select>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="sortOrder">Sort Order</label>
+                <input
+                  type="number"
+                  id="sortOrder"
+                  name="sortOrder"
+                  value={formData.sortOrder}
+                  onChange={handleChange}
+                  min="0"
+                  placeholder="0"
+                />
+                <small>Lower number = appears first in grids (0 = default)</small>
               </div>
 
               <div className={styles.formGroup}>

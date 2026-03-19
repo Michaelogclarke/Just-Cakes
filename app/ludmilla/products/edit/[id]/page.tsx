@@ -31,6 +31,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
     occasion: '',
     type: 'cake',
     available: true,
+    sortOrder: '0',
     digitalAssetUrl: ''
   })
 
@@ -65,6 +66,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
             occasion: foundProduct.occasion,
             type: foundProduct.type,
             available: foundProduct.available,
+            sortOrder: foundProduct.sortOrder?.toString() || '0',
             digitalAssetUrl: foundProduct.digitalAssetUrl || ''
           })
         }
@@ -131,6 +133,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
           occasion: formData.occasion,
           type: formData.type,
           available: formData.available,
+          sortOrder: parseInt(formData.sortOrder) || 0,
           digitalAssetUrl: formData.digitalAssetUrl || null,
         }),
       })
@@ -335,6 +338,20 @@ export default function EditProductPage({ params }: EditProductPageProps) {
                   <option value="celebration">Celebration</option>
                   <option value="learning">Learning (Digital)</option>
                 </select>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="sortOrder">Sort Order</label>
+                <input
+                  type="number"
+                  id="sortOrder"
+                  name="sortOrder"
+                  value={formData.sortOrder}
+                  onChange={handleChange}
+                  min="0"
+                  placeholder="0"
+                />
+                <small>Lower number = appears first in grids (0 = default)</small>
               </div>
 
               <div className={styles.formGroup}>
