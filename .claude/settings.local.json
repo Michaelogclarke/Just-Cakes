@@ -19,7 +19,8 @@
       "Bash(find /home/michaelogclarke/projects/Just-Cakes -name \".env*\" -type f 2>/dev/null | head -5)",
       "Bash(npm install @vercel/blob)",
       "Bash(npm run:*)",
-      "Bash(curl -X POST http://localhost:3000/api/newsletter -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@example.com\"\"}' -v)"
+      "Bash(curl -X POST http://localhost:3000/api/newsletter -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@example.com\"\"}' -v)",
+      "Bash(curl -X POST http://localhost:3000/api/contact )"
     ],
     "deny": [],
     "ask": []

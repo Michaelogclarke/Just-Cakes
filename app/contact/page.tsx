@@ -24,21 +24,37 @@ export default function ContactPage() {
     e.preventDefault()
     setStatus('submitting')
 
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
-      setStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
 
-      // Reset success message after 5 seconds
+      if (response.ok) {
+        setStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+        // Reset success message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000)
+      } else {
+        setStatus('error')
+        // Reset error message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000)
+      }
+    } catch (error) {
+      console.error('Contact form error:', error)
+      setStatus('error')
+      // Reset error message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000)
-    }, 1000)
+    }
   }
 
   return (
