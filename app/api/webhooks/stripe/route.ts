@@ -85,6 +85,7 @@ export async function POST(req: NextRequest) {
         console.log(`Order created for session ${session.id}`)
 
         // Build digital products list directly from cart items (digitalAssetUrl flows through from DB → API → cart → metadata)
+        console.log('🛒 Cart items from metadata:', JSON.stringify(cartItems))
         const digitalProducts = cartItems
           .filter((item: any) => item.type === 'digital' && item.digitalAssetUrl)
           .map((item: any) => ({
@@ -92,6 +93,7 @@ export async function POST(req: NextRequest) {
             name: item.name,
             downloadUrl: item.digitalAssetUrl,
           }))
+        console.log('📦 Digital products for email:', JSON.stringify(digitalProducts))
 
         if (digitalProducts.length > 0) {
           const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
