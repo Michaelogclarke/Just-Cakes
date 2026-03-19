@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: blob: https:",
     "object-src 'none'",
-    `frame-src https://js.stripe.com https://hooks.stripe.com`,
+    `frame-src https://js.stripe.com https://hooks.stripe.com https://www.facebook.com https://web.facebook.com`,
     "connect-src 'self' https://api.stripe.com https://vitals.vercel-insights.com",
     "base-uri 'self'",
     "form-action 'self'",
