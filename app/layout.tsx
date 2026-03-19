@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(c,o,n,t,e,n,t){c[t]=c[t]||function(){(c[t].q=c[t].q||[]).push(arguments)};c[t].l=1*new Date();e=o.createElement(n);n=o.getElementsByTagName(n)[0];e.async=1;e.src='https://t.contentsquare.net/uxa/30720b587567d.js';n.parentNode.insertBefore(e,n)})(window,document,'script','_uxa');`
+            __html: `(function(w,d,s,n,e,el){w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};w[n].l=1*new Date();e=d.createElement(s);el=d.getElementsByTagName(s)[0];e.async=1;e.src='https://t.contentsquare.net/uxa/30720b587567d.js';el.parentNode.insertBefore(e,el)})(window,document,'script','_uxa');`
           }}
         />
         <Analytics />

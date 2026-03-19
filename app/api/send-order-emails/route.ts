@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
       console.log(` Sending confirmation email to: ${customerEmail}`)
       try {
         const customerEmailResult = await resend.emails.send({
-          from: 'Just Cakes <orders@mogsserver.online>',
+          from: 'Just Cakes <orders@justcakesbakery.com>',
           to: customerEmail,
           subject: 'Order Confirmation - Just Cakes',
           html: generateOrderConfirmationHTML(
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       console.log(` Sending business notification to: ${process.env.BUSINESS_EMAIL}`)
       try {
         const businessEmailResult = await resend.emails.send({
-          from: 'Just Cakes Orders <mogsserver.online@resend.dev>',
+          from: 'Just Cakes Orders <justcakesbakery.com@resend.dev>',
           to: process.env.BUSINESS_EMAIL,
           subject: ` New Order - ${deliveryDate ? 'Delivery: ' + new Date(deliveryDate).toLocaleDateString('en-GB') : 'Action Required'}`,
           html: generateBusinessNotificationHTML(

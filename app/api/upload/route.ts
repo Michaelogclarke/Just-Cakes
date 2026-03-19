@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
-    const blob = await put(file.name, file, { access: 'public' })
+    const blob = await put(file.name, file, { access: 'public', allowOverwrite: true })
     return NextResponse.json({ url: blob.url })
   } catch (error: any) {
     console.error('Upload error:', error)
