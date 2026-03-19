@@ -20,7 +20,11 @@
       "Bash(npm install @vercel/blob)",
       "Bash(npm run:*)",
       "Bash(curl -X POST http://localhost:3000/api/newsletter -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@example.com\"\"}' -v)",
-      "Bash(curl -X POST http://localhost:3000/api/contact )"
+      "Bash(curl -X POST http://localhost:3000/api/contact )",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
