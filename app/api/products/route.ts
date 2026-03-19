@@ -41,6 +41,7 @@ export async function POST(request: Request) {
         occasion: body.occasion,
         type: body.type,
         available: body.available ?? true,
+        digitalAssetUrl: body.digitalAssetUrl || null,
       }
     })
     return NextResponse.json(product, { status: 201 })
