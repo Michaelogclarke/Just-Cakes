@@ -35,6 +35,7 @@
 
 /* Image */
 .imageContainer {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   border-radius: 8px;
