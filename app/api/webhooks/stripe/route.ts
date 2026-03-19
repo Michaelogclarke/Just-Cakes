@@ -84,40 +84,22 @@ export async function POST(req: NextRequest) {
 
         console.log(`Order created for session ${session.id}`)
 
-        // Send digital product download links if order contains digital items
-        // Look up digitalAssetUrl from DB instead of metadata (Stripe truncates metadata >500 chars)
-        let digitalProducts: { id: string; name: string; downloadUrl: string }[] = []
-        const digitalCartItems = cartItems.filter((item: any) => item.type === 'digital')
-        if (digitalCartItems.length > 0) {
-          try {
-            const productIds = digitalCartItems.map((item: any) => item.id)
-            const dbProducts = await prisma.product.findMany({
-              where: { id: { in: productIds } },
-              select: { id: true, name: true, digitalAssetUrl: true }
+        // Build digital products list directly from cart items (digitalAssetUrl flows through from DB → API → cart → metadata)
+        const digitalProducts = cartItems
+          .filter((item: any) => item.type === 'digital' && item.digitalAssetUrl)
+          .map((item: any) => ({
+            id: String(item.id),
+            name: item.name,
+            downloadUrl: item.digitalAssetUrl,
+          }))
+
+        if (digitalProducts.length > 0) {
+          const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
+          if (!hasPhysicalItems) {
+            await prisma.order.update({
+              where: { id: order.id },
+              data: { status: 'completed' },
             })
-
-            digitalProducts = dbProducts
-              .filter(p => p.digitalAssetUrl)
-              .map(p => ({
-                id: String(p.id),
-                name: p.name,
-                downloadUrl: p.digitalAssetUrl!,
-              }))
-
-            if (digitalProducts.length > 0) {
-              // Mark as completed if purely digital order
-              const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
-              if (!hasPhysicalItems) {
-                await prisma.order.update({
-                  where: { id: order.id },
-                  data: { status: 'completed' },
-                })
-              }
-            } else {
-              console.warn(`Digital products in order ${order.id} have no digitalAssetUrl in DB`)
-            }
-          } catch (err) {
-            console.error('Failed to fetch digital product URLs:', err)
           }
         }
 
@@ -346,10 +328,10 @@ function generateOrderConfirmationHTML(
         ${digitalProducts.length > 0 ? `
         <div style="background: #f0f7ff; border-left: 4px solid #6A00AA; padding: 20px; margin-bottom: 24px; border-radius: 4px;">
           <h3 style="color: #6A00AA; font-size: 16px; margin-top: 0; margin-bottom: 12px;">Your Digital Downloads</h3>
-          ${digitalProducts.map(p => `
+          ${digitalProducts.map((p: { name: string; downloadUrl: string }) => `
             <div style="margin-bottom: 12px;">
-              <p style="margin: 0 0 6px 0; font-weight: bold; color: #333;">${p.name}</p>
-              <a href="${p.downloadUrl}" style="display: inline-block; background: #6A00AA; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-size: 14px;">Download</a>
+              <p style="margin: 0 0 4px 0; font-weight: bold; color: #333;">${p.name}</p>
+              <p style="margin: 0; color: #555;">Download link: <a href="${p.downloadUrl}" style="color: #6A00AA;">${p.downloadUrl}</a></p>
             </div>
           `).join('')}
         </div>
