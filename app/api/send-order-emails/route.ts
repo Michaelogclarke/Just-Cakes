@@ -47,11 +47,30 @@ export async function POST(req: NextRequest) {
       ? JSON.parse(session.metadata.cart_items)
       : []
 
+    // Fetch digitalAssetUrl from DB for any digital items
+    const digitalItemIds = cartItems
+      .filter((item: any) => item.type === 'digital')
+      .map((item: any) => String(item.id))
+
+    const digitalProducts: { name: string; downloadUrl: string }[] = []
+    if (digitalItemIds.length > 0) {
+      const dbProducts = await prisma.product.findMany({
+        where: { id: { in: digitalItemIds } },
+        select: { id: true, name: true, digitalAssetUrl: true }
+      })
+      dbProducts.forEach(p => {
+        if (p.digitalAssetUrl) {
+          digitalProducts.push({ name: p.name, downloadUrl: p.digitalAssetUrl })
+        }
+      })
+    }
+
     console.log(' Order details:', {
       customerEmail,
       customerName,
       totalAmount,
-      itemCount: cartItems.length
+      itemCount: cartItems.length,
+      digitalProducts
     })
 
     // Save order to DB (upsert to avoid duplicates if success page loads twice)
@@ -96,7 +115,8 @@ export async function POST(req: NextRequest) {
             cartItems,
             totalAmount,
             deliveryDate,
-            shippingDetails
+            shippingDetails,
+            digitalProducts
           )
         })
 
@@ -157,7 +177,8 @@ function generateOrderConfirmationHTML(
   orderItems: any[],
   totalAmount: number,
   deliveryDate: string | null,
-  shippingAddress: any
+  shippingAddress: any,
+  digitalProducts: { name: string; downloadUrl: string }[] = []
 ): string {
   const formatAddress = (address: any) => {
     if (!address) return 'N/A'
@@ -223,9 +244,21 @@ function generateOrderConfirmationHTML(
           </table>
         </div>
 
+        ${digitalProducts.length > 0 ? `
+        <div style="background: #f0f7ff; border-left: 4px solid #6A00AA; padding: 20px; margin-bottom: 24px; border-radius: 4px;">
+          <h3 style="color: #6A00AA; font-size: 16px; margin-top: 0; margin-bottom: 12px;">Your Digital Downloads</h3>
+          ${digitalProducts.map(p => `
+            <div style="margin-bottom: 12px;">
+              <p style="margin: 0 0 4px 0; font-weight: bold; color: #333;">${p.name}</p>
+              <p style="margin: 0; color: #555;">Download link: <a href="${p.downloadUrl}" style="color: #6A00AA;">${p.downloadUrl}</a></p>
+            </div>
+          `).join('')}
+        </div>
+        ` : ''}
+
         <div style="background: #f8f5fc; padding: 20px; border-radius: 8px;">
           <p style="margin: 0; text-align: center; color: #6A00AA; font-weight: bold;">
-            Thank you for choosing Just Cakes! 
+            Thank you for choosing Just Cakes!
           </p>
         </div>
       </div>
