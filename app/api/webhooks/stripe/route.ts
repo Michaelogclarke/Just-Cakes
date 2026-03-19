@@ -86,49 +86,38 @@ export async function POST(req: NextRequest) {
 
         // Send digital product download links if order contains digital items
         // Look up digitalAssetUrl from DB instead of metadata (Stripe truncates metadata >500 chars)
+        let digitalProducts: { id: string; name: string; downloadUrl: string }[] = []
         const digitalCartItems = cartItems.filter((item: any) => item.type === 'digital')
         if (digitalCartItems.length > 0) {
-          const customerEmail = session.customer_details?.email
-          const customerName = session.customer_details?.name || 'Valued Customer'
-          if (customerEmail) {
-            try {
-              const productIds = digitalCartItems.map((item: any) => item.id)
-              const dbProducts = await prisma.product.findMany({
-                where: { id: { in: productIds } },
-                select: { id: true, name: true, digitalAssetUrl: true }
-              })
+          try {
+            const productIds = digitalCartItems.map((item: any) => item.id)
+            const dbProducts = await prisma.product.findMany({
+              where: { id: { in: productIds } },
+              select: { id: true, name: true, digitalAssetUrl: true }
+            })
 
-              const digitalProducts = dbProducts
-                .filter(p => p.digitalAssetUrl)
-                .map(p => ({
-                  id: String(p.id),
-                  name: p.name,
-                  downloadUrl: p.digitalAssetUrl!,
-                }))
+            digitalProducts = dbProducts
+              .filter(p => p.digitalAssetUrl)
+              .map(p => ({
+                id: String(p.id),
+                name: p.name,
+                downloadUrl: p.digitalAssetUrl!,
+              }))
 
-              if (digitalProducts.length > 0) {
-                await sendDigitalProductEmail({
-                  to: customerEmail,
-                  customerName,
-                  orderId: order.id,
-                  digitalProducts,
+            if (digitalProducts.length > 0) {
+              // Mark as completed if purely digital order
+              const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
+              if (!hasPhysicalItems) {
+                await prisma.order.update({
+                  where: { id: order.id },
+                  data: { status: 'completed' },
                 })
-                console.log(`Digital product email sent to ${customerEmail}`)
-
-                // Mark as completed if purely digital order
-                const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
-                if (!hasPhysicalItems) {
-                  await prisma.order.update({
-                    where: { id: order.id },
-                    data: { status: 'completed' },
-                  })
-                }
-              } else {
-                console.warn(`Digital products in order ${order.id} have no digitalAssetUrl in DB`)
               }
-            } catch (err) {
-              console.error('Failed to send digital product email:', err)
+            } else {
+              console.warn(`Digital products in order ${order.id} have no digitalAssetUrl in DB`)
             }
+          } catch (err) {
+            console.error('Failed to fetch digital product URLs:', err)
           }
         }
 
@@ -154,14 +143,16 @@ export async function POST(req: NextRequest) {
                   cartItems,
                   totalAmount,
                   deliveryDate,
-                  shippingDetails
+                  shippingDetails,
+                  digitalProducts
                 ),
                 text: generateOrderConfirmationText(
                   customerName,
                   cartItems,
                   totalAmount,
                   deliveryDate,
-                  shippingDetails
+                  shippingDetails,
+                  digitalProducts
                 ),
               })
               console.log(`Order confirmation email sent to ${customerEmail}`)
@@ -278,7 +269,8 @@ function generateOrderConfirmationHTML(
   orderItems: any[],
   totalAmount: number,
   deliveryDate: string | null,
-  shippingAddress: any
+  shippingAddress: any,
+  digitalProducts: { id: string; name: string; downloadUrl: string }[] = []
 ): string {
   const formatAddress = (address: any) => {
     if (!address) return 'N/A'
@@ -351,6 +343,18 @@ function generateOrderConfirmationHTML(
           </div>
         </div>
 
+        ${digitalProducts.length > 0 ? `
+        <div style="background: #f0f7ff; border-left: 4px solid #6A00AA; padding: 20px; margin-bottom: 24px; border-radius: 4px;">
+          <h3 style="color: #6A00AA; font-size: 16px; margin-top: 0; margin-bottom: 12px;">Your Digital Downloads</h3>
+          ${digitalProducts.map(p => `
+            <div style="margin-bottom: 12px;">
+              <p style="margin: 0 0 6px 0; font-weight: bold; color: #333;">${p.name}</p>
+              <a href="${p.downloadUrl}" style="display: inline-block; background: #6A00AA; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-size: 14px;">Download</a>
+            </div>
+          `).join('')}
+        </div>
+        ` : ''}
+
         <div style="background: #f8f5fc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h3 style="color: #6A00AA; font-size: 16px; margin-top: 0; margin-bottom: 12px;">What Happens Next?</h3>
           <ul style="margin: 0; padding-left: 20px; color: #555;">
@@ -380,7 +384,8 @@ function generateOrderConfirmationText(
   orderItems: any[],
   totalAmount: number,
   deliveryDate: string | null,
-  shippingAddress: any
+  shippingAddress: any,
+  digitalProducts: { id: string; name: string; downloadUrl: string }[] = []
 ): string {
   const formatAddress = (address: any) => {
     if (!address) return 'N/A'
@@ -406,7 +411,10 @@ ${itemsList}
 
 ORDER TOTAL: £${totalAmount.toFixed(2)}
 
-DELIVERY ADDRESS:
+${digitalProducts.length > 0 ? `YOUR DIGITAL DOWNLOADS:
+${digitalProducts.map(p => `${p.name}: ${p.downloadUrl}`).join('\n')}
+
+` : ''}DELIVERY ADDRESS:
 ${formatAddress(shippingAddress)}
 
 WHAT HAPPENS NEXT?
