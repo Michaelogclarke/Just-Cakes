@@ -23,6 +23,7 @@ model Product {
   occasion        String      // e.g., "birthday", "wedding", "anniversary", "celebration", "learning"
   type            String      // e.g., "cake", "cupcake", "slice", "digital"
   available       Boolean  @default(true)
+  sortOrder       Int      @default(0)  // Controls display order; lower = appears first
   digitalAssetUrl String?     // Download URL for digital products (PDF, ZIP, etc.)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
