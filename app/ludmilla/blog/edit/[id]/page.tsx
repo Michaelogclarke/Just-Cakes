@@ -3,12 +3,12 @@
 import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import styles from '../../new/newPost.module.css'
 
 export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const { isAuthenticated } = useAdmin()
+  const { isAuthenticated } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -31,7 +31,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -90,7 +90,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
 
     setSuccessMessage('Blog post updated successfully! Redirecting...')
     setTimeout(() => {
-      router.push('/admin/dashboard')
+      router.push('/ludmilla/dashboard')
     }, 2000)
 
     setIsSubmitting(false)
@@ -99,7 +99,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/admin/dashboard" className={styles.backLink}>
+        <Link href="/ludmilla/dashboard" className={styles.backLink}>
           ← Back to Dashboard
         </Link>
         <h1>Edit Blog Post</h1>
@@ -234,7 +234,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
         )}
 
         <div className={styles.formActions}>
-          <Link href="/admin/dashboard" className={styles.cancelButton}>
+          <Link href="/ludmilla/dashboard" className={styles.cancelButton}>
             Cancel
           </Link>
           <button type="submit" className={styles.submitButton} disabled={isSubmitting}>

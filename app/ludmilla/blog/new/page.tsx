@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import styles from './newPost.module.css'
 
 export default function NewBlogPostPage() {
-  const { isAuthenticated } = useAdmin()
+  const { isAuthenticated } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -29,7 +29,7 @@ export default function NewBlogPostPage() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -65,7 +65,7 @@ export default function NewBlogPostPage() {
 
       setSuccessMessage('Blog post created successfully! Redirecting...')
       setTimeout(() => {
-        router.push('/admin/dashboard')
+        router.push('/ludmilla/dashboard')
       }, 2000)
     } catch (error) {
       console.error('Error creating blog post:', error)
@@ -78,7 +78,7 @@ export default function NewBlogPostPage() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/admin/dashboard" className={styles.backLink}>
+        <Link href="/ludmilla/dashboard" className={styles.backLink}>
           ← Back to Dashboard
         </Link>
         <h1>Create New Blog Post</h1>
@@ -214,7 +214,7 @@ export default function NewBlogPostPage() {
         )}
 
         <div className={styles.formActions}>
-          <Link href="/admin/dashboard" className={styles.cancelButton}>
+          <Link href="/ludmilla/dashboard" className={styles.cancelButton}>
             Cancel
           </Link>
           <button type="submit" className={styles.submitButton} disabled={isSubmitting}>

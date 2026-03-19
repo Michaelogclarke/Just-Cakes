@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import { Product } from '@/types/product'
 import styles from './products.module.css'
 
-export default function AdminProductsPage() {
-  const { isAuthenticated, logout } = useAdmin()
+export default function LudmillaProductsPage() {
+  const { isAuthenticated, logout } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
@@ -24,7 +24,7 @@ export default function AdminProductsPage() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -78,7 +78,7 @@ export default function AdminProductsPage() {
 
   const handleLogout = () => {
     logout()
-    router.push('/admin')
+    router.push('/ludmilla')
   }
 
   const formatPrice = (price: number) => {
@@ -95,7 +95,7 @@ export default function AdminProductsPage() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <Link href="/admin/dashboard" className={styles.backLink}>← Back to Dashboard</Link>
+            <Link href="/ludmilla/dashboard" className={styles.backLink}>← Back to Dashboard</Link>
             <h1>Product Management</h1>
             <p>Manage all your cakes, cupcakes, slices, and digital products</p>
           </div>
@@ -107,7 +107,7 @@ export default function AdminProductsPage() {
 
       <main className={styles.main}>
         <div className={styles.actions}>
-          <Link href="/admin/products/new" className={styles.createButton}>
+          <Link href="/ludmilla/products/new" className={styles.createButton}>
             + Add New Product
           </Link>
         </div>
@@ -214,7 +214,7 @@ export default function AdminProductsPage() {
                           <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                             View
                           </Link>
-                          <Link href={`/admin/products/edit/${product.id}`} className={styles.editButton}>
+                          <Link href={`/ludmilla/products/edit/${product.id}`} className={styles.editButton}>
                             Edit
                           </Link>
                         </div>
@@ -236,7 +236,7 @@ export default function AdminProductsPage() {
                         <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                           View
                         </Link>
-                        <Link href={`/admin/products/edit/${product.id}`} className={styles.editButton}>
+                        <Link href={`/ludmilla/products/edit/${product.id}`} className={styles.editButton}>
                           Edit
                         </Link>
                       </div>

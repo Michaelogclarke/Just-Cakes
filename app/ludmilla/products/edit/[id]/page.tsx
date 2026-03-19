@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import { Product } from '@/types/product'
 import styles from './edit.module.css'
 
@@ -13,7 +13,7 @@ interface EditProductPageProps {
 }
 
 export default function EditProductPage({ params }: EditProductPageProps) {
-  const { isAuthenticated } = useAdmin()
+  const { isAuthenticated } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [productId, setProductId] = useState<string | null>(null)
@@ -43,7 +43,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -138,7 +138,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
       if (response.ok) {
         const product = await response.json()
         alert(`Product "${product.name}" updated successfully!`)
-        router.push('/admin/products')
+        router.push('/ludmilla/products')
       } else {
         const error = await response.json()
         alert(`Failed to update product: ${error.error}`)
@@ -161,7 +161,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
 
       if (response.ok) {
         alert('Product deleted successfully!')
-        router.push('/admin/products')
+        router.push('/ludmilla/products')
       } else {
         const error = await response.json()
         alert(`Failed to delete product: ${error.error}`)
@@ -177,7 +177,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <Link href="/admin/products" className={styles.backLink}>← Back to Products</Link>
+            <Link href="/ludmilla/products" className={styles.backLink}>← Back to Products</Link>
             <h1>Edit Product</h1>
             <p>Update product information</p>
           </div>
@@ -356,7 +356,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
               Delete Product
             </button>
             <div className={styles.actionGroup}>
-              <Link href="/admin/products" className={styles.cancelButton}>
+              <Link href="/ludmilla/products" className={styles.cancelButton}>
                 Cancel
               </Link>
               <button type="submit" className={styles.submitButton}>

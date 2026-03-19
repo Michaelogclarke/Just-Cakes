@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
-import { AdminProvider } from '@/context/AdminContext'
+import { LudmillaProvider } from '@/context/LudmillaContext'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CartBubble from '@/components/CartBubble'
@@ -33,14 +33,14 @@ export default function RootLayout({
         <SpeedInsights />
       </head>
       <body>
-        <AdminProvider>
+        <LudmillaProvider>
           <CartProvider>
             <Navbar />
             {children}
             <Footer />
             <NewsletterPopup />
           </CartProvider>
-        </AdminProvider>
+        </LudmillaProvider>
       </body>
     </html>
   )

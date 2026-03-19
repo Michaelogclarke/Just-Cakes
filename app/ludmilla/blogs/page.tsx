@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import { BlogPost } from '@/types/blog'
 import styles from './blogs.module.css'
 
-export default function AdminBlogsPage() {
-  const { isAuthenticated, logout } = useAdmin()
+export default function LudmillaBlogsPage() {
+  const { isAuthenticated, logout } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
@@ -19,7 +19,7 @@ export default function AdminBlogsPage() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -41,7 +41,7 @@ export default function AdminBlogsPage() {
 
   const handleLogout = () => {
     logout()
-    router.push('/admin')
+    router.push('/ludmilla')
   }
 
   const formatDate = (dateString: string) => {
@@ -57,7 +57,7 @@ export default function AdminBlogsPage() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <Link href="/admin/dashboard" className={styles.backLink}>← Back to Dashboard</Link>
+            <Link href="/ludmilla/dashboard" className={styles.backLink}>← Back to Dashboard</Link>
             <h1>Blog Management</h1>
             <p>Manage all your blog posts</p>
           </div>
@@ -69,7 +69,7 @@ export default function AdminBlogsPage() {
 
       <main className={styles.main}>
         <div className={styles.actions}>
-          <Link href="/admin/blog/new" className={styles.createButton}>
+          <Link href="/ludmilla/blog/new" className={styles.createButton}>
             + Create New Blog Post
           </Link>
         </div>
@@ -123,7 +123,7 @@ export default function AdminBlogsPage() {
                         <Link href={`/blog/${post.id}`} className={styles.viewButton}>
                           View
                         </Link>
-                        <Link href={`/admin/blog/edit/${post.id}`} className={styles.editButton}>
+                        <Link href={`/ludmilla/blog/edit/${post.id}`} className={styles.editButton}>
                           Edit
                         </Link>
                         <button onClick={() => handleDelete(post.id, post.title)} className={styles.deleteButton}>

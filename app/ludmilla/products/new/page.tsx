@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import styles from './new.module.css'
 
 export default function NewProductPage() {
-  const { isAuthenticated } = useAdmin()
+  const { isAuthenticated } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [uploading, setUploading] = useState(false)
@@ -31,7 +31,7 @@ export default function NewProductPage() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -89,7 +89,7 @@ export default function NewProductPage() {
       if (response.ok) {
         const product = await response.json()
         alert(`Product "${product.name}" created successfully!`)
-        router.push('/admin/products')
+        router.push('/ludmilla/products')
       } else {
         const error = await response.json()
         alert(`Failed to create product: ${error.error}`)
@@ -105,7 +105,7 @@ export default function NewProductPage() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <Link href="/admin/products" className={styles.backLink}>← Back to Products</Link>
+            <Link href="/ludmilla/products" className={styles.backLink}>← Back to Products</Link>
             <h1>Add New Product</h1>
             <p>Create a new product for your store</p>
           </div>
@@ -275,7 +275,7 @@ export default function NewProductPage() {
           </div>
 
           <div className={styles.formActions}>
-            <Link href="/admin/products" className={styles.cancelButton}>
+            <Link href="/ludmilla/products" className={styles.cancelButton}>
               Cancel
             </Link>
             <button type="submit" className={styles.submitButton}>

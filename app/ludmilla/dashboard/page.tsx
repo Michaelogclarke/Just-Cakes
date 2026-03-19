@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import { BlogPost } from '@/types/blog'
 import styles from './dashboard.module.css'
 
-export default function AdminDashboard() {
-  const { isAuthenticated, logout } = useAdmin()
+export default function LudmillaDashboard() {
+  const { isAuthenticated, logout } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <h1>Admin Dashboard</h1>
+            <h1>Ludmilla Dashboard</h1>
             <p>Manage your products and blog posts</p>
           </div>
           <button onClick={handleLogout} className={styles.logoutButton}>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useAdmin } from '@/context/AdminContext'
+import { useLudmilla } from '@/context/LudmillaContext'
 import styles from './orders.module.css'
 
 interface Order {
@@ -24,8 +24,8 @@ interface Order {
   updatedAt: string
 }
 
-export default function AdminOrdersPage() {
-  const { isAuthenticated, logout } = useAdmin()
+export default function LudmillaOrdersPage() {
+  const { isAuthenticated, logout } = useLudmilla()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [orders, setOrders] = useState<Order[]>([])
@@ -38,7 +38,7 @@ export default function AdminOrdersPage() {
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {
-      router.push('/admin')
+      router.push('/ludmilla')
     }
   }, [isAuthenticated, router, mounted])
 
@@ -68,7 +68,7 @@ export default function AdminOrdersPage() {
 
   const handleLogout = () => {
     logout()
-    router.push('/admin')
+    router.push('/ludmilla')
   }
 
   const filteredOrders = filterStatus === 'all'
@@ -119,7 +119,7 @@ export default function AdminOrdersPage() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div>
-            <Link href="/admin/dashboard" className={styles.backLink}>
+            <Link href="/ludmilla/dashboard" className={styles.backLink}>
               ← Back to Dashboard
             </Link>
             <h1>Order Management</h1>
@@ -238,7 +238,7 @@ export default function AdminOrdersPage() {
                     </td>
                     <td>
                       <Link
-                        href={`/admin/orders/${order.id}`}
+                        href={`/ludmilla/orders/${order.id}`}
                         className={styles.viewButton}
                       >
                         View Details
