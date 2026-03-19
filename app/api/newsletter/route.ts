@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
     await client.contacts.createContact({
       email: email,
-      listIds: [2], // Newsletter list ID
+      listIds: [3], // Newsletter list ID
       updateEnabled: true // Update if contact already exists
     })
 
