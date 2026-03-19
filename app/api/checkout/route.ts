@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { prisma } from '@/lib/prisma'
 
 const getStripe = () => {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -35,33 +34,15 @@ export async function POST(request: NextRequest) {
 
     const isDigitalOnly = items.every((item: any) => item.type === 'digital')
 
-    // For digital items, fetch the latest digitalAssetUrl from DB to ensure it's current
-    const digitalItemIds = items
-      .filter((item: any) => item.type === 'digital')
-      .map((item: any) => String(item.id))
-
-    const digitalAssetMap: Record<string, string> = {}
-    if (digitalItemIds.length > 0) {
-      const dbProducts = await prisma.product.findMany({
-        where: { id: { in: digitalItemIds } },
-        select: { id: true, digitalAssetUrl: true }
-      })
-      console.log('🔍 Digital item IDs from cart:', digitalItemIds)
-      console.log('🔍 DB products found:', JSON.stringify(dbProducts))
-      dbProducts.forEach(p => {
-        if (p.digitalAssetUrl) digitalAssetMap[p.id] = p.digitalAssetUrl
-      })
-      console.log('🔍 digitalAssetMap:', JSON.stringify(digitalAssetMap))
-    }
-
     // Create Stripe checkout session
+    // Note: digitalAssetUrl is intentionally excluded from metadata to stay within
+    // Stripe's 500 char limit — it's fetched from the DB in send-order-emails instead
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/cart`,
-      // Only collect shipping address for physical products
       ...(isDigitalOnly ? {} : {
         shipping_address_collection: { allowed_countries: ['GB'] },
       }),
@@ -72,7 +53,6 @@ export async function POST(request: NextRequest) {
           quantity: item.quantity,
           price: item.price,
           type: item.type || 'cake',
-          digitalAssetUrl: digitalAssetMap[String(item.id)] || item.digitalAssetUrl || null,
         }))),
         delivery_date: deliveryDate || ''
       }
