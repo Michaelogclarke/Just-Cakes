@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import styles from "./Product.module.css"
 import { Product as ProductType } from '@/types/product'
+import { useCart } from '@/context/CartContext'
 import Link from 'next/link'
 import { useState } from 'react'
 import DateOrderModal from './DateOrderModal'
@@ -20,6 +21,11 @@ export default function Product({
   available
 }: ProductProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { addToCart } = useCart()
+
+  const handleAddToCart = () => {
+    addToCart({ id, name, description, price, image, category, occasion, type, available })
+  }
 
   // Determine the detail page route based on product type
   const getDetailRoute = () => {
@@ -59,13 +65,21 @@ export default function Product({
             <Link href={detailRoute}>
               <button className={styles.detailsButton}>Details</button>
             </Link>
-            {type === 'letterbox' && (
+            {type === 'letterbox' ? (
               <button
                 onClick={() => setIsModalOpen(true)}
                 disabled={!available}
                 className={styles.addButton}
               >
                 {!available ? 'Out of Stock' : 'Buy Now'}
+              </button>
+            ) : (
+              <button
+                onClick={handleAddToCart}
+                disabled={!available}
+                className={styles.addButton}
+              >
+                {!available ? 'Out of Stock' : 'Add to Cart'}
               </button>
             )}
           </div>
