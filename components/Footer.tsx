@@ -11,9 +11,9 @@ export default function Footer() {
         {/* Logo and Description */}
         <div className={styles.footerSection}>
           <div className={styles.logoSection}>
-            <Image src="/updated-logo.png" alt="Just Cakes Logo" className={styles.logo} width={150} height={75} />
+            <Image src="/Logo4.png" alt="Just Cakes Logo" className={styles.logo} width={150} height={75} />
             <p className={styles.description}>
-              Crafting delicious cakes and cupcakes for every occasion. Made with love, baked fresh daily.
+              Allergy friendly bakery in Ballykelly offering dairy free, egg free, nut free, soy free, gluten free and vegan cakes. Safe birthday cakes and cupcake workshops. Book today.
             </p>
           </div>
         </div>
@@ -24,9 +24,7 @@ export default function Footer() {
           <ul className={styles.linkList}>
             <li><Link href="/cakes">Cakes</Link></li>
             <li><Link href="/cupcakes">Cupcakes</Link></li>
-            <li><Link href="/letterbox-cakes">Letterbox Cakes</Link></li>
             <li><Link href="/digital-products">Digital Products</Link></li>
-            <li><Link href="/custom-orders">Custom Orders</Link></li>
           </ul>
         </div>
 
@@ -36,8 +34,6 @@ export default function Footer() {
           <ul className={styles.linkList}>
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/contact">Contact Us</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/faq">FAQ</Link></li>
           </ul>
         </div>
 
@@ -47,11 +43,11 @@ export default function Footer() {
           <ul className={styles.contactList}>
             <li>
               <strong>Email:</strong><br />
-              hello@justcakes.com
+              justcakesballykelly@gmail.com
             </li>
             <li>
               <strong>Phone:</strong><br />
-              (555) 123-4567
+              0795688619
             </li>
             <li>
               <strong>Hours:</strong><br />
@@ -69,9 +65,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Just Cakes. All rights reserved.
           </p>
           <div className={styles.bottomLinks}>
-            <Link href="/privacy">Privacy Policy</Link>
             <span className={styles.divider}>|</span>
-            <Link href="/terms">Terms of Service</Link>
           </div>
         </div>
       </div>

@@ -73,7 +73,7 @@ export default function NewsletterPopup() {
             <span className={styles.icon}>🎉</span>
             <div>
               <h3>Get sweet updates</h3>
-              <p>New cakes, events &amp; exclusive offers — straight to your inbox.</p>
+              <p>New updates, events &amp; exclusive offers — straight to your inbox.</p>
             </div>
           </div>
 

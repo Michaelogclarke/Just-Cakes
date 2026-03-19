@@ -186,7 +186,7 @@ export default function Cupcakespage() {
               disabled={isSubmitting}
             />
             <p className={styles.helperText}>
-              Typical servings: Small Batch (6-8), Medium (12-16), Large (16-20)
+              Typical servings: Small Batch (6), Medium (12), Large (24+)
             </p>
           </div>
 
