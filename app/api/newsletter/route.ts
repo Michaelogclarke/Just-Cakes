@@ -12,6 +12,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    if (!process.env.BREVO_API_KEY) {
+      return NextResponse.json(
+        { error: 'Brevo API key not configured' },
+        { status: 500 }
+      )
+    }
+
     const client = new BrevoClient({
       apiKey: process.env.BREVO_API_KEY,
     })
