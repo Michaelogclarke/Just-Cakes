@@ -85,33 +85,46 @@ export async function POST(req: NextRequest) {
         console.log(`Order created for session ${session.id}`)
 
         // Send digital product download links if order contains digital items
-        const digitalItems = cartItems.filter(
-          (item: any) => item.type === 'digital' && item.digitalAssetUrl
-        )
-        if (digitalItems.length > 0) {
+        // Look up digitalAssetUrl from DB instead of metadata (Stripe truncates metadata >500 chars)
+        const digitalCartItems = cartItems.filter((item: any) => item.type === 'digital')
+        if (digitalCartItems.length > 0) {
           const customerEmail = session.customer_details?.email
           const customerName = session.customer_details?.name || 'Valued Customer'
           if (customerEmail) {
             try {
-              await sendDigitalProductEmail({
-                to: customerEmail,
-                customerName,
-                orderId: order.id,
-                digitalProducts: digitalItems.map((item: any) => ({
-                  id: String(item.id),
-                  name: item.name,
-                  downloadUrl: item.digitalAssetUrl,
-                })),
+              const productIds = digitalCartItems.map((item: any) => item.id)
+              const dbProducts = await prisma.product.findMany({
+                where: { id: { in: productIds } },
+                select: { id: true, name: true, digitalAssetUrl: true }
               })
-              console.log(`Digital product email sent to ${customerEmail}`)
 
-              // Mark as completed if purely digital order
-              const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
-              if (!hasPhysicalItems) {
-                await prisma.order.update({
-                  where: { id: order.id },
-                  data: { status: 'completed' },
+              const digitalProducts = dbProducts
+                .filter(p => p.digitalAssetUrl)
+                .map(p => ({
+                  id: String(p.id),
+                  name: p.name,
+                  downloadUrl: p.digitalAssetUrl!,
+                }))
+
+              if (digitalProducts.length > 0) {
+                await sendDigitalProductEmail({
+                  to: customerEmail,
+                  customerName,
+                  orderId: order.id,
+                  digitalProducts,
                 })
+                console.log(`Digital product email sent to ${customerEmail}`)
+
+                // Mark as completed if purely digital order
+                const hasPhysicalItems = cartItems.some((item: any) => item.type !== 'digital')
+                if (!hasPhysicalItems) {
+                  await prisma.order.update({
+                    where: { id: order.id },
+                    data: { status: 'completed' },
+                  })
+                }
+              } else {
+                console.warn(`Digital products in order ${order.id} have no digitalAssetUrl in DB`)
               }
             } catch (err) {
               console.error('Failed to send digital product email:', err)
