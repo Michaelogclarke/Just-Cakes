@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { BlogPost } from '@/types/blog'
 import styles from './BlogCard.module.css'
 
@@ -14,7 +15,7 @@ export default function BlogCard({ id, title, excerpt, author, date, image, cate
     <article className={styles.card}>
       <Link href={`/blog/${id}`} className={styles.imageLink}>
         <div className={styles.imageContainer}>
-          <img src={image} alt={title} className={styles.image} />
+          <Image src={image} alt={title} className={styles.image} width={400} height={250} />
           <div className={styles.categoryBadge}>{category}</div>
         </div>
       </Link>

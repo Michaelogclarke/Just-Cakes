@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAdmin } from '@/context/AdminContext'
 import { Product } from '@/types/product'
 import styles from './products.module.css'
@@ -190,7 +191,7 @@ export default function AdminProductsPage() {
                     {filteredProducts.map((product) => (
                     <tr key={product.id}>
                       <td>
-                        <img src={product.image} alt={product.name} className={styles.productImage} />
+                        <Image src={product.image} alt={product.name} className={styles.productImage} width={80} height={80} />
                       </td>
                       <td className={styles.titleCell}>
                         <div className={styles.productName}>{product.name}</div>

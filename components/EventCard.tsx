@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Event } from '@/types/event'
 import styles from './EventCard.module.css'
 
@@ -32,7 +33,7 @@ export default function EventCard({
   return (
     <article className={styles.card}>
       <div className={styles.imageContainer}>
-        <img src={image} alt={title} className={styles.image} />
+        <Image src={image} alt={title} className={styles.image} width={400} height={300} />
         <span className={styles.categoryBadge}>{category}</span>
         {isSoldOut && <span className={styles.soldOutBadge}>Sold Out</span>}
       </div>

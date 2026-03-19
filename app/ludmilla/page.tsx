@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useAdmin } from '@/context/AdminContext'
 import styles from './admin.module.css'
 
@@ -36,7 +37,7 @@ export default function AdminLoginPage() {
     <div className={styles.loginContainer}>
       <div className={styles.loginBox}>
         <div className={styles.logoSection}>
-          <img src="/updated-logo.png" alt="Just Cakes" className={styles.logo} />
+          <Image src="/updated-logo.png" alt="Just Cakes" className={styles.logo} width={150} height={75} />
           <h1>Admin Login</h1>
           <p>Enter your password to access the admin panel</p>
         </div>

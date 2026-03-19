@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Product } from '@/types/product'
 import { useCart } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
@@ -61,7 +62,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       <div className={styles.productLayout}>
         <div className={styles.imageContainer}>
-          <img src={product.image} alt={product.name} />
+          <Image src={product.image} alt={product.name} width={500} height={400} />
         </div>
 
         <div className={styles.details}>
