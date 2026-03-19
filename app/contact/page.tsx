@@ -69,22 +69,17 @@ export default function ContactPage() {
           <h2>Get In Touch</h2>
           <div className={styles.infoItem}>
             <h3>Email</h3>
-            <p>hello@justcakes.com</p>
+            <p>justcakesballykelly@gmail.com</p>
           </div>
           <div className={styles.infoItem}>
             <h3>Phone</h3>
-            <p>(555) 123-4567</p>
+            <p>0795688619</p>
           </div>
           <div className={styles.infoItem}>
             <h3>Hours</h3>
             <p>Monday - Friday: 9am - 6pm</p>
             <p>Saturday: 10am - 4pm</p>
             <p>Sunday: Closed</p>
-          </div>
-          <div className={styles.infoItem}>
-            <h3>Location</h3>
-            <p>123 Baker Street</p>
-            <p>Sweet City, SC 12345</p>
           </div>
         </div>
 
