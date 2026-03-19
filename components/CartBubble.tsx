@@ -9,8 +9,8 @@ export default function CartBubble() {
   const { cart } = useCart()
   const pathname = usePathname()
 
-  // Hide on cart page
-  if (pathname === '/cart') return null
+  // Hide on cart page or when cart is empty
+  if (pathname === '/cart' || cart.totalItems < 1) return null
 
   return (
     <Link href="/cart" className={styles.cartBubble}>
