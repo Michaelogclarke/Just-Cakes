@@ -56,16 +56,30 @@ export default function Product({
           <span className={styles.category}>{category}</span>
         </div>
 
-        <p className={styles.description}>{description}</p>
+        {type !== 'cake' && type !== 'cupcake' && (
+          <p className={styles.description}>{description}</p>
+        )}
 
         <div className={styles.footer}>
-          <span className={styles.price}>£{price.toFixed(2)}</span>
+          {type !== 'cake' && type !== 'cupcake' && (
+            <span className={styles.price}>£{price.toFixed(2)}</span>
+          )}
 
           <div className={styles.actions}>
-            <Link href={detailRoute}>
-              <button className={styles.detailsButton}>Details</button>
-            </Link>
-            {type === 'letterbox' ? (
+            {type !== 'cake' && type !== 'cupcake' && (
+              <Link href={detailRoute}>
+                <button className={styles.detailsButton}>Details</button>
+              </Link>
+            )}
+            {type === 'cake' ? (
+              <Link href="/cakes" className={styles.fullWidthLink}>
+                <button className={`${styles.addButton} ${styles.fullWidthButton}`}>Order a Cake</button>
+              </Link>
+            ) : type === 'cupcake' ? (
+              <Link href="/cupcakes" className={styles.fullWidthLink}>
+                <button className={`${styles.addButton} ${styles.fullWidthButton}`}>Order Cupcakes</button>
+              </Link>
+            ) : type === 'letterbox' ? (
               <button
                 onClick={() => setIsModalOpen(true)}
                 disabled={!available}

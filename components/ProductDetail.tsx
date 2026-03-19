@@ -62,7 +62,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       <div className={styles.productLayout}>
         <div className={styles.imageContainer}>
-          <Image src={product.image} alt={product.name} width={500} height={400} />
+          <Image src={product.image} alt={product.name} fill style={{ objectFit: 'cover' }} />
         </div>
 
         <div className={styles.details}>
