@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
 import { usePathname } from 'next/navigation'
 import styles from './Navbar.module.css'
@@ -33,7 +34,7 @@ export default function Navbar() {
       <div className={styles.navContent}>
         {/* Logo Section */}
         <Link href="/" className={styles.logoLink}>
-          <img src="/Logo4.png" alt="Just Cakes Logo" className={styles.logo} />
+          <Image src="/Logo4.png" alt="Just Cakes Logo" className={styles.logo} width={120} height={60} />
         </Link>
 
         {/* Hamburger Menu Button */}

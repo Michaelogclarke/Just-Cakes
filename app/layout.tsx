@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://t.contentsquare.net/uxa/30720b587567d.js" />
+        <script src="https://t.contentsquare.net/uxa/30720b587567d.js" async />
         <Analytics />
         <SpeedInsights />
       </head>

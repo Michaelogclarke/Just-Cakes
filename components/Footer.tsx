@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -10,7 +11,7 @@ export default function Footer() {
         {/* Logo and Description */}
         <div className={styles.footerSection}>
           <div className={styles.logoSection}>
-            <img src="/updated-logo.png" alt="Just Cakes Logo" className={styles.logo} />
+            <Image src="/updated-logo.png" alt="Just Cakes Logo" className={styles.logo} width={150} height={75} />
             <p className={styles.description}>
               Crafting delicious cakes and cupcakes for every occasion. Made with love, baked fresh daily.
             </p>

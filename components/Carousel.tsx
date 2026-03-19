@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import styles from './Carousel.module.css'
 
 interface CarouselProps {
@@ -43,7 +44,7 @@ export default function Carousel({ images, autoPlayInterval = 5000 }: CarouselPr
               index === currentIndex ? styles.active : ''
             }`}
           >
-            <img src={image} alt={`Slide ${index + 1}`} />
+            <Image src={image} alt={`Slide ${index + 1}`} width={800} height={400} />
           </div>
         ))}
       </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAdmin } from '@/context/AdminContext'
 import { Product } from '@/types/product'
 import styles from './edit.module.css'
@@ -244,7 +245,7 @@ export default function EditProductPage({ params }: EditProductPageProps) {
                 />
                 {formData.image && (
                   <div className={styles.imagePreview}>
-                    <img src={formData.image} alt="Preview" />
+                    <Image src={formData.image} alt="Preview" width={200} height={150} />
                   </div>
                 )}
               </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getBlogPostById, getAllBlogPosts } from '@/lib/blogs'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -62,7 +63,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
         </header>
 
         <div className={styles.imageContainer}>
-          <img src={post.image} alt={post.title} className={styles.image} />
+          <Image src={post.image} alt={post.title} className={styles.image} width={800} height={400} />
         </div>
 
         <div className={styles.content}>

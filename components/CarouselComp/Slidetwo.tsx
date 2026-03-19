@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import style from "../Carousel.module.css"
 
 const SlideTwo = () => (
@@ -11,7 +12,7 @@ const SlideTwo = () => (
         A short paragraph with some descriptive text.
       </p>
     </div>
-    <img src="https://via.placeholder.com/400/3D1D73/ffffff" />
+    <Image src="https://via.placeholder.com/400/3D1D73/ffffff" alt="Placeholder" width={400} height={400} />
   </div>
 );
 

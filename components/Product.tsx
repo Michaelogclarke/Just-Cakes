@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import styles from "./Product.module.css"
 import { Product as ProductType } from '@/types/product'
 import Link from 'next/link'
@@ -40,7 +41,7 @@ export default function Product({
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={image} alt={name} />
+        <Image className={styles.image} src={image} alt={name} width={300} height={200} />
       </div>
 
       <div className={styles.content}>
