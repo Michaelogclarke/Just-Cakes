@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import { AdminProvider } from '@/context/AdminContext'
@@ -25,14 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(c,o,n,t,e,n,t){c[t]=c[t]||function(){(c[t].q=c[t].q||[]).push(arguments)};c[t].l=1*new Date();e=o.createElement(n);n=o.getElementsByTagName(n)[0];e.async=1;e.src='https://t.contentsquare.net/uxa/30720b587567d.js';n.parentNode.insertBefore(e,n)})(window,document,'script','_uxa');`
+          }}
+        />
         <Analytics />
         <SpeedInsights />
       </head>
       <body>
-        <Script
-          src="https://t.contentsquare.net/uxa/30720b587567d.js"
-          strategy="afterInteractive"
-        />
         <AdminProvider>
           <CartProvider>
             <Navbar />
