@@ -41,7 +41,7 @@ export default function EventsPage() {
         </p>
         <div className={styles.videoWrapper}>
           <iframe
-            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F938733791938143&show_text=false&width=734"
+            src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fr%2F1BQVM7Lxz1%2F&show_text=true&width=500"
             width="734"
             height="413"
             style={{ border: 'none', overflow: 'hidden' }}
