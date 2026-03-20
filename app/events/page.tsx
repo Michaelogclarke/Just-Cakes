@@ -40,15 +40,11 @@ export default function EventsPage() {
           Missed our last event? Here&apos;s a look at what we got up to!
         </p>
         <div className={styles.videoWrapper}>
-          <iframe
-            src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fr%2F1BQVM7Lxz1%2F&show_text=true&width=500"
+          <video
+            src="/Events.mp4"
             width="734"
-            height="413"
-            style={{ border: 'none', overflow: 'hidden' }}
-            scrolling="no"
-            frameBorder="0"
-            allowFullScreen
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            controls
+            style={{ maxWidth: '100%' }}
           />
         </div>
       </section>

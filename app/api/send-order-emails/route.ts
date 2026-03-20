@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
       console.log(` Sending business notification to: ${process.env.BUSINESS_EMAIL}`)
       try {
         const businessEmailResult = await resend.emails.send({
-          from: 'Just Cakes Orders <justcakesbakery.com@resend.dev>',
+          from: 'Just Cakes Orders <justcakesbakery.com@justcakesbakery.com>',
           to: process.env.BUSINESS_EMAIL,
           subject: ` New Order - ${deliveryDate ? 'Delivery: ' + new Date(deliveryDate).toLocaleDateString('en-GB') : 'Action Required'}`,
           html: generateBusinessNotificationHTML(
