@@ -135,7 +135,7 @@ export default function Navbar() {
              Blog
             </Link>
           </li>
-          <li>
+          {/*<li>
             <Link
               href="/events"
               className={isActive('/events') || pathname?.startsWith('/events/') ? styles.active : ''}
@@ -144,6 +144,7 @@ export default function Navbar() {
               Events
             </Link>
           </li>
+          }*/
           <li>
             <Link
               href="/cart"
