@@ -144,7 +144,7 @@ export default function Navbar() {
               Events
             </Link>
           </li>
-          }*/
+          */}
           <li>
             <Link
               href="/cart"
