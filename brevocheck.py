@@ -5,10 +5,10 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 client = Brevo(
-    api_key="BREVO_API_KEY",
+    api_key=os.environ["BREVO_API_KEY"],
 )
 
-response = requests.get("https://api.brevo.com/v3/contacts/lists/{#2}/contacts", headers={"api-key": "BREVO_API_KEY"}, params={"limit": 500,  
+response = requests.get("https://api.brevo.com/v3/contacts/lists/2/contacts", headers={"api-key": os.environ["BREVO_API_KEY"]}, params={"limit": 500,
   "offset": 0})
 
 data = response.json()
