@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Just Cakes Contact <onboarding@resend.dev>',
+      from: 'Just Cakes Contact <Contact@justcakejustcakesbakery.com>',
       to: [process.env.BUSINESS_EMAIL!],
       replyTo: email,
       subject: `Contact Form: ${subject}`,
