@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Just Cakes <onboarding@resend.dev>',
+      from: 'Just Cakes <Cakes@justcakesbakery.com>',
       to: process.env.BUSINESS_EMAIL,
       subject: `New Custom Cake Quote Request - ${formatOccasion(occasion)}`,
       html: generateEmailHTML(body),
