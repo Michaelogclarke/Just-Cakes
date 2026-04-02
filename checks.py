@@ -1,4 +1,5 @@
 from brevo import Brevo
+from brevo  import RemoveContactFromListRequestBodyEmails
 import psycopg2
 import os
 import requests
@@ -8,7 +9,7 @@ client = Brevo(
     api_key=os.environ["BREVO_API_KEY"],
 )
 
-response = requests.get("https://api.brevo.com/v3/contacts/lists/3/contacts", headers={"api-key": os.environ["BREVO_API_KEY"]}, params={"limit": 500,
+response = requests.get("https://api.brevo.com/v3/contacts/lists/2/contacts", headers={"api-key": os.environ["BREVO_API_KEY"]}, params={"limit": 500,
   "offset": 0})
 
 data = response.json()
@@ -25,24 +26,19 @@ db_emails = {row[0].lower() for row in x if row[0]}
 brevo_emails = {c['email'].lower() for c in contacts if c.get('email')}
 
 duplicates = db_emails & brevo_emails
-non_duplicates = db_emails - brevo_emails
+non_duplicates = db_emails - brevo_emails  
 
-def checks():
-
-    print(f"Found {len(duplicates)} duplicate(s):")
-    for email in duplicates:
-        print(" ", email)
-
-    print(f"\nFound {len(non_duplicates)} non-duplicate(s) to add to Brevo:")
-    for email in non_duplicates:
-        print(" ", email)
-
-def create_contact():
+def deletecontactsinlist():
     for email in db_emails:
-        client.contacts.create_contact(email=email, list_ids=[3])
+        client.contacts.remove_contact_from_list(
+        list_id=2,
+        request=RemoveContactFromListRequestBodyEmails(emails=[email]))
+def deletecontacts():
+    for email in db_emails:
+        client.contacts.delete_contact(
+        identifier=email)
 
-def amount():
-    amount = len(brevo_emails)
-    print(amount)
-amount()
+
+print(db_emails)
+deletecontacts()
 
