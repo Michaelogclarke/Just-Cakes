@@ -27,7 +27,10 @@
       "Bash(git checkout:*)",
       "Bash(git commit:*)",
       "Bash(npx prisma:*)",
-      "Bash(ffmpeg:*)"
+      "Bash(ffmpeg:*)",
+      "Bash(pip install:*)",
+      "Bash(python3 -m pip install brevo-python psycopg2-binary)",
+      "Bash(python3 -m ensurepip --upgrade)"
     ],
     "deny": [],
     "ask": []

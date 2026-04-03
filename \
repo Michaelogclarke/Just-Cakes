@@ -1,0 +1,14 @@
+from brevo import Brevo
+import psycopg2
+import os
+from dotenv import load_dotenv
+load_dotenv()
+client = Brevo(
+    api_key="BREVO_API_KEY",
+)
+conn = psycopg2.connect(os.environ["DATABASE2_POSTGRES_URL"])
+cur = conn.cursor()
+cur.execute('SELECT "customerEmail" FROM "Order";')
+x = cur.fetchall()
+I = [x]
+print(x)
