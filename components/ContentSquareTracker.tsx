@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line
     _uxa: ((...args: any[]) => void) & { q?: IArguments[] }
   }
 }
