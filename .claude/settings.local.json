@@ -30,7 +30,9 @@
       "Bash(ffmpeg:*)",
       "Bash(pip install:*)",
       "Bash(python3 -m pip install brevo-python psycopg2-binary)",
-      "Bash(python3 -m ensurepip --upgrade)"
+      "Bash(python3 -m ensurepip --upgrade)",
+      "Bash(lsof -ti:3001)",
+      "Bash(xargs kill:*)"
     ],
     "deny": [],
     "ask": []
