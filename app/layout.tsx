@@ -8,6 +8,8 @@ import CartBubble from '@/components/CartBubble'
 import NewsletterPopup from '@/components/NewsletterPopup'
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ContentSquareTracker from '@/components/ContentSquareTracker'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Just Cakes - Delicious Custom Cakes',
@@ -38,6 +40,9 @@ export default function RootLayout({
             <Footer />
             <CartBubble />
             <NewsletterPopup />
+            <Suspense fallback={null}>
+              <ContentSquareTracker />
+            </Suspense>
           </CartProvider>
         </LudmillaProvider>
       </body>
