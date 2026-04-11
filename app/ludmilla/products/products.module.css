@@ -432,6 +432,67 @@
   font-weight: 500;
 }
 
+.statusHidden {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #f3e5f5;
+  color: #6a1b9a;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.statNumberHidden {
+  color: #6a1b9a;
+}
+
+.hideButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #f57c00;
+  background: white;
+  color: #f57c00;
+}
+
+.hideButton:hover:not(:disabled) {
+  background: #fff3e0;
+}
+
+.hideButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.showButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #2e7d32;
+  background: white;
+  color: #2e7d32;
+}
+
+.showButton:hover:not(:disabled) {
+  background: #e8f5e9;
+}
+
+.showButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.productCardHidden {
+  opacity: 0.7;
+  border-color: #e1bee7 !important;
+}
+
 .filterSection {
   background: white;
   border: 1px solid #e5e5e5;
