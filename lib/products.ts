@@ -17,63 +17,66 @@ function transformProduct(dbProduct: any): Product {
   }
 }
 
-// Get all products
+// Get all products (customer-facing: only visible/available products)
 export async function getAllProducts(): Promise<Product[]> {
   const products = await prisma.product.findMany({
+    where: { available: true },
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }]
   })
   return products.map(transformProduct)
 }
 
 // Get product by ID (supports both string and number IDs for backwards compatibility)
+// Customer-facing: returns undefined for hidden products
 export async function getProductById(id: number | string): Promise<Product | undefined> {
   const productId = typeof id === 'number' ? `${id}` : id
   const product = await prisma.product.findUnique({
     where: { id: productId }
   })
-  return product ? transformProduct(product) : undefined
+  if (!product || !product.available) return undefined
+  return transformProduct(product)
 }
 
-// Get products by category
+// Get products by category (customer-facing: only visible/available products)
 export async function getProductsByCategory(category: string): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { category },
+    where: { category, available: true },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)
 }
 
-// Get all cakes
+// Get all cakes (customer-facing: only visible/available products)
 export async function getAllCakes(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { type: 'cake' },
+    where: { type: 'cake', available: true },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)
 }
 
-// Get all cupcakes
+// Get all cupcakes (customer-facing: only visible/available products)
 export async function getAllCupcakes(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { type: 'cupcake' },
+    where: { type: 'cupcake', available: true },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)
 }
 
-// Get all digital products
+// Get all digital products (customer-facing: only visible/available products)
 export async function getAllDigitalProducts(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { type: 'digital' },
+    where: { type: 'digital', available: true },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)
 }
 
-// Get all letterbox cakes
+// Get all letterbox cakes (customer-facing: only visible/available products)
 export async function getAllLetterboxCakes(): Promise<Product[]> {
   const products = await prisma.product.findMany({
-    where: { type: 'letterbox' },
+    where: { type: 'letterbox', available: true },
     orderBy: { createdAt: 'desc' }
   })
   return products.map(transformProduct)

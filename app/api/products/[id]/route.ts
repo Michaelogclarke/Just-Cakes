@@ -77,6 +77,30 @@ export async function PUT(
   }
 }
 
+// PATCH /api/products/[id] - Toggle product visibility
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    const body = await request.json()
+
+    const product = await prisma.product.update({
+      where: { id },
+      data: { available: body.available }
+    })
+
+    return NextResponse.json(product)
+  } catch (error) {
+    console.error('Failed to toggle product visibility:', error)
+    return NextResponse.json(
+      { error: 'Failed to update product visibility' },
+      { status: 500 }
+    )
+  }
+}
+
 // DELETE /api/products/[id] - Delete product
 export async function DELETE(
   request: Request,

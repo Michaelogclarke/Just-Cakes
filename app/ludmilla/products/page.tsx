@@ -17,6 +17,8 @@ export default function LudmillaProductsPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState('all')
+  const [filterVisibility, setFilterVisibility] = useState('all')
+  const [togglingId, setTogglingId] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -47,13 +49,20 @@ export default function LudmillaProductsPage() {
     }
   }, [mounted, isAuthenticated])
 
-  // Filter products based on search and type
+  // Filter products based on search, type, and visibility
   useEffect(() => {
     let filtered = products
 
     // Filter by type
     if (filterType !== 'all') {
       filtered = filtered.filter(p => p.type === filterType)
+    }
+
+    // Filter by visibility
+    if (filterVisibility === 'visible') {
+      filtered = filtered.filter(p => p.available)
+    } else if (filterVisibility === 'hidden') {
+      filtered = filtered.filter(p => !p.available)
     }
 
     // Filter by search term
@@ -66,7 +75,29 @@ export default function LudmillaProductsPage() {
     }
 
     setFilteredProducts(filtered)
-  }, [products, searchTerm, filterType])
+  }, [products, searchTerm, filterType, filterVisibility])
+
+  const toggleVisibility = async (product: Product) => {
+    setTogglingId(product.id as string)
+    try {
+      const response = await fetch(`/api/products/${product.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ available: !product.available })
+      })
+      if (response.ok) {
+        setProducts(prev =>
+          prev.map(p => p.id === product.id ? { ...p, available: !p.available } : p)
+        )
+      } else {
+        alert('Failed to update product visibility')
+      }
+    } catch {
+      alert('An error occurred while updating product visibility')
+    } finally {
+      setTogglingId(null)
+    }
+  }
 
   if (!mounted || !isAuthenticated) {
     return null
@@ -89,6 +120,7 @@ export default function LudmillaProductsPage() {
   const cupcakes = products.filter(p => p.type === 'cupcake')
   const slices = products.filter(p => p.type === 'letterbox')
   const digitalProducts = products.filter(p => p.type === 'digital')
+  const hiddenProducts = products.filter(p => !p.available)
 
   return (
     <div className={styles.dashboard}>
@@ -131,6 +163,15 @@ export default function LudmillaProductsPage() {
             <option value="slice">Slices</option>
             <option value="digital">Digital Products</option>
           </select>
+          <select
+            value={filterVisibility}
+            onChange={(e) => setFilterVisibility(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="all">All Visibility</option>
+            <option value="visible">Visible</option>
+            <option value="hidden">Hidden</option>
+          </select>
         </div>
 
         <div className={styles.statsContainer}>
@@ -160,6 +201,11 @@ export default function LudmillaProductsPage() {
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>{digitalProducts.length}</span>
                 <span className={styles.statLabel}>Digital</span>
+              </div>
+              <div className={styles.statDivider}></div>
+              <div className={styles.statItem}>
+                <span className={`${styles.statNumber} ${styles.statNumberHidden}`}>{hiddenProducts.length}</span>
+                <span className={styles.statLabel}>Hidden</span>
               </div>
             </div>
           </div>
@@ -205,8 +251,8 @@ export default function LudmillaProductsPage() {
                       </td>
                       <td className={styles.priceCell}>{formatPrice(product.price)}</td>
                       <td>
-                        <span className={product.available ? styles.statusAvailable : styles.statusUnavailable}>
-                          {product.available ? 'Available' : 'Unavailable'}
+                        <span className={product.available ? styles.statusAvailable : styles.statusHidden}>
+                          {product.available ? 'Visible' : 'Hidden'}
                         </span>
                       </td>
                       <td>
@@ -214,6 +260,13 @@ export default function LudmillaProductsPage() {
                           <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                             View
                           </Link>
+                          <button
+                            onClick={() => toggleVisibility(product)}
+                            disabled={togglingId === product.id}
+                            className={product.available ? styles.hideButton : styles.showButton}
+                          >
+                            {togglingId === product.id ? '...' : product.available ? 'Hide' : 'Show'}
+                          </button>
                           <Link href={`/ludmilla/products/edit/${product.id}`} className={styles.editButton}>
                             Edit
                           </Link>
@@ -228,14 +281,24 @@ export default function LudmillaProductsPage() {
               {/* Mobile Card View */}
               <div className={styles.mobileCardGrid}>
                 {filteredProducts.map((product) => (
-                  <div key={product.id} className={styles.productCard}>
+                  <div key={product.id} className={`${styles.productCard} ${!product.available ? styles.productCardHidden : ''}`}>
                     <div className={styles.cardContent}>
                       <h3 className={styles.cardTitle}>{product.name}</h3>
+                      {!product.available && (
+                        <span className={styles.statusHidden}>Hidden</span>
+                      )}
                       <div className={styles.cardPrice}>{formatPrice(product.price)}</div>
                       <div className={styles.cardActions}>
                         <Link href={`/${product.type === 'cake' || product.type === 'cupcake' || product.type === 'letterbox' ? product.type === 'letterbox' ? 'slices' : product.type + 's' : 'digital-products'}/${product.id}`} className={styles.viewButton}>
                           View
                         </Link>
+                        <button
+                          onClick={() => toggleVisibility(product)}
+                          disabled={togglingId === product.id}
+                          className={product.available ? styles.hideButton : styles.showButton}
+                        >
+                          {togglingId === product.id ? '...' : product.available ? 'Hide' : 'Show'}
+                        </button>
                         <Link href={`/ludmilla/products/edit/${product.id}`} className={styles.editButton}>
                           Edit
                         </Link>
