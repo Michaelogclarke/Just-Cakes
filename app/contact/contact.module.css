@@ -68,6 +68,15 @@
   line-height: 1.5;
 }
 
+.infoItem a {
+  color: #6A00AA;
+  text-decoration: none;
+}
+
+.infoItem a:hover {
+  text-decoration: underline;
+}
+
 /* Contact Form */
 .contactForm {
   background: white;

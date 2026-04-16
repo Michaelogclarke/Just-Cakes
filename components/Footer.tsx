@@ -43,11 +43,11 @@ export default function Footer() {
           <ul className={styles.contactList}>
             <li>
               <strong>Email:</strong><br />
-              justcakesballykelly@gmail.com
+              <a href="mailto:justcakesballykelly@gmail.com">justcakesballykelly@gmail.com</a>
             </li>
             <li>
               <strong>Phone:</strong><br />
-              0795688619
+              <a href="tel:+447956886190">0795688619</a>
             </li>
             <li>
               <strong>Hours:</strong><br />
@@ -65,7 +65,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Just Cakes. All rights reserved.
           </p>
           <div className={styles.bottomLinks}>
+            <Link href="/privacy-policy">Privacy Policy</Link>
             <span className={styles.divider}>|</span>
+            <Link href="/terms">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>
