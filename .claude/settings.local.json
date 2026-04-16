@@ -32,7 +32,8 @@
       "Bash(python3 -m pip install brevo-python psycopg2-binary)",
       "Bash(python3 -m ensurepip --upgrade)",
       "Bash(lsof -ti:3001)",
-      "Bash(xargs kill:*)"
+      "Bash(xargs kill:*)",
+      "Bash(ls /home/michaelogclarke/projects/Just-Cakes/.env*)"
     ],
     "deny": [],
     "ask": []

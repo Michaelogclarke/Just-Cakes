@@ -69,11 +69,11 @@ export default function ContactPage() {
           <h2>Get In Touch</h2>
           <div className={styles.infoItem}>
             <h3>Email</h3>
-            <p>justcakesballykelly@gmail.com</p>
+            <p><a href="mailto:justcakesballykelly@gmail.com">justcakesballykelly@gmail.com</a></p>
           </div>
           <div className={styles.infoItem}>
             <h3>Phone</h3>
-            <p>0795688619</p>
+            <p><a href="tel:+447956886190">0795688619</a></p>
           </div>
           <div className={styles.infoItem}>
             <h3>Hours</h3>
