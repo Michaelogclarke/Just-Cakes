@@ -13,8 +13,8 @@ import { Suspense } from 'react'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Just Cakes - Delicious Custom Cakes',
-  description: 'Premium custom cakes for all occasions',
+  title: 'Just Cakes Allergy Free Cakes',
+  description: 'Cakes should be for everyone',
 }
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
