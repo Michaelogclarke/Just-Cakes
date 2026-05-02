@@ -29,9 +29,18 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     }
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://justcakesbakery.com'
+
   return {
     title: `${product.name} | Just Cakes`,
     description: product.description,
+    alternates: { canonical: `${baseUrl}/cupcakes/${id}` },
+    openGraph: {
+      title: `${product.name} | Just Cakes`,
+      description: product.description,
+      url: `${baseUrl}/cupcakes/${id}`,
+      images: product.image ? [{ url: product.image }] : [],
+    },
   }
 }
 
@@ -43,5 +52,28 @@ export default async function CupcakeDetailPage({ params }: { params: Promise<{ 
     notFound()
   }
 
-  return <ProductDetail product={product} />
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://justcakesbakery.com'
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: product.image,
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'GBP',
+      availability: product.available
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      url: `${baseUrl}/cupcakes/${id}`,
+    },
+  }
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ProductDetail product={product} />
+    </>
+  )
 }

@@ -12,9 +12,28 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from 'react'
 import Script from 'next/script'
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://justcakesbakery.com'
+const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION
+
 export const metadata: Metadata = {
-  title: 'Just Cakes Allergy Free Cakes',
-  description: 'Cakes should be for everyone',
+  title: 'Just Cakes | Allergy-Free Cakes — Delivery & Pickup Available',
+  description: 'Delicious allergy-free cakes available for delivery and pickup. Custom cakes for everyone, no matter your dietary needs.',
+  metadataBase: new URL(baseUrl),
+  openGraph: {
+    type: 'website',
+    siteName: 'Just Cakes',
+    title: 'Just Cakes | Allergy-Free Cakes — Delivery & Pickup Available',
+    description: 'Delicious allergy-free cakes available for delivery and pickup. Custom cakes for everyone, no matter your dietary needs.',
+    url: baseUrl,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Just Cakes | Allergy-Free Cakes — Delivery & Pickup Available',
+    description: 'Delicious allergy-free cakes available for delivery and pickup. Custom cakes for everyone, no matter your dietary needs.',
+  },
+  ...(gscVerification && {
+    verification: { google: gscVerification },
+  }),
 }
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
