@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next'
+import { getAllCakes, getAllCupcakes, getAllLetterboxCakes, getAllDigitalProducts } from '@/lib/products'
+import { getAllBlogPosts } from '@/lib/blogs'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://justcakesbakery.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -66,5 +68,55 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  return staticRoutes
+  const [cakes, cupcakes, letterboxCakes, digitalProducts, blogPosts] = await Promise.all([
+    getAllCakes().catch(() => []),
+    getAllCupcakes().catch(() => []),
+    getAllLetterboxCakes().catch(() => []),
+    getAllDigitalProducts().catch(() => []),
+    getAllBlogPosts().catch(() => []),
+  ])
+
+  const cakeRoutes: MetadataRoute.Sitemap = cakes.map((cake) => ({
+    url: `${baseUrl}/cakes/${cake.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const cupcakeRoutes: MetadataRoute.Sitemap = cupcakes.map((cupcake) => ({
+    url: `${baseUrl}/cupcakes/${cupcake.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const letterboxRoutes: MetadataRoute.Sitemap = letterboxCakes.map((cake) => ({
+    url: `${baseUrl}/letterbox-cakes/${cake.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }))
+
+  const digitalRoutes: MetadataRoute.Sitemap = digitalProducts.map((product) => ({
+    url: `${baseUrl}/digital-products/${product.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [
+    ...staticRoutes,
+    ...cakeRoutes,
+    ...cupcakeRoutes,
+    ...letterboxRoutes,
+    ...digitalRoutes,
+    ...blogRoutes,
+  ]
 }

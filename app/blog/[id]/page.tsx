@@ -21,9 +21,19 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     }
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://justcakesbakery.com'
+
   return {
     title: `${post.title} - Just Cakes Blog`,
     description: post.excerpt,
+    alternates: { canonical: `${baseUrl}/blog/${id}` },
+    openGraph: {
+      title: `${post.title} - Just Cakes Blog`,
+      description: post.excerpt,
+      url: `${baseUrl}/blog/${id}`,
+      type: 'article',
+      images: post.image ? [{ url: post.image }] : [],
+    },
   }
 }
 
