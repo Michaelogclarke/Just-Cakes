@@ -15,7 +15,7 @@ export default function BlogCard({ id, title, excerpt, author, date, image, cate
     <article className={styles.card}>
       <Link href={`/blog/${id}`} className={styles.imageLink}>
         <div className={styles.imageContainer}>
-          <Image src={image} alt={title} className={styles.image} width={400} height={250} />
+          {image && <Image src={image.startsWith('/') || image.startsWith('http') ? image : `/${image}`} alt={title} className={styles.image} width={400} height={250} />}
           <div className={styles.categoryBadge}>{category}</div>
         </div>
       </Link>

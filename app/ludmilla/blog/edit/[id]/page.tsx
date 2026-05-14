@@ -74,24 +74,26 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call - replace with actual database update
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch(`/api/blogs/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
 
-    const updatedPost = {
-      id: parseInt(id),
-      ...formData,
-      date: new Date().toISOString().split('T')[0]
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to update blog post')
+      }
+
+      setSuccessMessage('Blog post updated successfully! Redirecting...')
+      setTimeout(() => {
+        router.push('/ludmilla/blogs')
+      }, 2000)
+    } catch (error) {
+      console.error('Error updating blog post:', error)
+      setSuccessMessage('Error updating blog post. Please try again.')
     }
-
-    console.log('Updated blog post to save:', updatedPost)
-
-    // TODO: Add database update logic here
-    // Example: await updateBlogPost(updatedPost)
-
-    setSuccessMessage('Blog post updated successfully! Redirecting...')
-    setTimeout(() => {
-      router.push('/ludmilla/dashboard')
-    }, 2000)
 
     setIsSubmitting(false)
   }
@@ -243,7 +245,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
         </div>
 
         <div className={styles.devNote}>
-          <strong>Developer Note:</strong> This form currently logs to console. Replace the TODO in the handleSubmit function with your database update logic.
+          <strong>✅ Database Connected:</strong> Changes are saved permanently to the PostgreSQL database via Prisma.
         </div>
       </form>
     </div>
