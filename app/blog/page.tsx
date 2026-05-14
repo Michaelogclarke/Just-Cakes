@@ -2,6 +2,8 @@ import { getAllBlogPosts } from '@/lib/blogs'
 import BlogCard from '@/components/BlogCard'
 import styles from './blog.module.css'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Blog - Just Cakes',
   description: 'Tips, recipes, and inspiration for all things cakes',
