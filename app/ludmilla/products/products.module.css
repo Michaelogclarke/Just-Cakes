@@ -1,13 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+
+/* BO3 Cyberpunk Design System */
+/* Colors: #080810 bg | #00D4FF cyan | #FF6500 orange | #E8F4FF text */
+
 .dashboard {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: #080810;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 212, 255, 0.015) 2px,
+      rgba(0, 212, 255, 0.015) 4px
+    );
+  font-family: 'Fira Code', 'Courier New', monospace;
+  color: #E8F4FF;
+  position: relative;
 }
 
+/* Scanline overlay */
+.dashboard::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+
 .header {
-  background: white;
-  border-bottom: 2px solid #e5e5e5;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #0A0A18;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.08);
 }
 
 .headerContent {
@@ -18,46 +55,62 @@
   align-items: center;
 }
 
+.header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00D4FF;
+  margin: 0.25rem 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.7), 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.header p {
+  color: #608090;
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .backLink {
   display: inline-block;
-  color: #6A00AA;
+  color: #608090;
   text-decoration: none;
-  font-size: 0.95rem;
-  margin-bottom: 0.75rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
   transition: color 0.2s ease;
 }
 
 .backLink:hover {
-  color: #8300d4;
-}
-
-.header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 0.5rem 0;
-}
-
-.header p {
-  color: #555;
-  margin: 0;
+  color: #00D4FF;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
 }
 
 .logoutButton {
-  padding: 0.75rem 1.5rem;
-  background: white;
-  border: 2px solid #e0e0e0;
-  color: #555;
-  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  color: #608090;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
   font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: all 0.2s ease;
 }
 
 .logoutButton:hover {
-  border-color: #6A00AA;
-  color: #6A00AA;
+  border-color: #FF6500;
+  color: #FF6500;
+  box-shadow: 0 0 12px rgba(255, 101, 0, 0.3);
 }
+
+/* ─── MAIN ───────────────────────────────────────────────── */
 
 .main {
   max-width: 1400px;
@@ -65,98 +118,131 @@
   padding: 2rem;
 }
 
-.quickLinks {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.quickLinkCard {
-  background: white;
-  border: 2px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 2.5rem;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.quickLinkCard:hover {
-  border-color: #6A00AA;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(106, 0, 170, 0.15);
-}
-
-.quickLinkIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.quickLinkCard h3 {
-  color: #333;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.quickLinkCard p {
-  color: #666;
-  font-size: 0.95rem;
-  margin: 0;
-}
+/* ─── ACTIONS BAR ─────────────────────────────────────────── */
 
 .actions {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: flex;
   gap: 1rem;
 }
 
 .createButton {
   display: inline-block;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
-  color: white;
-  border-radius: 8px;
-  font-size: 1.05rem;
-  font-weight: 600;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), rgba(0, 212, 255, 0.05));
+  border: 1px solid #00D4FF;
+  color: #00D4FF;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.3);
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.2), inset 0 0 12px rgba(0, 212, 255, 0.05);
 }
 
 .createButton:hover {
-  background: linear-gradient(135deg, #8300d4 0%, #991ee6 100%);
-  box-shadow: 0 6px 24px rgba(106, 0, 170, 0.4);
-  transform: translateY(-2px);
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.3), rgba(0, 212, 255, 0.1));
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), inset 0 0 20px rgba(0, 212, 255, 0.1);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
 }
 
+/* ─── FILTER SECTION ─────────────────────────────────────── */
+
+.filterSection {
+  background: #0E0E1C;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  background: #080810;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: #E8F4FF;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #00D4FF;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.15), 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+.searchInput::placeholder {
+  color: #304050;
+  font-size: 0.8rem;
+}
+
+.filterSelect {
+  padding: 0.7rem 1rem;
+  background: #080810;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: #E8F4FF;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  cursor: pointer;
+  min-width: 160px;
+  transition: all 0.2s ease;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #00D4FF;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.15);
+}
+
+.filterSelect option {
+  background: #0E0E1C;
+}
+
+/* ─── STATS ──────────────────────────────────────────────── */
+
 .statsContainer {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .statsBox {
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #0E0E1C;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.statsBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00D4FF, transparent);
 }
 
 .statsBox h3 {
-  font-size: 1.25rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 1.5rem 0;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f5f5f5;
+  color: #608090;
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 .statsRow {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -164,46 +250,66 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  min-width: 80px;
+  gap: 0.4rem;
+  min-width: 70px;
 }
 
 .statNumber {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: #6A00AA;
+  color: #00D4FF;
   line-height: 1;
+  text-shadow: 0 0 16px rgba(0, 212, 255, 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+.statNumberHidden {
+  color: #FF6500;
+  text-shadow: 0 0 16px rgba(255, 101, 0, 0.7);
 }
 
 .statLabel {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.65rem;
+  color: #608090;
   font-weight: 500;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 .statDivider {
   width: 1px;
-  height: 60px;
-  background: #e5e5e5;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 212, 255, 0.3), transparent);
 }
 
+/* ─── SECTION / TABLE ────────────────────────────────────── */
+
 .section {
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #0E0E1C;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #FF6500, #00D4FF, #FF6500);
 }
 
 .section h2 {
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 1.5rem 0;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f5f5f5;
+  color: #608090;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 .tableContainer {
@@ -216,413 +322,364 @@
 }
 
 .table thead {
-  background: #f8f9fa;
+  background: #080810;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
 }
 
 .table th {
-  padding: 1rem;
+  padding: 0.875rem 1rem;
   text-align: left;
-  font-weight: 600;
-  color: #1a1a1a;
-  border-bottom: 2px solid #e5e5e5;
-  font-size: 0.9rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #00D4FF;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.2em;
 }
 
 .table td {
-  padding: 1.25rem 1rem;
-  border-bottom: 1px solid #f0f0f0;
-  color: #555;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+  color: #A0B8C8;
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background 0.15s ease;
 }
 
 .table tbody tr:hover {
-  background: #fafafa;
+  background: rgba(0, 212, 255, 0.04);
 }
+
+/* ─── PRODUCT CELLS ──────────────────────────────────────── */
 
 .titleCell {
-  max-width: 400px;
-}
-
-.postTitle {
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 0.25rem;
-}
-
-.postExcerpt {
-  font-size: 0.85rem;
-  color: #999;
-}
-
-.categoryBadge {
-  display: inline-block;
-  padding: 0.375rem 0.875rem;
-  background: linear-gradient(135deg, #6A00AA 0%, #8300d4 100%);
-  color: white;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.viewButton,
-.editButton {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.viewButton {
-  background: white;
-  border: 2px solid #e0e0e0;
-  color: #555;
-}
-
-.viewButton:hover {
-  border-color: #6A00AA;
-  color: #6A00AA;
-}
-
-.editButton {
-  background: #6A00AA;
-  border: 2px solid #6A00AA;
-  color: white;
-}
-
-.editButton:hover {
-  background: #8300d4;
-  border-color: #8300d4;
-}
-
-.infoBox {
-  background: #FFF9F5;
-  border: 2px solid #FFE4D6;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-top: 2rem;
-}
-
-.infoBox h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 1rem 0;
-}
-
-.infoBox p {
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-
-.infoBox code {
-  background: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-family: monospace;
-  color: #6A00AA;
-  font-size: 0.9rem;
-  border: 1px solid #FFE4D6;
-}
-
-.infoBox ol {
-  margin: 1rem 0;
-  padding-left: 1.5rem;
-  color: #555;
-}
-
-.infoBox li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-  .headerContent {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .main {
-    padding: 1rem;
-  }
-
-  .table {
-    font-size: 0.85rem;
-  }
-
-  .table th,
-  .table td {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .actionButtons {
-    flex-direction: column;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Product-specific styles */
-.productImage {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
+  max-width: 320px;
 }
 
 .productName {
   font-weight: 600;
-  color: #333;
-  margin-bottom: 0.25rem;
+  color: #E8F4FF;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
 }
 
 .productDesc {
-  font-size: 0.85rem;
-  color: #999;
+  font-size: 0.75rem;
+  color: #405060;
 }
 
-.typeBadge {
-  display: inline-block;
-  padding: 0.35rem 0.75rem;
-  background: #e3f2fd;
-  color: #1976d2;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-transform: capitalize;
+.productImage {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  filter: brightness(0.9) saturate(1.1);
 }
 
 .priceCell {
   font-weight: 700;
-  color: #6A00AA;
-  font-size: 1.05rem;
+  color: #00D4FF;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* ─── BADGES ─────────────────────────────────────────────── */
+
+.typeBadge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00D4FF;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+.categoryBadge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: rgba(255, 101, 0, 0.08);
+  border: 1px solid rgba(255, 101, 0, 0.3);
+  color: #FF6500;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
 }
 
 .statusAvailable {
   display: inline-block;
-  padding: 0.35rem 0.75rem;
-  background: #e8f5e9;
-  color: #2e7d32;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  color: #00FF88;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
 }
 
 .statusUnavailable {
   display: inline-block;
-  padding: 0.35rem 0.75rem;
-  background: #ffebee;
-  color: #c62828;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  background: rgba(255, 50, 50, 0.08);
+  border: 1px solid rgba(255, 50, 50, 0.35);
+  color: #FF3232;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .statusHidden {
   display: inline-block;
-  padding: 0.35rem 0.75rem;
-  background: #f3e5f5;
-  color: #6a1b9a;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  background: rgba(255, 101, 0, 0.08);
+  border: 1px solid rgba(255, 101, 0, 0.4);
+  color: #FF6500;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(255, 101, 0, 0.5);
 }
 
-.statNumberHidden {
-  color: #6a1b9a;
+/* ─── ACTION BUTTONS ─────────────────────────────────────── */
+
+.actionButtons {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.viewButton,
+.editButton,
+.hideButton,
+.showButton {
+  padding: 0.4rem 0.85rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border: 1px solid;
+  display: inline-block;
+  white-space: nowrap;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.viewButton {
+  background: transparent;
+  border-color: rgba(0, 212, 255, 0.25);
+  color: #608090;
+}
+
+.viewButton:hover {
+  border-color: #00D4FF;
+  color: #00D4FF;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+}
+
+.editButton {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: #00D4FF;
+  color: #00D4FF;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.15);
+}
+
+.editButton:hover {
+  background: rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.4);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
 }
 
 .hideButton {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 2px solid #f57c00;
-  background: white;
-  color: #f57c00;
+  background: transparent;
+  border-color: rgba(255, 101, 0, 0.4);
+  color: #FF6500;
 }
 
 .hideButton:hover:not(:disabled) {
-  background: #fff3e0;
+  background: rgba(255, 101, 0, 0.12);
+  border-color: #FF6500;
+  box-shadow: 0 0 12px rgba(255, 101, 0, 0.3);
+  text-shadow: 0 0 8px rgba(255, 101, 0, 0.7);
 }
 
 .hideButton:disabled {
-  opacity: 0.5;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
 .showButton {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 2px solid #2e7d32;
-  background: white;
-  color: #2e7d32;
+  background: transparent;
+  border-color: rgba(0, 255, 136, 0.4);
+  color: #00FF88;
 }
 
 .showButton:hover:not(:disabled) {
-  background: #e8f5e9;
+  background: rgba(0, 255, 136, 0.1);
+  border-color: #00FF88;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.7);
 }
 
 .showButton:disabled {
-  opacity: 0.5;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
-.productCardHidden {
-  opacity: 0.7;
-  border-color: #e1bee7 !important;
-}
-
-.filterSection {
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.searchInput {
-  flex: 1;
-  padding: 0.875rem 1.25rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-.searchInput:focus {
-  outline: none;
-  border-color: #6A00AA;
-  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
-}
-
-.searchInput::placeholder {
-  color: #999;
-}
-
-.filterSelect {
-  padding: 0.875rem 1.25rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: 200px;
-}
-
-.filterSelect:focus {
-  outline: none;
-  border-color: #6A00AA;
-  box-shadow: 0 0 0 3px rgba(106, 0, 170, 0.1);
-}
+/* ─── EMPTY STATE ────────────────────────────────────────── */
 
 .emptyState {
   text-align: center;
   padding: 4rem 2rem;
-  color: #999;
+  color: #304050;
 }
 
 .emptyState p {
-  font-size: 1.1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
   margin: 0;
 }
 
-/* Mobile Card Layout */
+/* ─── MOBILE CARD GRID ───────────────────────────────────── */
+
 .mobileCardGrid {
-  display: none; /* Hidden by default, shown on mobile */
+  display: none;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .productCard {
-  background: white;
-  border: 2px solid #f0f0f0;
-  border-radius: 12px;
+  background: #0E0E1C;
+  border: 1px solid rgba(0, 212, 255, 0.2);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.productCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00D4FF, transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .productCard:hover {
-  border-color: #6A00AA;
-  box-shadow: 0 4px 16px rgba(106, 0, 170, 0.15);
-  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
+}
+
+.productCard:hover::before {
+  opacity: 1;
+}
+
+.productCardHidden {
+  opacity: 0.55;
+  border-color: rgba(255, 101, 0, 0.2) !important;
+}
+
+.productCardHidden::before {
+  background: linear-gradient(90deg, transparent, #FF6500, transparent) !important;
 }
 
 .cardContent {
-  padding: 1.25rem;
+  padding: 1.1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   flex: 1;
 }
 
 .cardTitle {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #E8F4FF;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .cardPrice {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #6A00AA;
+  color: #00D4FF;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  font-variant-numeric: tabular-nums;
 }
 
 .cardActions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.5rem;
   margin-top: auto;
 }
 
 .cardActions .viewButton,
-.cardActions .editButton {
+.cardActions .editButton,
+.cardActions .hideButton,
+.cardActions .showButton {
   text-align: center;
-  padding: 0.75rem 1rem;
+  padding: 0.55rem 0.5rem;
 }
 
-/* Responsive Behavior */
+/* ─── LOADING ─────────────────────────────────────────────── */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #080810;
+  color: #00D4FF;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.7);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+
 @media (max-width: 968px) {
-  /* Hide table on tablets and below */
   .tableContainer {
     display: none;
   }
 
-  /* Show card grid on tablets and below */
   .mobileCardGrid {
     display: grid;
   }
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 1.25rem;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+
   .filterSection {
     flex-direction: column;
   }
@@ -633,19 +690,7 @@
 
   .mobileCardGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .cardContent {
-    padding: 1rem;
-  }
-
-  .cardTitle {
-    font-size: 1rem;
-  }
-
-  .cardPrice {
-    font-size: 1.25rem;
+    gap: 0.75rem;
   }
 
   .statDivider {
@@ -654,64 +699,35 @@
 
   .statsRow {
     gap: 1rem;
+    justify-content: space-between;
   }
 
   .statNumber {
-    font-size: 2rem;
-  }
-
-  .statLabel {
-    font-size: 0.8rem;
+    font-size: 1.75rem;
   }
 }
 
 @media (max-width: 480px) {
   .mobileCardGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .cardContent {
-    padding: 1rem;
-    gap: 0.75rem;
+    padding: 0.875rem;
+    gap: 0.6rem;
   }
 
   .cardTitle {
-    font-size: 0.95rem;
-  }
-
-  .cardPrice {
-    font-size: 1.15rem;
-  }
-
-  .cardActions {
-    gap: 0.5rem;
-  }
-
-  .cardActions .viewButton,
-  .cardActions .editButton {
-    padding: 0.65rem 0.75rem;
     font-size: 0.85rem;
   }
 
-  .statsBox {
-    padding: 1.25rem;
+  .cardPrice {
+    font-size: 1.1rem;
   }
 
-  .statsBox h3 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .statsRow {
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .statItem {
-    min-width: auto;
-    flex: 1;
+  .cardActions {
+    gap: 0.35rem;
   }
 
   .statNumber {
@@ -719,6 +735,6 @@
   }
 
   .statLabel {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }

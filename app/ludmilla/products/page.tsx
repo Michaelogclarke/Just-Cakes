@@ -104,7 +104,7 @@ export default function LudmillaProductsPage() {
   }
 
   if (loading) {
-    return <div className={styles.dashboard}>Loading products...</div>
+    return <div className={styles.loading}>[ Fetching Inventory... ]</div>
   }
 
   const handleLogout = () => {
