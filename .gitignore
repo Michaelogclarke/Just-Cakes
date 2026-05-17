@@ -40,3 +40,5 @@ next-env.d.ts
 .claude/settings.local.json
 
 /lib/generated/prisma
+__pycache__/
+*.pyc
